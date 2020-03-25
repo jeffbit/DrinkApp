@@ -21,12 +21,15 @@ data class Drink(
     val strDrinkDE: String?,
     val strDrinkES: String?,
     val strDrinkFR: String?,
-    val strDrinkThumb: String,
+    @SerializedName("strDrinkThumb")
+    val drinkImg: String,
     @SerializedName("strDrinkZH-HANS")
     val strDrinkZHHANS: String?,
     @SerializedName("strDrinkZH-HANT")
     val strDrinkZHHANT: String?,
-    val strGlass: String?,
+    @SerializedName("strGlass")
+    val glassType: String?,
+    @SerializedName("strIBA")
     val strIBA: String?,
     val strIngredient1: String?,
     val strIngredient10: String?,
@@ -69,4 +72,4 @@ data class Drink(
     val strTags: String?,
     val strVideo: String?,
     val dateModified: String
-    )
+)

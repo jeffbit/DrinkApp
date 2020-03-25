@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val myModule = module {
     single { DrinkRepository(RetrofitClient.cocktailApi, get(), get()) }
     single { NetworkConnection(get()) }
-    viewModel { FavoriteDrinksViewModel() }
-    viewModel { PopularDrinksViewModel() }
-    viewModel { SearchRecentDrinksViewModel() }
+    viewModel { FavoriteDrinksViewModel(get()) }
+    viewModel { PopularDrinksViewModel(get()) }
+    viewModel { SearchRecentDrinksViewModel(get()) }
 }

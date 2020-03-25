@@ -18,10 +18,10 @@ object RetrofitClient {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(okHttpClient)
+            .client(okHttpClient).build()
 
         return retrofit()
     }
 
-    val cocktailApi = retrofit().create(DrinkApi::class.java)
+    val cocktailApi: DrinkApi = retrofit().create(DrinkApi::class.java)
 }

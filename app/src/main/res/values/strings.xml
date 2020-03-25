@@ -3,4 +3,5 @@
     <string name="favorites">Favorites</string>
     <string name="recent">Recent</string>
     <string name="popular">Popular</string>
+    <string name="todo" />
 </resources>

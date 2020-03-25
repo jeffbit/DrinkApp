@@ -9,17 +9,17 @@
         android:id="@+id/navigation_popular"
         android:name="brown.jeff.cocktailapp.ui.popular.PopularDrinksFragment"
         android:label="@string/popular"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_popular" />
 
     <fragment
         android:id="@+id/navigation_recent"
         android:name="brown.jeff.cocktailapp.ui.recent.SearchRecentDrinksFragment"
         android:label="@string/recent"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragment"
         android:label="@string/favorites"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
