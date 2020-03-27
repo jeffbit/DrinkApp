@@ -2,6 +2,7 @@ package brown.jeff.cocktailapp.model
 
 import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.NetworkConnection
+import brown.jeff.cocktailapp.repositories.DrinkRepository
 import brown.jeff.cocktailapp.room.DrinkDao
 import org.junit.Before
 import retrofit2.Call

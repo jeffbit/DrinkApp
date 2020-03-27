@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
+import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,13 +32,18 @@ class PopularDrinksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        popularDrinkAdapter = DrinkAdapter(
+            emptyList()
+        ) { drink: Drink -> handleDrinkClickListener(drink) }
 
-        popularDrinkAdapter = DrinkAdapter(emptyList())
-        recyclerview_popular.let {
-            it.adapter = popularDrinkAdapter
-            it.layoutManager = GridLayoutManager(context, 2)
+        recyclerview_popular.apply {
+            adapter = popularDrinkAdapter
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(context, 2)
 
         }
+
+
 
         popularDrinksViewModel.getAllPopularDrinks()
         popularDrinksViewModel.popularDrinks.observe(viewLifecycleOwner, Observer {
@@ -44,6 +51,11 @@ class PopularDrinksFragment : Fragment() {
 
         })
 
+
+    }
+
+    fun handleDrinkClickListener(drink: Drink) {
+        Toast.makeText(context, "Drink Name: ${drink.drink}", Toast.LENGTH_SHORT).show();
 
     }
 }
