@@ -4,4 +4,7 @@
     <string name="recent">Recent</string>
     <string name="popular">Popular</string>
     <string name="todo" />
+    <string name="instructions">Instructions</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="image_of_drink">Image of Drink</string>
 </resources>

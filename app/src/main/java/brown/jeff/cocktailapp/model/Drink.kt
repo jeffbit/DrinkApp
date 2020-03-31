@@ -1,11 +1,14 @@
 package brown.jeff.cocktailapp.model
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "drinkTable")
+@Parcelize
 data class Drink(
     @PrimaryKey(autoGenerate = false)
     val idDrink: String,
@@ -72,4 +75,4 @@ data class Drink(
     val strTags: String?,
     val strVideo: String?,
     val dateModified: String
-)
+) : Parcelable

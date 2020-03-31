@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 28
     buildToolsVersion "27.0.3"
@@ -19,14 +20,14 @@ android {
     }
 
     buildTypes {
-        debug{
-            buildConfigField ('String', "apiKey", CocktailApiKey)
+        debug {
+            buildConfigField('String', "apiKey", CocktailApiKey)
 
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField ('String', "apiKey", CocktailApiKey)
+            buildConfigField('String', "apiKey", CocktailApiKey)
         }
     }
 
@@ -78,7 +79,6 @@ dependencies {
     testImplementation "com.android.support:support-annotations:28.0.0"
     testImplementation 'com.android.support.test:rules:1.0.2'
     testImplementation 'org.robolectric:robolectric:4.3'
-
 
 
     //Material Design

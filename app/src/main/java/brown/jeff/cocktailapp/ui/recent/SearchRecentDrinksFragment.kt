@@ -51,5 +51,6 @@ class SearchRecentDrinksFragment : Fragment() {
 
     fun handleClicks(drink: Drink) {
         Toast.makeText(context, "Search Fragment: ${drink.alcoholic}", Toast.LENGTH_SHORT).show();
+        //todo: pass data into drinkclicked fragment
     }
 }
