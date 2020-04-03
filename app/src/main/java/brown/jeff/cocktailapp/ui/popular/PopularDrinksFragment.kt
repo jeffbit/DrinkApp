@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
@@ -34,7 +34,7 @@ class PopularDrinksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         popularDrinkAdapter = DrinkAdapter(
             emptyList()
-        ) { drink: Drink -> handleDrinkClickListener(drink) }
+        ) { drink: Drink -> handleScreenChange(drink) }
 
         recyclerview_popular.apply {
             adapter = popularDrinkAdapter
@@ -54,8 +54,10 @@ class PopularDrinksFragment : Fragment() {
 
     }
 
-    fun handleDrinkClickListener(drink: Drink) {
-        Toast.makeText(context, "Drink Name: ${drink.drink}", Toast.LENGTH_SHORT).show();
+    fun handleScreenChange(drink: Drink) {
+        val action =
+            PopularDrinksFragmentDirections.actionNavigationPopularToDrinkClickedFragment(drink)
+        findNavController().navigate(action)
 
     }
 }

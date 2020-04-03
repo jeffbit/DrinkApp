@@ -6,8 +6,6 @@ import brown.jeff.cocktailapp.repositories.DrinkRepository
 import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
-import brown.jeff.cocktailapp.ui.drinkclicked.ingredients.DrinkIngredientsViewModel
-import brown.jeff.cocktailapp.ui.drinkclicked.instructions.DrinkInstructionsViewModel
 import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksViewModel
 import brown.jeff.cocktailapp.ui.popular.PopularDrinksViewModel
 import brown.jeff.cocktailapp.ui.recent.SearchRecentDrinksViewModel
@@ -30,8 +28,4 @@ val myModule = module(override = true) {
     viewModel { SearchRecentDrinksViewModel(get()) }
     //drinkclicked
     viewModel { DrinkClickedViewModel() }
-    //ingredients
-    viewModel { DrinkIngredientsViewModel() }
-    //instructions
-    viewModel { DrinkInstructionsViewModel() }
 }

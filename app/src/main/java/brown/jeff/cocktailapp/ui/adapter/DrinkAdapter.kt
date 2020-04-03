@@ -9,8 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import brown.jeff.cocktailapp.util.loadImage
+import brown.jeff.cocktailapp.util.loadImageRecyclerView
 
 class DrinkAdapter(
     private var drinks: List<Drink>,
@@ -55,11 +55,7 @@ class DrinkAdapter(
         ) {
             drinkNameTextView.text = drink.drink
             //Glide loads image into view
-            Glide.with(drinkImageView.context)
-                .load(drink.drinkImg)
-                .error(R.drawable.ic_broken_image_black_24dp)
-                .apply(RequestOptions.centerCropTransform())
-                .into(drinkImageView)
+            loadImageRecyclerView(drinkImageView, drink)
 
             drinkContainer.setOnClickListener { clickListener(drink) }
 

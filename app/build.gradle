@@ -2,17 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+
 
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "28.0.3"
     testOptions.unitTests.includeAndroidResources = true
 
     defaultConfig {
         applicationId "brown.jeff.cocktailapp"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -136,6 +139,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.room:room-compiler:2.2.5"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment:2.2.1"
+    implementation "androidx.navigation:navigation-ui:2.2.1"
 
 
 }

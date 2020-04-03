@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
@@ -32,7 +33,7 @@ class SearchRecentDrinksFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         drinkAdapter = DrinkAdapter(emptyList(), { drink: Drink ->
-            handleClicks(drink)
+            handleScreenChange(drink)
         })
         recyclerview_search.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -49,8 +50,12 @@ class SearchRecentDrinksFragment : Fragment() {
 
     }
 
-    fun handleClicks(drink: Drink) {
+    private fun handleScreenChange(drink: Drink) {
         Toast.makeText(context, "Search Fragment: ${drink.alcoholic}", Toast.LENGTH_SHORT).show();
         //todo: pass data into drinkclicked fragment
+        val action =
+            SearchRecentDrinksFragmentDirections.actionNavigationRecentToDrinkClickedFragment(drink)
+        findNavController().navigate(action)
+
     }
 }

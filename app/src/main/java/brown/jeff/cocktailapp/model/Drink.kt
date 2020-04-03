@@ -2,12 +2,14 @@ package brown.jeff.cocktailapp.model
 
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "drinkTable")
+@Keep
 @Parcelize
 data class Drink(
     @PrimaryKey(autoGenerate = false)
