@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
 import kotlinx.android.synthetic.main.drink_instructions_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DrinkInstructionsFragment(private val drinkClickedViewModel: DrinkClickedViewModel) : Fragment() {
+class DrinkInstructionsFragment() : Fragment() {
 
+    private val drinkInstructionsViewModel: DrinkInstructionsViewModel by viewModel()
 
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class DrinkInstructionsFragment(private val drinkClickedViewModel: DrinkClickedV
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        drinkClickedViewModel.drink.observe(viewLifecycleOwner, Observer {
+        drinkInstructionsViewModel.drink.observe(viewLifecycleOwner, Observer {
             instructions_textview.text = it.strInstructions
         })
     }

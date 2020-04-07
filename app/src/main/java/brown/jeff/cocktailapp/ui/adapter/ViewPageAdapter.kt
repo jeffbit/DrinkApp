@@ -1,28 +1,31 @@
 package brown.jeff.cocktailapp.ui.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import brown.jeff.cocktailapp.ui.drinkclicked.DrinkIngredientsFragment
+import brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsFragment
 
-class ViewPageAdapter(fm: FragmentManager) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+const val INGREDIENTS_PAGE_INDEX = 0
+const val INSTRUCTIONS_PAGE_INDEX = 1
 
-    private val fragmentList = ArrayList<Fragment>()
-    private val fragmentTitle = ArrayList<String>()
-    override fun getItem(position: Int): Fragment {
-        return fragmentList[position]
-    }
+class ViewPageAdapter(fragment: Fragment) :
+    FragmentStateAdapter(fragment) {
 
-    override fun getCount(): Int {
+    private val fragmentList: Map<Int, () -> Fragment> = mapOf(
+        INGREDIENTS_PAGE_INDEX to { DrinkIngredientsFragment() },
+        INSTRUCTIONS_PAGE_INDEX to { DrinkInstructionsFragment() }
+    )
+
+
+    override fun getItemCount(): Int {
         return fragmentList.size
+
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitle[position]
+    override fun createFragment(position: Int): Fragment {
+        return fragmentList[position]?.invoke() ?: throw IndexOutOfBoundsException()
+
     }
 
-    fun addFragment(fragment: Fragment, title: String) {
-        fragmentTitle.add(title)
-        fragmentList.add(fragment)
-    }
+
 }

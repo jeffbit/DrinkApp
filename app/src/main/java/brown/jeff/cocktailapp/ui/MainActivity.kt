@@ -34,7 +34,18 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        //hides bottom navigation view for DrinkClickedFragment
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.drinkClickedFragment) {
+                navView.visibility = View.GONE
+            } else {
+                navView.visibility = View.VISIBLE
+            }
+        }
+
     }
 
-    fun buttonPressed(view: View) {}
+
 }

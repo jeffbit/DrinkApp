@@ -7,4 +7,6 @@
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
     <string name="image_of_drink">Image of Drink</string>
+    <string name="favorite">Favorite</string>
+    <string name="settings">Settings</string>
 </resources>

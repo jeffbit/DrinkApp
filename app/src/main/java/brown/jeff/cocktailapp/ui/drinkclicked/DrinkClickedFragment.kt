@@ -1,37 +1,45 @@
 package brown.jeff.cocktailapp.ui.drinkclicked
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import brown.jeff.cocktailapp.R
+import brown.jeff.cocktailapp.ui.adapter.INGREDIENTS_PAGE_INDEX
+import brown.jeff.cocktailapp.ui.adapter.INSTRUCTIONS_PAGE_INDEX
 import brown.jeff.cocktailapp.ui.adapter.ViewPageAdapter
-import brown.jeff.cocktailapp.util.loadImage
+import brown.jeff.cocktailapp.util.loadImage2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DrinkClickedFragment : Fragment() {
+class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
 
     private val drinkClickedViewModel: DrinkClickedViewModel by viewModel()
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.drink_clicked_fragment, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.drink_clicked_menu, menu)
+        //todo: Figure out how to change favorite icon when clicked.Currently working with selector when pressed but will not stay when released.
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPageAdapter(view)
+
 
     }
 
@@ -39,7 +47,6 @@ class DrinkClickedFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         retrieveSafeArgs()
         loadDrinkIntoView()
-        changeFavoriteButtonIcon()
 
     }
 
@@ -47,7 +54,7 @@ class DrinkClickedFragment : Fragment() {
     //observes drink from viewmodel
     private fun loadDrinkIntoView() {
         drinkClickedViewModel.drink.observe(viewLifecycleOwner, Observer {
-            loadImage(drinkimage_imageview, it)
+            loadImage2(drinkimage_imageview, it)
             drinkname_textview.text = it.drink
         })
     }
@@ -61,45 +68,21 @@ class DrinkClickedFragment : Fragment() {
 
     }
 
+    //setups viewpager2 with adapter
     private fun initViewPageAdapter(view: View) {
         val tabLayout: TabLayout = view.findViewById(R.id.viewpager_tablayout)
-        val viewPager: ViewPager = view.findViewById(R.id.viewPager)
-        val viewPageAdapter = ViewPageAdapter(
-            childFragmentManager
-        )
-        viewPageAdapter.addFragment(
-            DrinkIngredientsFragment(
-                drinkClickedViewModel
-            ), "Ingredients")
-        viewPageAdapter.addFragment(
-            DrinkInstructionsFragment(
-                drinkClickedViewModel
-            ), "Instructions")
-        viewPager.adapter = viewPageAdapter
-
-
-        tabLayout.setupWithViewPager(viewPager)
-
+        val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
+        viewPager.adapter = ViewPageAdapter(this)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = getTabText(position)
+        }.attach()
     }
 
-    private fun changeFavoriteButtonIcon() {
-        var flag = true
-
-        floatingActionButton.setOnClickListener {
-            if (flag) {
-                floatingActionButton.setImageDrawable(context?.let {
-                    it
-                    ContextCompat.getDrawable(
-                        it, R.drawable.ic_favorite_border_black_24dp
-                    )
-                })
-            } else {
-                floatingActionButton.setImageDrawable(context?.let {
-                    ContextCompat.getDrawable(
-                        it, R.drawable.ic_favorite_black_24dp
-                    )
-                })
-            }
+    private fun getTabText(position: Int): String? {
+        return when (position) {
+            INGREDIENTS_PAGE_INDEX -> getString(R.string.ingredients)
+            INSTRUCTIONS_PAGE_INDEX -> getString(R.string.instructions)
+            else -> null
         }
     }
 

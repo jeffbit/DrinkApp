@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.loadImage
-import brown.jeff.cocktailapp.util.loadImageRecyclerView
 
 class DrinkAdapter(
     private var drinks: List<Drink>,
@@ -55,7 +54,7 @@ class DrinkAdapter(
         ) {
             drinkNameTextView.text = drink.drink
             //Glide loads image into view
-            loadImageRecyclerView(drinkImageView, drink)
+            loadImage(drinkImageView, drink)
 
             drinkContainer.setOnClickListener { clickListener(drink) }
 

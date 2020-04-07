@@ -7,8 +7,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-//used to load image from API into imageview
-fun loadImageRecyclerView(imageView: ImageView, drink: Drink) {
+//used to load image into imageview
+fun loadImage(imageView: ImageView, drink: Drink) {
     Glide.with(imageView.context)
         .load(drink.drinkImg)
         .error(R.drawable.ic_broken_image_black_24dp)
@@ -16,7 +16,7 @@ fun loadImageRecyclerView(imageView: ImageView, drink: Drink) {
         .into(imageView)
 }
 
-fun loadImage(imageView: ImageView, drink: Drink) {
+fun loadImage2(imageView: ImageView, drink: Drink) {
     Glide.with(imageView.context)
         .load(drink.drinkImg)
         .error(R.drawable.ic_broken_image_black_24dp)

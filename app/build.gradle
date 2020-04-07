@@ -144,5 +144,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:2.2.1"
     implementation "androidx.navigation:navigation-ui:2.2.1"
 
+    //ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+
 
 }
