@@ -27,6 +27,7 @@ class DrinkInstructionsFragment() : Fragment() {
         drinkInstructionsViewModel.drink.observe(viewLifecycleOwner, Observer {
             instructions_textview.text = it.strInstructions
         })
+
     }
 
 

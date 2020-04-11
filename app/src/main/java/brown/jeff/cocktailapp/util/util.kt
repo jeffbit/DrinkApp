@@ -19,6 +19,7 @@ fun loadImage(imageView: ImageView, drink: Drink) {
 fun loadImage2(imageView: ImageView, drink: Drink) {
     Glide.with(imageView.context)
         .load(drink.drinkImg)
+        .apply(RequestOptions.fitCenterTransform())
         .error(R.drawable.ic_broken_image_black_24dp)
         .into(imageView)
 }

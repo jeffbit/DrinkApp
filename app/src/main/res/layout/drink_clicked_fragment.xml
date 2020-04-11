@@ -7,36 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.drinkclicked.DrinkClickedFragment">
 
-    <TextView
-        android:id="@+id/drinkname_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/drinkimage_imageview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/drinkimage_imageview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="48dp"
-        android:adjustViewBounds="false"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/image_of_drink"
         android:paddingBottom="12dp"
         app:layout_constraintBottom_toTopOf="@id/viewpager_framelayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/avatars" />
 
     <FrameLayout
         android:id="@+id/viewpager_framelayout"
         android:layout_width="match_parent"
-        android:layout_height="375dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,31 +33,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/viewpager_tablayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/ingredients_tabitem"
-                android:layout_width="wrap_content"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="46dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewpager_tablayout">
+
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/viewpager_tablayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ingredients" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/instructions_tabitem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/instructions" />
-        </com.google.android.material.tabs.TabLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/ingredients_tabitem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredients" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="411dp"
-            android:layout_height="0dp">
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/instructions_tabitem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instructions" />
+            </com.google.android.material.tabs.TabLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.viewpager2.widget.ViewPager2>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

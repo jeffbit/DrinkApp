@@ -5,6 +5,7 @@ import brown.jeff.cocktailapp.network.RetrofitClient
 import brown.jeff.cocktailapp.repositories.DrinkRepository
 import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.ui.adapter.ViewPageAdapter
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkIngredientsViewModel
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsViewModel

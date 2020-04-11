@@ -125,7 +125,7 @@ dependencies {
 
     //Mockito Kotlin
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
-    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
 
 
     //RxJava

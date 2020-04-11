@@ -1,6 +1,7 @@
 package brown.jeff.cocktailapp.ui.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkIngredientsFragment
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsFragment
@@ -16,14 +17,13 @@ class ViewPageAdapter(fragment: Fragment) :
         INSTRUCTIONS_PAGE_INDEX to { DrinkInstructionsFragment() }
     )
 
-
     override fun getItemCount(): Int {
         return fragmentList.size
 
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentList[position]?.invoke() ?: throw IndexOutOfBoundsException()
+          return fragmentList[position]?.invoke() ?: throw IllegalArgumentException()
 
     }
 

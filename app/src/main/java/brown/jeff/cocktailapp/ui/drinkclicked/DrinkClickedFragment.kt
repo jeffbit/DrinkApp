@@ -1,9 +1,9 @@
 package brown.jeff.cocktailapp.ui.drinkclicked
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -12,7 +12,7 @@ import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.ui.adapter.INGREDIENTS_PAGE_INDEX
 import brown.jeff.cocktailapp.ui.adapter.INSTRUCTIONS_PAGE_INDEX
 import brown.jeff.cocktailapp.ui.adapter.ViewPageAdapter
-import brown.jeff.cocktailapp.util.loadImage2
+import brown.jeff.cocktailapp.util.loadImage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
@@ -23,9 +23,11 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     private val drinkClickedViewModel: DrinkClickedViewModel by viewModel()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
 
@@ -33,6 +35,15 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.drink_clicked_menu, menu)
         //todo: Figure out how to change favorite icon when clicked.Currently working with selector when pressed but will not stay when released.
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+
     }
 
 
@@ -54,8 +65,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     //observes drink from viewmodel
     private fun loadDrinkIntoView() {
         drinkClickedViewModel.drink.observe(viewLifecycleOwner, Observer {
-            loadImage2(drinkimage_imageview, it)
-            drinkname_textview.text = it.drink
+            loadImage(drinkimage_imageview, it)
+            //drinkname_textview.text = it.drink
         })
     }
 
