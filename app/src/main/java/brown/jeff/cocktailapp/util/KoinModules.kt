@@ -5,14 +5,14 @@ import brown.jeff.cocktailapp.network.RetrofitClient
 import brown.jeff.cocktailapp.repositories.DrinkRepository
 import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import brown.jeff.cocktailapp.ui.adapter.ViewPageAdapter
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkIngredientsViewModel
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsViewModel
 import brown.jeff.cocktailapp.ui.drinkclicked.SharedDrinkViewModelData
 import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksViewModel
 import brown.jeff.cocktailapp.ui.popular.PopularDrinksViewModel
-import brown.jeff.cocktailapp.ui.recent.SearchRecentDrinksViewModel
+import brown.jeff.cocktailapp.ui.random.RandomDrinkViewModel
+import brown.jeff.cocktailapp.ui.search.SearchRecentDrinksViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,6 +31,7 @@ val myModule = module(override = true) {
     factory { DrinkAdapter(get(), get()) }
 
     viewModel { FavoriteDrinksViewModel() }
+    viewModel { RandomDrinkViewModel(get()) }
     viewModel { PopularDrinksViewModel(get()) }
     viewModel { SearchRecentDrinksViewModel(get()) }
     viewModel { DrinkClickedViewModel(get()) }

@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/navigation_recent"
-        android:name="brown.jeff.cocktailapp.ui.recent.SearchRecentDrinksFragment"
+        android:name="brown.jeff.cocktailapp.ui.search.SearchRecentDrinksFragment"
         android:label="@string/recent"
         tools:layout="@layout/fragment_search">
         <action
@@ -71,4 +71,9 @@
         android:name="brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsFragment"
         android:label="drink_instructions_fragment"
         tools:layout="@layout/drink_instructions_fragment" />
+    <fragment
+        android:id="@+id/navigation_random"
+        android:name="brown.jeff.cocktailapp.ui.random.RandomDrinkFragment"
+        android:label="random_drink_fragment"
+        tools:layout="@layout/random_drink_fragment" />
 </navigation>

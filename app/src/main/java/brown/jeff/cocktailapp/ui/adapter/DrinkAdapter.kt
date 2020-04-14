@@ -23,6 +23,11 @@ class DrinkAdapter(
         notifyDataSetChanged()
     }
 
+    fun clearDrinks() {
+        this.drinks = emptyList()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.drink_adapter_view, parent, false)

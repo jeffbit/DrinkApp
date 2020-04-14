@@ -1,6 +1,11 @@
 package brown.jeff.cocktailapp.util
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import com.bumptech.glide.Glide
@@ -16,10 +21,16 @@ fun loadImage(imageView: ImageView, drink: Drink) {
         .into(imageView)
 }
 
-fun loadImage2(imageView: ImageView, drink: Drink) {
-    Glide.with(imageView.context)
-        .load(drink.drinkImg)
-        .apply(RequestOptions.fitCenterTransform())
-        .error(R.drawable.ic_broken_image_black_24dp)
-        .into(imageView)
+//hides keyboard from view
+fun Context.hideKeyBoard(view: View) {
+    val inputManager =
+        getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let {
+        activity?.hideKeyBoard(it)
+    }
 }
