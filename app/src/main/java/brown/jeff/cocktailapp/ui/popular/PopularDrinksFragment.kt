@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,7 +12,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -65,7 +63,7 @@ class PopularDrinksFragment : Fragment() {
 
     }
 
-    fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(drink: Drink) {
         val action =
             PopularDrinksFragmentDirections.actionNavigationPopularToDrinkClickedFragment(drink)
         findNavController().navigate(action)

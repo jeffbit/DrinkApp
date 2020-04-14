@@ -33,7 +33,7 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
             withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getPopularDrinks()) {
                     is Result.Success -> {
-                        Timber.i(result.data.drinks.toString())
+                       // Timber.i(result.data.drinks.toString())
                         _popularDrinks.postValue(result.data.drinks)
                         _loadingDrinks.postValue(false)
                     }

@@ -64,6 +64,9 @@ class DrinkRepository(
 
     //DRINKDAO CALLS
 
+    //TODO: Add empty or null check to return error if local database is empty.
+
+
     suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
         return drinkDao.getAllDrinks()
 

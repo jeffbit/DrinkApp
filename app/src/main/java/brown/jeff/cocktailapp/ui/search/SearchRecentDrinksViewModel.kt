@@ -33,7 +33,7 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
             withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getPopularDrinks()) {
                     is Success -> {
-                        Timber.i(result.data.drinks.toString())
+                       // Timber.i(result.data.drinks.toString())
                         recentDrinks.postValue(result.data.drinks)
                         _loadingDrinks.postValue(false)
                     }

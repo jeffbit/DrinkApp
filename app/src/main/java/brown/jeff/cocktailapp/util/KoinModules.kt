@@ -30,7 +30,7 @@ val myModule = module(override = true) {
     factory { NetworkConnection(get()) }
     factory { DrinkAdapter(get(), get()) }
 
-    viewModel { FavoriteDrinksViewModel() }
+    viewModel { FavoriteDrinksViewModel(get()) }
     viewModel { RandomDrinkViewModel(get()) }
     viewModel { PopularDrinksViewModel(get()) }
     viewModel { SearchRecentDrinksViewModel(get()) }

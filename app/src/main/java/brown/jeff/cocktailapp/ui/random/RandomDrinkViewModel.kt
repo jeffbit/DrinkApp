@@ -10,6 +10,7 @@ import brown.jeff.cocktailapp.repositories.DrinkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
 
@@ -34,9 +35,11 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
                     is Result.Success -> {
                         _loading.postValue(false)
                         _drink.postValue(result.data)
+                        Timber.i("Success")
                     }
                     is Result.Failure -> {
                         _loading.postValue(false)
+                        Timber.e(result.errors.toString())
                         _errorMessage.value = result.errors.toString()
                     }
 
