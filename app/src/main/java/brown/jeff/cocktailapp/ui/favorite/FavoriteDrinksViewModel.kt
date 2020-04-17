@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.repositories.DrinkRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
 
@@ -23,20 +21,19 @@ class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : Vi
 
     fun getDrinksFromLocalStorage() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val result = drinkRepository.getDrinksLocalDB()
-                try {
-                    result.value?.let { drinkList ->
-                        if (!drinkList.isNullOrEmpty()) {
-                            _favoriteDrinks.postValue(drinkList)
-                        }
+            val result = drinkRepository.getDrinksLocalDB()
+            try {
+                result.value?.let { drinkList ->
+                    if (!drinkList.isNullOrEmpty()) {
+                        _favoriteDrinks.postValue(drinkList)
                     }
-
-                } catch (e: Exception) {
-                    _errorMessage.postValue(e.message)
-
                 }
+
+            } catch (e: Exception) {
+                _errorMessage.postValue(e.message)
+
             }
         }
+
     }
 }

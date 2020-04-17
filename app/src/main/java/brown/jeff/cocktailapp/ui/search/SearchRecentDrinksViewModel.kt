@@ -30,7 +30,6 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
     fun getRecentDrinks() {
         _loadingDrinks.value = true
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getPopularDrinks()) {
                     is Success -> {
                        // Timber.i(result.data.drinks.toString())
@@ -43,14 +42,12 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
                     }
                 }
             }
-        }
 
     }
 
     fun searchDrinkByName(drinkName: String) {
         _loadingDrinks.value = true
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getDrinksByName(drinkName)) {
                     is Success -> {
                         recentDrinks.postValue(result.data.drinks)
@@ -62,7 +59,6 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
                     }
                 }
             }
-        }
     }
 
 

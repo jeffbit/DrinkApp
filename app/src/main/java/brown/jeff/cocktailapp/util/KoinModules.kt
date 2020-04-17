@@ -34,7 +34,7 @@ val myModule = module(override = true) {
     viewModel { RandomDrinkViewModel(get()) }
     viewModel { PopularDrinksViewModel(get()) }
     viewModel { SearchRecentDrinksViewModel(get()) }
-    viewModel { DrinkClickedViewModel(get()) }
+    viewModel { DrinkClickedViewModel(get(), get()) }
     viewModel { DrinkInstructionsViewModel(get()) }
     viewModel { DrinkIngredientsViewModel(get()) }
 

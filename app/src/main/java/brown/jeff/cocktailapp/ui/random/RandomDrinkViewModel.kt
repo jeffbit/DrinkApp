@@ -30,7 +30,6 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
     fun getRandomDrink() {
         _loading.value = true
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getRandomDrink()) {
                     is Result.Success -> {
                         _loading.postValue(false)
@@ -43,7 +42,7 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
                         _errorMessage.value = result.errors.toString()
                     }
 
-                }
+
 
             }
         }

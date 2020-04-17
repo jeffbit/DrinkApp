@@ -1,20 +1,15 @@
 package brown.jeff.cocktailapp.ui.drinkclicked
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager2.widget.ViewPager2
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.adapter.INGREDIENTS_PAGE_INDEX
-import brown.jeff.cocktailapp.ui.adapter.INSTRUCTIONS_PAGE_INDEX
-import brown.jeff.cocktailapp.ui.adapter.ViewPageAdapter
 import brown.jeff.cocktailapp.util.loadImage
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,7 +21,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        // setHasOptionsMenu(true)
 
     }
 
@@ -34,7 +29,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.drink_clicked_menu, menu)
-        //todo: Figure out how to change favorite icon when clicked.Currently working with selector when pressed but will not stay when released.
+        //todo: Figure out how to change favorite icon when clicked.
+        // Currently working with selector when pressed but will not stay when released.
     }
 
     override fun onCreateView(
@@ -42,14 +38,20 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+//        var toolbar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.drink_toolbar)
+//         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
         return super.onCreateView(inflater, container, savedInstanceState)
+
+
 
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewPageAdapter(view)
 
 
     }
@@ -65,8 +67,24 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     //observes drink from viewmodel
     private fun loadDrinkIntoView() {
         drinkClickedViewModel.drink.observe(viewLifecycleOwner, Observer {
-            loadImage(drinkimage_imageview, it)
-            //drinkname_textview.text = it.drink
+            loadImage(drink_imageview, it)
+            drinkname_textview.text = it.drink
+            setIngredients(it.strMeasure1, it.strIngredient1, ingredient1_tv, view_divider1)
+            setIngredients(it.strMeasure2, it.strIngredient2, ingredient2_tv, view_divider2)
+            setIngredients(it.strMeasure3, it.strIngredient3, ingredient3_tv, view_divider3)
+            setIngredients(it.strMeasure4, it.strIngredient4, ingredient4_tv, view_divider4)
+            setIngredients(it.strMeasure5, it.strIngredient5, ingredient5_tv, view_divider5)
+            setIngredients(it.strMeasure6, it.strIngredient6, ingredient6_tv, view_divider6)
+            setIngredients(it.strMeasure7, it.strIngredient7, ingredient7_tv, view_divider7)
+            setIngredients(it.strMeasure8, it.strIngredient8, ingredient8_tv, view_divider8)
+            setIngredients(it.strMeasure9, it.strIngredient9, ingredient9_tv, view_divider9)
+            setIngredients(it.strMeasure10, it.strIngredient10, ingredient10_tv, view_divider10)
+            setIngredients(it.strMeasure11, it.strIngredient11, ingredient11_tv, view_divider11)
+            setIngredients(it.strMeasure12, it.strIngredient12, ingredient12_tv, view_divider12)
+            setIngredients(it.strMeasure13, it.strIngredient13, ingredient13_tv, view_divider13)
+            setIngredients(it.strMeasure14, it.strIngredient14, ingredient14_tv, view_divider14)
+            setIngredients(it.strMeasure15, it.strIngredient15, ingredient15_tv, view_divider15)
+            instructions_tv.text = it.strInstructions
         })
     }
 
@@ -79,21 +97,20 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     }
 
-    //setups viewpager2 with adapter
-    private fun initViewPageAdapter(view: View) {
-        val tabLayout: TabLayout = view.findViewById(R.id.viewpager_tablayout)
-        val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
-        viewPager.adapter = ViewPageAdapter(this)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = getTabText(position)
-        }.attach()
-    }
-
-    private fun getTabText(position: Int): String? {
-        return when (position) {
-            INGREDIENTS_PAGE_INDEX -> getString(R.string.ingredients)
-            INSTRUCTIONS_PAGE_INDEX -> getString(R.string.instructions)
-            else -> null
+    private fun setIngredients(
+        measure: String?,
+        ingredientName: String?,
+        textView: TextView,
+        view: View
+    ) {
+        if (ingredientName != null && measure != null) {
+            textView.visibility = View.VISIBLE
+            view.visibility = View.VISIBLE
+            textView.text =
+                getString(R.string.set_ingredients_and_measurements, measure, ingredientName)
+        } else {
+            textView.visibility = View.GONE
+            view.visibility = View.GONE
         }
     }
 

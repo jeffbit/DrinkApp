@@ -1,78 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.drinkclicked.DrinkClickedFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/drinkimage_imageview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/image_of_drink"
-        android:paddingBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@id/viewpager_framelayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
-
-    <FrameLayout
-        android:id="@+id/viewpager_framelayout"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_height="350dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+            app:toolbarId="@+id/collapseToolbar">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+            <ImageView
+                android:id="@+id/drink_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="46dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewpager_tablayout">
+                android:contentDescription="@string/drink_image"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/sym_def_app_icon"
+                app:layout_collapseMode="parallax" />
 
+            <TextView
+                android:id="@+id/drinkname_textview"
+                android:layout_width="match_parent"
+                android:layout_height="345dp"
+                android:gravity="bottom"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="@string/drink_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#FFFFFF" />
 
-            </androidx.viewpager2.widget.ViewPager2>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/drink_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"></androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/viewpager_tablayout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ingredienttitle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/ingredients"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/ingredients_tabitem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ingredients" />
+            <TextView
+                android:id="@+id/ingredient1_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/instructions_tabitem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/instructions" />
-            </com.google.android.material.tabs.TabLayout>
+            <View
+                android:id="@+id/view_divider1"
+                style="@style/Divider" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/ingredient2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
 
-    </FrameLayout>
+            <View
+                android:id="@+id/view_divider2"
+                style="@style/Divider" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/ingredient3_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider3"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/ingredient4_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider4"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/ingredient5_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider5"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/ingredient6_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider6"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/ingredient7_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider7"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/ingredient8_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider8"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient9_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider9"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient10_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider10"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient11_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider11"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient12_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider12"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient13_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider13"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient14_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider14"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ingredient15_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:paddingStart="36dp"
+                android:paddingEnd="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view_divider15"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/shareingredients_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/share_ingredients" />
+
+            <TextView
+                android:id="@+id/instructiontitle_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/instructions"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/instructions_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="12dp"
+                android:text="@string/app_name"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Drink Responsibly"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_favorite_black_24dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

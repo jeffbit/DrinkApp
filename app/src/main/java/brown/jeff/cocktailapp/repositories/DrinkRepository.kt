@@ -10,6 +10,8 @@ import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Failure
 import brown.jeff.cocktailapp.network.Result.Success
 import brown.jeff.cocktailapp.room.DrinkDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import timber.log.Timber
 
@@ -25,39 +27,48 @@ class DrinkRepository(
 
     //gets list of drinks by name
     suspend fun getDrinksByName(drinkName: String): Result<Drinks> {
-        return makeCall(drinkApi.searchDrinksByName(drinkName))
+        return withContext(Dispatchers.IO){
+            makeCall(drinkApi.searchDrinksByName(drinkName))
+        }
 
     }
 
     //gets list of drinks that start with letter
     //this will be useful if we have a dictionary view of all drinks in alphabetical order
     suspend fun getDrinksByFirstLetterInName(firstLetter: Char): Result<Drinks> {
-        return makeCall(drinkApi.searchDrinksByLetter(firstLetter))
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.searchDrinksByLetter(firstLetter))
+        }
     }
 
     //gets single drink by drinkId
     suspend fun getDrinkById(drinkId: String): Result<Drink> {
-        return makeCall(drinkApi.getDrinkById(drinkId))
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.getDrinkById(drinkId))
+        }
     }
-
 
     //gets recently added drinks
     suspend fun getRecentDrinks(): Result<Drinks> {
-        return makeCall(drinkApi.getRecentDrinks())
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.getRecentDrinks())
+        }
     }
-
 
     //gets popular drinks
     suspend fun getPopularDrinks(): Result<Drinks> {
         Timber.e("Drinks called")
-        return makeCall(drinkApi.getPopularDrinks())
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.getPopularDrinks())
+        }
 
     }
 
     //gets random single drink
     suspend fun getRandomDrink(): Result<Drink> {
-        return makeCall(drinkApi.getRandomDrink())
-
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.getRandomDrink())
+        }
 
     }
 
@@ -68,7 +79,7 @@ class DrinkRepository(
 
 
     suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
-        return drinkDao.getAllDrinks()
+        return withContext(Dispatchers.IO) { drinkDao.getAllDrinks() }
 
     }
 

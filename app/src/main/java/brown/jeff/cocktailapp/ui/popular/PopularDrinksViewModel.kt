@@ -30,7 +30,6 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
     fun getAllPopularDrinks() {
         _loadingDrinks.value = true
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
                 when (val result = drinkRepository.getPopularDrinks()) {
                     is Result.Success -> {
                        // Timber.i(result.data.drinks.toString())
@@ -43,27 +42,9 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
                     }
                 }
             }
-        }
+
 
     }
 
-//    fun getPopularDrinks() {
-//        viewModelScope.launch {
-//
-//                val result = drinkRepository.getPopularDrinks().execute()
-//                try {
-//                    if (result.isSuccessful && result.body() != null) {
-//                        _popularDrinks.postValue(result.body()!!.drinks)
-//                        Timber.e("Success")
-//                    } else {
-//                        Timber.e(result.message())
-//
-//                    }
-//                } catch (e: Exception) {
-//                    Timber.e(e)
-//
-//
-//            }
-//        }
-//    }
+
 }
