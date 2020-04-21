@@ -1,9 +1,10 @@
 package brown.jeff.cocktailapp.ui.popular
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.showSnackBar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,6 +22,28 @@ class PopularDrinksFragment : Fragment() {
 
     private val popularDrinksViewModel: PopularDrinksViewModel by viewModel()
     private lateinit var popularDrinkAdapter: DrinkAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.settings_menu, menu)
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.setting_menuitem -> {
+                Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +60,9 @@ class PopularDrinksFragment : Fragment() {
             //val snackBar = Snackbar.make(view, "Data updated", 1000)
             swipeRefreshLayout.isRefreshing = false
         }
-
+        //sets the toolbar in the fragment
+        val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         return view
     }
 
@@ -53,7 +80,6 @@ class PopularDrinksFragment : Fragment() {
         }
 
 
-
         popularDrinksViewModel.getAllPopularDrinks()
         popularDrinksViewModel.popularDrinks.observe(viewLifecycleOwner, Observer {
             popularDrinkAdapter.updateDrinkList(it)
@@ -69,4 +95,6 @@ class PopularDrinksFragment : Fragment() {
         findNavController().navigate(action)
 
     }
+
+
 }

@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.room
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
+import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.DRINK
 import org.junit.*
 import java.io.IOException
@@ -39,6 +40,18 @@ class DrinkDatabaseTest {
 
         //then
         Assert.assertEquals(readDrink?.drink, writeDrink.drink)
+    }
+
+    @Test
+    fun getAllDrinks() {
+        //given
+        val drink = DRINK
+        val drinkList = listOf<Drink>(drink)
+        //when
+        drinkDao.insertDrink(drink)
+        //then
+        val getDrinks = drinkDao.getAllDrinks().getValueBlocking()
+        Assert.assertEquals(drinkList, getDrinks)
     }
 
     @Test

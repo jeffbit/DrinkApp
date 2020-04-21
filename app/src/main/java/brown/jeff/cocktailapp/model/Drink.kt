@@ -4,6 +4,9 @@ package brown.jeff.cocktailapp.model
 import android.os.Parcelable
 import androidx.annotation.Keep
 import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.OnConflictStrategy
+import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -77,4 +80,5 @@ data class Drink(
     val strTags: String?,
     val strVideo: String?,
     val dateModified: String
-) : Parcelable
+) : Parcelable{
+}

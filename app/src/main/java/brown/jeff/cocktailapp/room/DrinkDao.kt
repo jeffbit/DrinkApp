@@ -1,16 +1,13 @@
 package brown.jeff.cocktailapp.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import brown.jeff.cocktailapp.model.Drink
 
 @Dao
 interface DrinkDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDrink(drink: Drink)
 
     @Delete
@@ -24,6 +21,9 @@ interface DrinkDao {
 
     @Query("SELECT * FROM drinkTable WHERE idDrink LIKE :drinkId")
     fun getDrinkById(drinkId: String): LiveData<Drink>
+
+    @Query("Delete FROM drinkTable WHERE idDrink Like :drinkId")
+    fun deleteDrinkById(drinkId: String)
 
 
 }

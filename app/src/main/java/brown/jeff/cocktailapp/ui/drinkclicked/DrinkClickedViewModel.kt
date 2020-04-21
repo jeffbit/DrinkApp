@@ -17,21 +17,20 @@ class DrinkClickedViewModel(
     val drink: LiveData<Drink>
         get() = sharedDrinkViewModelData.drink
 
-
     fun setDrinkValue(drink: Drink) {
         sharedDrinkViewModelData.setDrink(drink)
     }
 
-    fun favoriteDrink(drink: Drink){
+    fun addDrinkToFavorites(drink: Drink) {
         viewModelScope.launch {
-            try{
             drinkRepository.insertDrinksLocalDB(drink)
-
-        }catch (e: Exception){
-            //catch exception
-            }
         }
+    }
 
+    fun removeDrinkFromFavorites(drinkId: String) {
+        viewModelScope.launch {
+            drinkRepository.removeDrinkById(drinkId)
+        }
     }
 
 

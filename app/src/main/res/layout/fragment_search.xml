@@ -40,4 +40,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/drink_adapter_view" />
 
+    <TextView
+        android:id="@+id/errrortextview_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerview_search"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerview_search"
+        app:layout_constraintStart_toStartOf="@+id/recyclerview_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.repositories.DrinkRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
 
@@ -20,18 +21,13 @@ class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : Vi
 
 
     fun getDrinksFromLocalStorage() {
+        Timber.e("Local DB Call")
         viewModelScope.launch {
             val result = drinkRepository.getDrinksLocalDB()
-            try {
-                result.value?.let { drinkList ->
-                    if (!drinkList.isNullOrEmpty()) {
-                        _favoriteDrinks.postValue(drinkList)
-                    }
-                }
-
-            } catch (e: Exception) {
-                _errorMessage.postValue(e.message)
-
+           if(!result.value.isNullOrEmpty()){
+               _favoriteDrinks.value = result.value
+           }else{
+               _errorMessage.value = "No drinks added to favorites yet.."
             }
         }
 

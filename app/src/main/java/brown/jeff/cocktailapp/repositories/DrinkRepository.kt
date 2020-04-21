@@ -27,7 +27,7 @@ class DrinkRepository(
 
     //gets list of drinks by name
     suspend fun getDrinksByName(drinkName: String): Result<Drinks> {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             makeCall(drinkApi.searchDrinksByName(drinkName))
         }
 
@@ -72,28 +72,6 @@ class DrinkRepository(
 
     }
 
-
-    //DRINKDAO CALLS
-
-    //TODO: Add empty or null check to return error if local database is empty.
-
-
-    suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
-        return withContext(Dispatchers.IO) { drinkDao.getAllDrinks() }
-
-    }
-
-    suspend fun insertDrinksLocalDB(drink: Drink): Boolean {
-        return try {
-            drinkDao.insertDrink(drink)
-            true
-        } catch (e: Exception) {
-            Timber.e(e)
-            false
-        }
-    }
-
-
     //Call for api
     private fun <T> makeCall(call: Call<T>): Result<T> {
         return when (networkConnection.isInternetAvailable()) {
@@ -118,6 +96,46 @@ class DrinkRepository(
         }
 
 
+    }
+
+
+    //DRINKDAO CALLS
+
+    //TODO: Add empty or null check to return error if local database is empty.
+
+
+    suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
+        return withContext(Dispatchers.IO) { drinkDao.getAllDrinks() }
+
+    }
+
+    suspend fun insertDrinksLocalDB(drink: Drink): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                drinkDao.insertDrink(drink)
+                true
+            } catch (e: Exception) {
+                Timber.e(e)
+                false
+            }
+        }
+    }
+
+    suspend fun removeDrinkById(drinkId: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                if (drinkId.isNotEmpty()) {
+                    drinkDao.deleteDrinkById(drinkId)
+                    true
+                } else {
+                    Timber.e("Unknown Error")
+                    false
+                }
+            } catch (e: Exception) {
+                Timber.e(e)
+                false
+            }
+        }
     }
 
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -23,11 +24,6 @@ class SearchRecentDrinksFragment : Fragment() {
     private var savedQuery: String? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,6 +31,8 @@ class SearchRecentDrinksFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         searchDrinks(view)
+
+        setHasOptionsMenu(true)
         return view
     }
 
@@ -49,7 +47,7 @@ class SearchRecentDrinksFragment : Fragment() {
 //        this will change the search view fun depending on what item is checked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.settings_menuitem -> {
+            R.id.searchsettings_menuitem -> {
                 Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show();
                 true
             }
@@ -60,6 +58,8 @@ class SearchRecentDrinksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)
+        activity?.setActionBar(toolbar)
         drinkAdapter = DrinkAdapter(emptyList(), { drink: Drink ->
             handleScreenChange(drink)
         })
@@ -83,6 +83,13 @@ class SearchRecentDrinksFragment : Fragment() {
             if (!it.isNullOrEmpty()) {
                 drinkAdapter.updateDrinkList(it)
             }
+        })
+        searchRecentDrinksViewModel.displayError.observe(viewLifecycleOwner, Observer {
+            if (!it.isNullOrEmpty()) {
+                errrortextview_search.text = it
+                recyclerview_search.visibility = View.GONE
+            }
+
         })
 
 

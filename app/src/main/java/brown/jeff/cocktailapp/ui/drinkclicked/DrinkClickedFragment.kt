@@ -3,13 +3,14 @@ package brown.jeff.cocktailapp.ui.drinkclicked
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import brown.jeff.cocktailapp.R
+import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.loadImage
+import brown.jeff.cocktailapp.util.showSnackBar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,7 +29,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.drink_clicked_menu, menu)
+        inflater.inflate(R.menu.settings_menu, menu)
         //todo: Figure out how to change favorite icon when clicked.
         // Currently working with selector when pressed but will not stay when released.
     }
@@ -46,7 +47,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         return super.onCreateView(inflater, container, savedInstanceState)
 
 
-
     }
 
 
@@ -60,6 +60,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         super.onActivityCreated(savedInstanceState)
         retrieveSafeArgs()
         loadDrinkIntoView()
+        favoriteFloatingActionButton(view!!, retrieveDrink())
 
     }
 
@@ -89,6 +90,13 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
+    private fun favoriteFloatingActionButton(view: View, drink: Drink) {
+        favoritedrink_fab.setOnClickListener {
+            addTofavoriteSnackBar(view, drink)
+        }
+
+    }
+
     //retrieves data from previous fragment and sets viewmodel data
     private fun retrieveSafeArgs() {
         val safeArgs: DrinkClickedFragmentArgs by navArgs()
@@ -96,6 +104,25 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         drinkClickedViewModel.setDrinkValue(drinkPassed)
 
     }
+
+    private fun retrieveDrink(): Drink {
+        val safeArgs: DrinkClickedFragmentArgs by navArgs()
+        return safeArgs.passDrink
+
+    }
+
+    private fun addTofavoriteSnackBar(view: View, drink: Drink) {
+        drinkClickedViewModel.addDrinkToFavorites(drink)
+        showSnackBar(
+            view,
+            "Drink favorited ",
+            Snackbar.LENGTH_LONG,
+            "Undo",
+            { drinkClickedViewModel.removeDrinkFromFavorites(drink.idDrink) }
+        )
+
+    }
+
 
     private fun setIngredients(
         measure: String?,

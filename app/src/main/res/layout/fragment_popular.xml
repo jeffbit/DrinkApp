@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryLightColor"
     tools:context=".ui.popular.PopularDrinksFragment">
 
@@ -16,6 +17,22 @@
             android:id="@+id/recyclerview_popular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="?android:attr/actionBarSize"
             tools:listitem="@layout/drink_adapter_view" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/popular_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/swiperefresh_popular"
+        app:menu="@menu/settings_menu"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Popular Drinks" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 
 
 //used to load image into imageview
@@ -33,4 +34,19 @@ fun Fragment.hideKeyboard() {
     view?.let {
         activity?.hideKeyBoard(it)
     }
+}
+
+fun showSnackBar(
+    view: View,
+    displayedMessage: String,
+    duration: Int,
+    action: String,
+    actionFunction: () -> Unit
+) {
+    val snackBar = Snackbar.make(view, displayedMessage, duration)
+    snackBar.setAction(action, View.OnClickListener {
+        actionFunction()
+    })
+    snackBar.show()
+
 }

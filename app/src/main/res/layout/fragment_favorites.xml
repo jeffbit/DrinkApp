@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorite.FavoriteDrinksFragment">
 
+
     <TextView
-        android:id="@+id/errormessage_textview"
+        android:id="@+id/errormessage_tv_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -21,6 +22,21 @@
         android:id="@+id/recyclerview_favorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/drink_adapter_view" />
+        tools:listitem="@layout/drink_adapter_view"
+        android:paddingTop="?android:attr/actionBarSize"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/favorite_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Favorite Drinks"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/favorite_menu"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

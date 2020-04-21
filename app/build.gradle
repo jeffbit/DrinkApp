@@ -8,7 +8,10 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 29
     buildToolsVersion "28.0.3"
-    testOptions.unitTests.includeAndroidResources = true
+    testOptions{
+        unitTests.includeAndroidResources = true
+    }
+    viewBinding.enabled = true
 
     defaultConfig {
         applicationId "brown.jeff.cocktailapp"

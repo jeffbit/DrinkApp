@@ -24,17 +24,17 @@ class MainActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_popular,
-                R.id.navigation_recent,
-                R.id.navigation_favorites,
-                R.id.navigation_random
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        // Passing each menu ID as a set of Ids because each
+//        // menu should be considered as top level destinations.
+//        //val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_popular,
+//                R.id.navigation_recent,
+//                R.id.navigation_favorites,
+//                R.id.navigation_random
+//            )
+//        )
+//       // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
 
