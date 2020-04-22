@@ -12,7 +12,7 @@ import timber.log.Timber
 class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
 
     private val _favoriteDrinks = MutableLiveData<List<Drink>>()
-    val favoriteDrinks: LiveData<List<Drink>>
+     val favoriteDrinks: LiveData<List<Drink>>
         get() = _favoriteDrinks
 
     private val _errorMessage = MutableLiveData<String>()
@@ -20,14 +20,16 @@ class FavoriteDrinksViewModel(private val drinkRepository: DrinkRepository) : Vi
         get() = _errorMessage
 
 
+val data = drinkRepository.data
+
     fun getDrinksFromLocalStorage() {
         Timber.e("Local DB Call")
         viewModelScope.launch {
-            val result = drinkRepository.getDrinksLocalDB()
-           if(!result.value.isNullOrEmpty()){
-               _favoriteDrinks.value = result.value
-           }else{
-               _errorMessage.value = "No drinks added to favorites yet.."
+            try {
+                _favoriteDrinks.value = drinkRepository.getDrinksLocalDB().value
+                Timber.e("Drinks retrieved")
+            } catch (e: Exception) {
+                Timber.e(e)
             }
         }
 

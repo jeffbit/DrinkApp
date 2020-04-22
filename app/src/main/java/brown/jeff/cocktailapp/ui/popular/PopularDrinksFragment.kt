@@ -13,8 +13,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import brown.jeff.cocktailapp.util.showSnackBar
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +23,7 @@ class PopularDrinksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+        popularDrinksViewModel.insertTestDrinks()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

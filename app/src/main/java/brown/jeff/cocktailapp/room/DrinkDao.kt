@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.model.Drinks
 
 @Dao
 interface DrinkDao {

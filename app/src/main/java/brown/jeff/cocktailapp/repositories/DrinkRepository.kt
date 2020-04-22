@@ -10,6 +10,7 @@ import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Failure
 import brown.jeff.cocktailapp.network.Result.Success
 import brown.jeff.cocktailapp.room.DrinkDao
+import brown.jeff.cocktailapp.util.DRINK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -21,6 +22,8 @@ class DrinkRepository(
     private val networkConnection: NetworkConnection
 ) {
 
+
+    val data = drinkDao.getAllDrinks()
     //DRINK API CALLS
     //possible to use kotlin extensions to clean class up
     //separate into 2 classes; Api calls, Room calls
@@ -105,7 +108,21 @@ class DrinkRepository(
 
 
     suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
-        return withContext(Dispatchers.IO) { drinkDao.getAllDrinks() }
+        return withContext(Dispatchers.IO) {
+            Timber.e("Added")
+            drinkDao.getAllDrinks()
+        }
+
+    }
+
+    suspend fun insertDrinks() {
+        withContext(Dispatchers.IO) {
+            drinkDao.insertDrink(DRINK)
+            drinkDao.insertDrink(DRINK)
+            drinkDao.insertDrink(DRINK)
+            drinkDao.insertDrink(DRINK)
+        }
+
 
     }
 
@@ -113,6 +130,7 @@ class DrinkRepository(
         return withContext(Dispatchers.IO) {
             try {
                 drinkDao.insertDrink(drink)
+                Timber.e("Successfully inserted drink")
                 true
             } catch (e: Exception) {
                 Timber.e(e)

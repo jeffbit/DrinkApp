@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.DRINK
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,7 +50,6 @@ class FavoriteDrinksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favoriteDrinksViewModel.getDrinksFromLocalStorage()
         //sets the toolbar in the fragment
         val toolbar = view?.findViewById<Toolbar>(R.id.favorite_toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -68,9 +68,14 @@ class FavoriteDrinksFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
 
         }
+        favoriteDrinksViewModel.data
+
+
         //todo: Fragment will not inflate with empty list, figure out how to and display error message if nothing has been added to favorites.
-        favoriteDrinksViewModel.favoriteDrinks.observe(viewLifecycleOwner, Observer {
-            favoriteDrinkAdapter.updateDrinkList(it)
+        favoriteDrinksViewModel.data.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                favoriteDrinkAdapter.updateDrinkList(it)
+            }
             errormessage_tv_favorites.visibility = View.GONE
         })
 

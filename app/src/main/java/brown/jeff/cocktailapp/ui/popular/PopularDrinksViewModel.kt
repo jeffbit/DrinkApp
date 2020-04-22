@@ -42,4 +42,12 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
 
 
     }
+
+    fun insertTestDrinks() {
+        viewModelScope.launch {
+            drinkRepository.insertDrinks()
+        }
+    }
+
+
 }

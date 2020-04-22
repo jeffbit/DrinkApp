@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.util
+package brown.jeff.cocktailapp.di
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
@@ -9,7 +9,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(listOf(myModule))
+            modules(listOf(databaseModule, networkModule, viewModelModule, repositoryModule))
         }
 
     }
