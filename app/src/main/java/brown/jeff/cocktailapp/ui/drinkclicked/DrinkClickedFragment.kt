@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.ui.drinkclicked
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -10,6 +11,7 @@ import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.showSnackBar
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -141,5 +143,23 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         }
     }
 
+
+    private fun appbarFadeIn(){
+        var appBarExpanded = false
+        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if(Math.abs(verticalOffset) > 200){
+                appBarExpanded = false
+                invalidateOptionsMenu()
+            }else{
+                appBarExpanded = true
+                invalidateOptionsMenu()
+            }
+        })
+        }
+    }
+
+private fun invalidateOptionsMenu(){
+
+}
 
 }

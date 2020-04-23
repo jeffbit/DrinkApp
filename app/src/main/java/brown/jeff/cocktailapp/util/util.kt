@@ -1,9 +1,11 @@
 package brown.jeff.cocktailapp.util
 
 import android.content.Context
+import android.content.DialogInterface
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import brown.jeff.cocktailapp.R
@@ -50,3 +52,21 @@ fun showSnackBar(
     snackBar.show()
 
 }
+
+fun showAlertDialog(context: Context, message: String, action: () -> Unit) {
+    val builder = AlertDialog.Builder(context)
+    builder.setMessage(message)
+        .setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, which ->
+            action
+            dialog.dismiss()
+        })
+        .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+
+    builder.create()
+
+
+}
+
+

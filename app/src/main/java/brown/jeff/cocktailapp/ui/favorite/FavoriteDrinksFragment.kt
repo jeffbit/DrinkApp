@@ -2,6 +2,7 @@ package brown.jeff.cocktailapp.ui.favorite
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import brown.jeff.cocktailapp.util.DRINK
+import brown.jeff.cocktailapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,11 +35,12 @@ class FavoriteDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.favoritesettings_menuitem -> {
-
+                Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show();
                 true
             }
             R.id.favoriteclear_menuitem -> {
-
+                Toast.makeText(context, "test ", Toast.LENGTH_SHORT).show();
+                // deleteAllDrinks()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -52,8 +54,10 @@ class FavoriteDrinksFragment : Fragment() {
     ): View? {
         //sets the toolbar in the fragment
         val toolbar = view?.findViewById<Toolbar>(R.id.favorite_toolbar)
+
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,11 +72,11 @@ class FavoriteDrinksFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
 
         }
-        favoriteDrinksViewModel.data
+        favoriteDrinksViewModel.getDrinks
 
 
         //todo: Fragment will not inflate with empty list, figure out how to and display error message if nothing has been added to favorites.
-        favoriteDrinksViewModel.data.observe(viewLifecycleOwner, Observer {
+        favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 favoriteDrinkAdapter.updateDrinkList(it)
             }
@@ -87,6 +91,14 @@ class FavoriteDrinksFragment : Fragment() {
 
     }
 
+
+    private fun deleteAllDrinks() {
+        context?.let {
+            showAlertDialog(
+                it, "Delete all drinks"
+            ) { favoriteDrinksViewModel.deleteAllDrinks() }
+        }
+    }
 
     private fun handleScreenChange(drink: Drink) {
         val action =

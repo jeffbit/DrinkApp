@@ -23,7 +23,7 @@ class DrinkRepository(
 ) {
 
 
-    val data = drinkDao.getAllDrinks()
+    //val data = drinkDao.getAllDrinks()
     //DRINK API CALLS
     //possible to use kotlin extensions to clean class up
     //separate into 2 classes; Api calls, Room calls
@@ -107,12 +107,16 @@ class DrinkRepository(
     //TODO: Add empty or null check to return error if local database is empty.
 
 
-    suspend fun getDrinksLocalDB(): LiveData<List<Drink>> {
-        return withContext(Dispatchers.IO) {
-            Timber.e("Added")
-            drinkDao.getAllDrinks()
-        }
+    fun getDrinksLocalDB(): LiveData<List<Drink>> {
+        Timber.e("Repository: Drinks Retrieved")
+        return drinkDao.getAllDrinks()
 
+    }
+
+    suspend fun deleteAllDrinks() {
+        withContext(Dispatchers.IO) {
+            drinkDao.deleteAllDrinks()
+        }
     }
 
     suspend fun insertDrinks() {
