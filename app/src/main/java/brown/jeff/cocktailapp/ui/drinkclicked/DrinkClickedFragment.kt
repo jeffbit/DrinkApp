@@ -3,12 +3,13 @@ package brown.jeff.cocktailapp.ui.drinkclicked
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
@@ -21,45 +22,51 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     private val drinkClickedViewModel: DrinkClickedViewModel by viewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.settings_menu, menu)
-        //todo: Figure out how to change favorite icon when clicked.
-        // Currently working with selector when pressed but will not stay when released.
+        inflater.inflate(R.menu.drink_clicked_menu, menu)
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.drinkclicked_favorite_menuitem -> {
+                addTofavoriteSnackBar(this.view!!, retrieveDrink())
+                true
+            }
+            R.id.drinkclicked_settings_menuitem -> {
+                //todo: Load settings fragment into view
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-//        var toolbar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.drink_toolbar)
-//         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        val toolbar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.drink_toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar?.title = retrieveDrink().drink
+        backPressedToolbar(toolbar, activity)
+        return view
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        appbarFadeIn()
         retrieveSafeArgs()
         loadDrinkIntoView()
         favoriteFloatingActionButton(view!!, retrieveDrink())
@@ -71,7 +78,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private fun loadDrinkIntoView() {
         drinkClickedViewModel.drink.observe(viewLifecycleOwner, Observer {
             loadImage(drink_imageview, it)
-            drinkname_textview.text = it.drink
             setIngredients(it.strMeasure1, it.strIngredient1, ingredient1_tv, view_divider1)
             setIngredients(it.strMeasure2, it.strIngredient2, ingredient2_tv, view_divider2)
             setIngredients(it.strMeasure3, it.strIngredient3, ingredient3_tv, view_divider3)
@@ -144,22 +150,17 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
-    private fun appbarFadeIn(){
-        var appBarExpanded = false
+    //fades imageview,title,and floating actionbar into toolbar
+    private fun appbarFadeIn() {
+        var scrollRage = -1
         appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if(Math.abs(verticalOffset) > 200){
-                appBarExpanded = false
-                invalidateOptionsMenu()
-            }else{
-                appBarExpanded = true
-                invalidateOptionsMenu()
+            if (scrollRage == -1) {
+                scrollRage = appBarLayout?.totalScrollRange!!
             }
+            drink_toolbar.menu.findItem(R.id.drinkclicked_favorite_menuitem).isVisible =
+                scrollRage + verticalOffset == 0
         })
-        }
     }
-
-private fun invalidateOptionsMenu(){
-
 }
 
-}
+

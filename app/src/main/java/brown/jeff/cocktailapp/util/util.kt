@@ -1,5 +1,6 @@
 package brown.jeff.cocktailapp.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.view.View
@@ -56,17 +57,23 @@ fun showSnackBar(
 fun showAlertDialog(context: Context, message: String, action: () -> Unit) {
     val builder = AlertDialog.Builder(context)
     builder.setMessage(message)
-        .setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, which ->
+        .setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, _ ->
             action
             dialog.dismiss()
         })
-        .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+        .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
             dialog.cancel()
         })
 
     builder.create()
 
 
+}
+
+fun backPressedToolbar(toolbar: androidx.appcompat.widget.Toolbar?, activity: Activity?) {
+    toolbar?.setNavigationOnClickListener {
+        activity?.onBackPressed()
+    }
 }
 
 
