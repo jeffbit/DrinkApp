@@ -17,6 +17,7 @@
             android:id="@+id/recyclerview_popular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="?android:attr/actionBarSize"
             android:paddingTop="?android:attr/actionBarSize"
             tools:listitem="@layout/drink_adapter_view" />
 

@@ -9,8 +9,12 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragmentDirections
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
@@ -38,6 +42,8 @@ fun Fragment.hideKeyboard() {
         activity?.hideKeyBoard(it)
     }
 }
+
+
 
 fun showSnackBar(
     view: View,

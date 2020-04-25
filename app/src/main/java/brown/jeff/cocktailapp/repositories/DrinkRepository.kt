@@ -58,6 +58,13 @@ class DrinkRepository(
         }
     }
 
+    //gets drinks by ingredients
+    suspend fun getDrinksByIngredients(ingredients: String?): Result<Drinks> {
+        return withContext(Dispatchers.IO) {
+            makeCall(drinkApi.getDrinksByIngredient(ingredients))
+        }
+    }
+
     //gets popular drinks
     suspend fun getPopularDrinks(): Result<Drinks> {
         Timber.e("Drinks called")

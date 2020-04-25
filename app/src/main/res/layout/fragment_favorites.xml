@@ -27,6 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="?android:attr/actionBarSize"
         tools:listitem="@layout/drink_adapter_view" />
 
     <androidx.appcompat.widget.Toolbar

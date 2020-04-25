@@ -10,7 +10,7 @@
     <string name="favorite">Favorite</string>
     <string name="settings">Settings</string>
     <string name="ingredients_fragment">Ingredients Fragment</string>
-    <string name="set_ingredients_and_measurements">%1$s, %2$s</string>
+    <string name="set_ingredients_and_measurements">%1$s%2$s</string>
     <string name="share_ingredients">Share Ingredients</string>
     <string name="filter">Filter</string>
     <string name="random">Random</string>

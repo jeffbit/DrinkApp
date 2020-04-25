@@ -52,28 +52,22 @@
         android:label="drink_clicked_fragment"
         tools:layout="@layout/drink_clicked_fragment">
         <action
-            android:id="@+id/action_drinkClickedFragment_to_drinkInstructionsFragment"
-            app:destination="@id/drinkInstructionsFragment" />
-        <action
-            android:id="@+id/action_drinkClickedFragment_to_drinkIngredientsFragment"
-            app:destination="@id/drinkIngredientsFragment" />
+            android:id="@+id/action_drinkClickedFragment_self"
+            app:destination="@id/drinkClickedFragment" />
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
+
+
     </fragment>
-    <fragment
-        android:id="@+id/drinkIngredientsFragment"
-        android:name="brown.jeff.cocktailapp.ui.drinkclicked.DrinkIngredientsFragment"
-        android:label="drink_ingredients_fragment"
-        tools:layout="@layout/drink_ingredients_fragment" />
-    <fragment
-        android:id="@+id/drinkInstructionsFragment"
-        android:name="brown.jeff.cocktailapp.ui.drinkclicked.DrinkInstructionsFragment"
-        android:label="drink_instructions_fragment"
-        tools:layout="@layout/drink_instructions_fragment" />
+
     <fragment
         android:id="@+id/navigation_random"
         android:name="brown.jeff.cocktailapp.ui.random.RandomDrinkFragment"
         android:label="random_drink_fragment"
-        tools:layout="@layout/random_drink_fragment" />
+        tools:layout="@layout/drink_random_fragment">
+        <action
+            android:id="@+id/action_navigation_random_to_drinkClickedFragment"
+            app:destination="@id/drinkClickedFragment" />
+    </fragment>
 </navigation>

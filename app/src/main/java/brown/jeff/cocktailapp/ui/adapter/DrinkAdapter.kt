@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
@@ -19,14 +20,14 @@ class DrinkAdapter(
 
 
     fun updateDrinkList(drinkList: List<Drink>) {
+        val diffCallBack = DrinkDiffCallBack(drinks, drinkList)
+        val diffResult = DiffUtil.calculateDiff(diffCallBack)
+        this.drinks = emptyList()
         this.drinks = drinkList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+
     }
 
-    fun clearDrinks() {
-        this.drinks = emptyList()
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkViewHolder {
         val view =
@@ -70,6 +71,3 @@ class DrinkAdapter(
 
 
 }
-
-
-//todo: add onclick to allow user to click heart icon in corner of view to save and favorite cocktails

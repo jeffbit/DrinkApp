@@ -6,9 +6,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.showSnackBar
@@ -16,11 +20,13 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
 
     private val drinkClickedViewModel: DrinkClickedViewModel by viewModel()
+    private lateinit var drinkClickedAdapter: DrinkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +77,25 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         loadDrinkIntoView()
         favoriteFloatingActionButton(view!!, retrieveDrink())
 
+        drinkClickedAdapter = DrinkAdapter(
+            emptyList()
+        ) { drink: Drink -> handleScreenChange(drink) }
+
+        drinkclicked_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = drinkClickedAdapter
+            isNestedScrollingEnabled = true
+
+        }
+
+
+        drinkClickedViewModel.getDrinksByIngredient(retrieveDrink().strIngredient1)
+        drinkClickedViewModel.relatedDrinks.observe(viewLifecycleOwner, Observer {
+            Timber.e("List updated")
+            drinkClickedAdapter.updateDrinkList(it)
+        })
+
     }
 
 
@@ -116,6 +141,13 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private fun retrieveDrink(): Drink {
         val safeArgs: DrinkClickedFragmentArgs by navArgs()
         return safeArgs.passDrink
+
+    }
+
+    private fun handleScreenChange(drink: Drink) {
+        val action =
+            DrinkClickedFragmentDirections.actionDrinkClickedFragmentSelf(drink)
+        findNavController().navigate(action)
 
     }
 

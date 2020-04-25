@@ -54,7 +54,6 @@ class PopularDrinksFragment : Fragment() {
         //swipe to refresh pulls new data
         val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh_popular)
         swipeRefreshLayout.setOnRefreshListener {
-            popularDrinkAdapter.clearDrinks()
             popularDrinksViewModel.getAllPopularDrinks()
             //val snackBar = Snackbar.make(view, "Data updated", 1000)
             swipeRefreshLayout.isRefreshing = false
