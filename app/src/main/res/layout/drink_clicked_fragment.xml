@@ -331,12 +331,6 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-            <View
-                android:id="@+id/view_divider16"
-                style="@style/Divider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/drinkclicked_recyclerview"
                 android:layout_width="match_parent"

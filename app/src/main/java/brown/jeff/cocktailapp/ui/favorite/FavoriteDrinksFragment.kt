@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
@@ -24,8 +23,8 @@ class FavoriteDrinksFragment : Fragment() {
     private lateinit var favoriteDrinkAdapter: DrinkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -40,8 +39,7 @@ class FavoriteDrinksFragment : Fragment() {
                 true
             }
             R.id.favoriteclear_menuitem -> {
-                Toast.makeText(context, "test ", Toast.LENGTH_SHORT).show();
-                // deleteAllDrinks()
+                 deleteAllDrinks()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -53,11 +51,10 @@ class FavoriteDrinksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
         //sets the toolbar in the fragment
         val toolbar = view?.findViewById<Toolbar>(R.id.favorite_toolbar)
-
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
         return view
     }
 
@@ -93,7 +90,7 @@ class FavoriteDrinksFragment : Fragment() {
     }
 
 
-    private  fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(drink: Drink) {
         val action =
             FavoriteDrinksFragmentDirections.actionNavigationFavoritesToDrinkClickedFragment(drink)
         findNavController().navigate(action)

@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.ui.random
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,7 +13,38 @@ import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragmentDirections
 import brown.jeff.cocktailapp.util.loadImage
+import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import kotlinx.android.synthetic.main.drink_random_fragment.*
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient10_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient11_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient12_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient13_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient14_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient15_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient1_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient2_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient3_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient4_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient5_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient6_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient7_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient8_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.ingredient9_tv
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider1
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider10
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider11
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider12
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider13
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider14
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider15
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider2
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider3
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider4
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider5
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider6
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider7
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider8
+import kotlinx.android.synthetic.main.drink_random_fragment.view_divider9
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +62,9 @@ class RandomDrinkFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.drink_random_fragment, container, false)
+        val view =  inflater.inflate(R.layout.drink_random_fragment, container, false)
+        randomDrinkViewModel.getRandomDrink()
+        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -51,16 +85,11 @@ class RandomDrinkFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        randomDrinkViewModel.getRandomDrink()
-
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         observeRandomDrink()
+
+
     }
+
 
 
 
@@ -68,6 +97,7 @@ class RandomDrinkFragment : Fragment() {
 
     private fun observeRandomDrink() {
         randomDrinkViewModel.drink.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, "${it.strIngredient1}", Toast.LENGTH_SHORT).show();
             setIngredients(it.strMeasure1, it.strIngredient1, ingredient1_tv, view_divider1)
             setIngredients(it.strMeasure2, it.strIngredient2, ingredient2_tv, view_divider2)
             setIngredients(it.strMeasure3, it.strIngredient3, ingredient3_tv, view_divider3)

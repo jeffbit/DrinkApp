@@ -51,12 +51,14 @@
         android:name="brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedFragment"
         android:label="drink_clicked_fragment"
         tools:layout="@layout/drink_clicked_fragment">
+
         <action
             android:id="@+id/action_drinkClickedFragment_self"
             app:destination="@id/drinkClickedFragment" />
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
+
 
 
     </fragment>

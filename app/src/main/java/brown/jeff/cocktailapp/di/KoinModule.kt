@@ -10,7 +10,6 @@ import brown.jeff.cocktailapp.room.DrinkDao
 import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
-import brown.jeff.cocktailapp.ui.drinkclicked.SharedDrinkViewModelData
 import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksViewModel
 import brown.jeff.cocktailapp.ui.popular.PopularDrinksViewModel
 import brown.jeff.cocktailapp.ui.random.RandomDrinkViewModel
@@ -62,8 +61,7 @@ val viewModelModule = module {
     viewModel { RandomDrinkViewModel(get()) }
     viewModel { PopularDrinksViewModel(get()) }
     viewModel { SearchRecentDrinksViewModel(get()) }
-    viewModel { DrinkClickedViewModel(get(), get()) }
+    viewModel { DrinkClickedViewModel(get()) }
 
-    single { SharedDrinkViewModelData() }
 
 }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class DrinkClickedViewModel(
-    private val sharedDrinkViewModelData: SharedDrinkViewModelData,
     private val drinkRepository: DrinkRepository
 ) : ViewModel() {
     // TODO: Implement the ViewModel
@@ -20,11 +19,16 @@ class DrinkClickedViewModel(
     val relatedDrinks: LiveData<List<Drink>>
         get() = _relatedDrinks
 
-    val drink: LiveData<Drink>
-        get() = sharedDrinkViewModelData.drink
+    private val _clickedDrink = MutableLiveData<Drink>()
+    val clickedDrink: LiveData<Drink>
+        get() = _clickedDrink
 
-    fun setDrinkValue(drink: Drink) {
-        sharedDrinkViewModelData.setDrink(drink)
+    private val _drinkId = MutableLiveData<String>()
+    val drinkId: LiveData<String>
+        get() = _drinkId
+
+    fun setDrinkId(drinkId: String) {
+        _drinkId.postValue(drinkId)
     }
 
     fun addDrinkToFavorites(drink: Drink) {
@@ -39,12 +43,30 @@ class DrinkClickedViewModel(
         }
     }
 
+    fun setClickedDrink(drink: Drink) {
+        _clickedDrink.value = drink
+    }
+
+
+    fun getDrinkById(drinkId: String) {
+        viewModelScope.launch {
+            when (val result = drinkRepository.getDrinkById(drinkId)) {
+                is Result.Success -> {
+                    _clickedDrink.value = result.data
+                }
+                is Result.Failure -> {
+                    Timber.e(result.errors.toString())
+                }
+            }
+        }
+    }
+
     fun getDrinksByIngredient(ingredients: String? = "Vodka") {
         viewModelScope.launch {
             when (val result = drinkRepository.getDrinksByIngredients(ingredients)) {
                 is Result.Success -> {
                     Timber.e("Realted Drinks added")
-                    _relatedDrinks.value = result.data.drinks
+                    _relatedDrinks.postValue(result.data.drinks)
 //                    _loadingDrinks.value = false
                 }
                 is Result.Failure -> {

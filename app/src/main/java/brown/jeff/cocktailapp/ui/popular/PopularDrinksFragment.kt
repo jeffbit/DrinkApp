@@ -20,10 +20,10 @@ class PopularDrinksFragment : Fragment() {
 
     private val popularDrinksViewModel: PopularDrinksViewModel by viewModel()
     private lateinit var popularDrinkAdapter: DrinkAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
-        popularDrinksViewModel.insertTestDrinks()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -36,6 +36,9 @@ class PopularDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.setting_menuitem -> {
+//                todo: set up settings fragment
+//                allow user to disable notifications, delete all favorites, view info about api, access original api website, change from light mode to dark mode
+
                 Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show()
                 true
             }
