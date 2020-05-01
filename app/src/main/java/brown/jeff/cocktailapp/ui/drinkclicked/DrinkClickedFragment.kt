@@ -26,12 +26,18 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     private val drinkClickedViewModel: DrinkClickedViewModel by sharedViewModel()
     private lateinit var drinkClickedAdapter: DrinkAdapter
+    private val safeArgs: DrinkClickedFragmentArgs by navArgs()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("drinkId", safeArgs.passDrink.idDrink)
     }
 
 
@@ -44,7 +50,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.drinkclicked_favorite_menuitem -> {
-                addTofavoriteSnackBar(this.view!!, retrieveSafeArgs())
+                addTofavoriteSnackBar(this.view!!, safeArgs.passDrink)
                 true
             }
             R.id.drinkclicked_settings_menuitem -> {
@@ -64,9 +70,11 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         val toolbar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.drink_toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        toolbar?.title = retrieveSafeArgs().drink
+        toolbar?.title = safeArgs.passDrink.drink
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
+
+
 
         return view
     }
@@ -75,16 +83,16 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         appbarFadeIn()
-
-
+        loadDrinkIntoView()
 
         drinkClickedAdapter = DrinkAdapter(
             emptyList()
         ) { drink: Drink ->
             handleScreenChange(drink)
         }
-        loadDrinkIntoView()
-        favoriteFloatingActionButton(view!!, retrieveSafeArgs())
+        drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
+            favoriteFloatingActionButton(view!!, it)
+        })
 
 
 
@@ -98,7 +106,11 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         }
 
 
-        drinkClickedViewModel.getDrinksByIngredient(retrieveSafeArgs().strIngredient1)
+
+
+        drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
+            drinkClickedViewModel.getDrinksByIngredient(it.strIngredient1)
+        })
         drinkClickedViewModel.relatedDrinks.observe(viewLifecycleOwner, Observer {
             Timber.e("List updated")
             drinkClickedAdapter.updateDrinkList(it)
@@ -106,6 +118,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
 
     }
+
 
 
     //observes drink from viewmodel
@@ -140,24 +153,20 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
     //retrieves data from previous fragment and sets viewmodel data
-    private fun retrieveSafeArgs(): Drink {
-        val safeArgs: DrinkClickedFragmentArgs by navArgs()
+    private fun retrieveSafeArgs() {
         val drinkPassed = safeArgs.passDrink
         drinkClickedViewModel.setClickedDrink(drinkPassed)
-        return drinkPassed
 
 
     }
 
-
-    //this is where the issues resides
-    //todo: fix this issue asap
     private fun handleScreenChange(drink: Drink) {
         val action =
             DrinkClickedFragmentDirections.actionDrinkClickedFragmentSelf(drink)
         findNavController().navigate(action)
 
     }
+
 
     private fun addTofavoriteSnackBar(view: View, drink: Drink) {
         drinkClickedViewModel.addDrinkToFavorites(drink)

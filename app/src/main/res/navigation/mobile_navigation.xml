@@ -16,6 +16,9 @@
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
+        <action
+            android:id="@+id/action_navigation_popular_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
 
     </fragment>
 
@@ -32,6 +35,9 @@
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
+        <action
+            android:id="@+id/action_navigation_recent_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -45,6 +51,9 @@
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
+        <action
+            android:id="@+id/action_navigation_favorites_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/drinkClickedFragment"
@@ -58,7 +67,9 @@
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
-
+        <action
+            android:id="@+id/action_drinkClickedFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
 
 
     </fragment>
@@ -71,5 +82,13 @@
         <action
             android:id="@+id/action_navigation_random_to_drinkClickedFragment"
             app:destination="@id/drinkClickedFragment" />
+        <action
+            android:id="@+id/action_navigation_random_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="brown.jeff.cocktailapp.ui.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

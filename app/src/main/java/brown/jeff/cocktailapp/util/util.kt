@@ -10,11 +10,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
-import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragmentDirections
+import brown.jeff.cocktailapp.ui.popular.PopularDrinksFragmentDirections
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
@@ -42,7 +40,6 @@ fun Fragment.hideKeyboard() {
         activity?.hideKeyBoard(it)
     }
 }
-
 
 
 fun showSnackBar(
@@ -80,6 +77,14 @@ fun backPressedToolbar(toolbar: androidx.appcompat.widget.Toolbar?, activity: Ac
     toolbar?.setNavigationOnClickListener {
         activity?.onBackPressed()
     }
+}
+
+
+//navigate to settings fragment
+fun navigateToSettings(view: View) {
+    val action =
+        PopularDrinksFragmentDirections.actionNavigationPopularToSettingsFragment()
+    view.findNavController().navigate(action)
 }
 
 
