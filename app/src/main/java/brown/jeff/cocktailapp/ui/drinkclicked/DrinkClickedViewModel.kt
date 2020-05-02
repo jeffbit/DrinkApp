@@ -27,6 +27,7 @@ class DrinkClickedViewModel(
     val drinkId: LiveData<String>
         get() = _drinkId
 
+
     fun setDrinkId(drinkId: String) {
         _drinkId.postValue(drinkId)
     }

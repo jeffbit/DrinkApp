@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="General"
+        android:visibility="visible">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="disable_database"
+            android:title="Disable Favorites" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Color Settings">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="ui_mode_switch"
+            android:switchTextOff="Disable DarkMode"
+            android:switchTextOn="Enable Darkmode"
+            android:title="Enable DarkMode" />
+    </PreferenceCategory>
+</PreferenceScreen>

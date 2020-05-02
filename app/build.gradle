@@ -151,4 +151,6 @@ dependencies {
     //Material Design
     implementation 'com.google.android.material:material:1.1.0'
 
+    //Preferences
+    implementation 'androidx.preference:preference:1.1.1'
 }

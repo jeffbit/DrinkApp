@@ -2,7 +2,6 @@ package brown.jeff.cocktailapp.ui.popular
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -36,10 +35,8 @@ class PopularDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.setting_menuitem -> {
-//                todo: set up settings fragment
 //                allow user to disable notifications, delete all favorites, view info about api, access original api website, change from light mode to dark mode
-
-                Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show()
+                changeToSettingsScreen()
                 true
             }
 
@@ -95,6 +92,11 @@ class PopularDrinksFragment : Fragment() {
             PopularDrinksFragmentDirections.actionNavigationPopularToDrinkClickedFragment(drink)
         findNavController().navigate(action)
 
+    }
+
+    private fun changeToSettingsScreen() {
+        val action = PopularDrinksFragmentDirections.actionNavigationPopularToSettingsFragment()
+        findNavController().navigate(action)
     }
 
 
