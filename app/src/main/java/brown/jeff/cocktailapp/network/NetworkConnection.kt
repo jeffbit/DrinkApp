@@ -11,7 +11,5 @@ class NetworkConnection(private val context: Context) {
         val manager: ConnectivityManager = context.getSystemService(service) as ConnectivityManager
         val network = manager.activeNetworkInfo
         return (network != null) && network.isConnected
-
-
     }
 }

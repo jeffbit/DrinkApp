@@ -10,7 +10,6 @@ import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Failure
 import brown.jeff.cocktailapp.network.Result.Success
 import brown.jeff.cocktailapp.room.DrinkDao
-import brown.jeff.cocktailapp.util.DRINK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -33,7 +32,6 @@ class DrinkRepository(
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.searchDrinksByName(drinkName))
         }
-
     }
 
     //gets list of drinks that start with letter
@@ -45,7 +43,7 @@ class DrinkRepository(
     }
 
     //gets single drink by drinkId
-    suspend fun getDrinkById(drinkId: String): Result<Drink> {
+    suspend fun getDrinkById(drinkId: String): Result<Drinks> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinkById(drinkId))
         }
@@ -71,15 +69,13 @@ class DrinkRepository(
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getPopularDrinks())
         }
-
     }
 
     //gets random single drink
-    suspend fun getRandomDrink(): Result<Drink> {
+    suspend fun getRandomDrink(): Result<Drinks> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getRandomDrink())
         }
-
     }
 
     //Call for api
@@ -104,10 +100,7 @@ class DrinkRepository(
                 Failure(Errors.NetworkError())
             }
         }
-
-
     }
-
 
     //DRINKDAO CALLS
 
@@ -124,17 +117,6 @@ class DrinkRepository(
         withContext(Dispatchers.IO) {
             drinkDao.deleteAllDrinks()
         }
-    }
-
-    suspend fun insertDrinks() {
-        withContext(Dispatchers.IO) {
-            drinkDao.insertDrink(DRINK)
-            drinkDao.insertDrink(DRINK)
-            drinkDao.insertDrink(DRINK)
-            drinkDao.insertDrink(DRINK)
-        }
-
-
     }
 
     suspend fun insertDrinksLocalDB(drink: Drink): Boolean {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import brown.jeff.cocktailapp.util.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -67,6 +68,7 @@ class SearchRecentDrinksFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = drinkAdapter
+            activity?.let { changeRecyclerViewLayout(context, it, this) }
 
         }
 

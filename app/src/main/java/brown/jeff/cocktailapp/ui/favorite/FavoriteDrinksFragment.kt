@@ -8,10 +8,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import brown.jeff.cocktailapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +39,7 @@ class FavoriteDrinksFragment : Fragment() {
                 true
             }
             R.id.favoriteclear_menuitem -> {
-                 deleteAllDrinks()
+                deleteAllDrinks()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -67,7 +67,7 @@ class FavoriteDrinksFragment : Fragment() {
         recyclerview_favorites.apply {
             adapter = favoriteDrinkAdapter
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(context, 2)
+            activity?.let { changeRecyclerViewLayout(context, it, this) }
 
         }
         favoriteDrinksViewModel.getDrinks

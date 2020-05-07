@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.util
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.popular.PopularDrinksFragmentDirections
@@ -57,6 +60,7 @@ fun showSnackBar(
 
 }
 
+//show alert
 fun showAlertDialog(context: Context, message: String, action: () -> Unit) {
     val builder = AlertDialog.Builder(context)
     builder.setMessage(message)
@@ -73,6 +77,7 @@ fun showAlertDialog(context: Context, message: String, action: () -> Unit) {
 
 }
 
+//back press
 fun backPressedToolbar(toolbar: androidx.appcompat.widget.Toolbar?, activity: Activity?) {
     toolbar?.setNavigationOnClickListener {
         activity?.onBackPressed()
@@ -85,6 +90,22 @@ fun navigateToSettings(view: View) {
     val action =
         PopularDrinksFragmentDirections.actionNavigationPopularToSettingsFragment()
     view.findNavController().navigate(action)
+}
+
+
+//change recyclerview on orientation change
+fun changeRecyclerViewLayout(
+    context: Context,
+    activity: Activity,
+    recyclerView: RecyclerView
+) {
+    if (activity?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+    } else {
+        recyclerView.layoutManager = GridLayoutManager(context, 4)
+
+
+    }
 }
 
 

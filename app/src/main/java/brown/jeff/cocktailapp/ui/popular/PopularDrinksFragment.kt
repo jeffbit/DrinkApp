@@ -7,11 +7,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -73,7 +73,7 @@ class PopularDrinksFragment : Fragment() {
         recyclerview_popular.apply {
             adapter = popularDrinkAdapter
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(context, 2)
+            activity?.let { changeRecyclerViewLayout(context, it, this) }
 
         }
 
@@ -86,6 +86,7 @@ class PopularDrinksFragment : Fragment() {
 
 
     }
+
 
     private fun handleScreenChange(drink: Drink) {
         val action =

@@ -53,7 +53,7 @@ class DrinkClickedViewModel(
         viewModelScope.launch {
             when (val result = drinkRepository.getDrinkById(drinkId)) {
                 is Result.Success -> {
-                    _clickedDrink.value = result.data
+                    _clickedDrink.value = result.data.drinks[0]
                 }
                 is Result.Failure -> {
                     Timber.e(result.errors.toString())

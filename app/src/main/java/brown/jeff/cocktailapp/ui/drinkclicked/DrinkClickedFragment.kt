@@ -50,7 +50,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.drinkclicked_favorite_menuitem -> {
-                addTofavoriteSnackBar(this.view!!, safeArgs.passDrink)
+                addTofavoriteSnackBar(this.requireView(), safeArgs.passDrink)
                 true
             }
             R.id.drinkclicked_settings_menuitem -> {
@@ -74,7 +74,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
 
-
+        drinkClickedViewModel.getDrinkById(safeArgs.passDrink.idDrink)
 
         return view
     }
@@ -91,7 +91,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
             handleScreenChange(drink)
         }
         drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
-            favoriteFloatingActionButton(view!!, it)
+            favoriteFloatingActionButton(requireView(), it)
         })
 
 
@@ -118,7 +118,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
 
     }
-
 
 
     //observes drink from viewmodel
