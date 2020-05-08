@@ -1,8 +1,10 @@
 package brown.jeff.cocktailapp.ui.favorite
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -12,7 +14,6 @@ import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
-import brown.jeff.cocktailapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +22,7 @@ class FavoriteDrinksFragment : Fragment() {
 
     private val favoriteDrinksViewModel: FavoriteDrinksViewModel by viewModel()
     private lateinit var favoriteDrinkAdapter: DrinkAdapter
+    private var isAlertDisplayed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -70,7 +72,15 @@ class FavoriteDrinksFragment : Fragment() {
             activity?.let { changeRecyclerViewLayout(context, it, this) }
 
         }
+
+        if (savedInstanceState != null) {
+            val isDisplayed = savedInstanceState.getBoolean("isAlertDisplayed")
+            if (isDisplayed) {
+                deleteAllDrinks()
+            }
+        }
         favoriteDrinksViewModel.getDrinks
+        showErrorMessage()
 
 
         //todo: Fragment will not inflate with empty list, figure out how to and display error message if nothing has been added to favorites.
@@ -90,6 +100,12 @@ class FavoriteDrinksFragment : Fragment() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("isAlertDisplayed", isAlertDisplayed)
+    }
+
+
     private fun handleScreenChange(drink: Drink) {
         val action =
             FavoriteDrinksFragmentDirections.actionNavigationFavoritesToDrinkClickedFragment(drink)
@@ -98,11 +114,41 @@ class FavoriteDrinksFragment : Fragment() {
     }
 
     private fun deleteAllDrinks() {
-        context?.let {
-            showAlertDialog(
-                it, "Delete all drinks"
-            ) { favoriteDrinksViewModel.deleteAllDrinks() }
-        }
+        showAlertDialogFavorites()
+    }
+
+
+    //show alert for favorites fragment
+    private fun showAlertDialogFavorites() {
+        isAlertDisplayed = true
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setMessage("Delete all Drinks")
+            ?.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, _ ->
+                favoriteDrinksViewModel.deleteAllDrinks()
+                isAlertDisplayed = false
+                dialog.dismiss()
+            })
+            ?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
+                isAlertDisplayed = false
+                dialog.cancel()
+            })
+
+        val alert = builder.create()
+        alert.setTitle("Are you sure")
+        alert.show()
+
+
+    }
+
+    private fun showErrorMessage() {
+        favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) {
+                errormessage_tv_favorites.visibility = View.VISIBLE
+                errormessage_tv_favorites.text = "No drinks added to favorites"
+            } else {
+                errormessage_tv_favorites.visibility = View.GONE
+            }
+        })
     }
 
 

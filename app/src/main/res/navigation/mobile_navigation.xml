@@ -78,7 +78,7 @@
         android:id="@+id/navigation_random"
         android:name="brown.jeff.cocktailapp.ui.random.RandomDrinkFragment"
         android:label="random_drink_fragment"
-        tools:layout="@layout/drink_random_fragment">
+        tools:layout="@layout/drink_clicked_fragment">
         <action
             android:id="@+id/action_navigation_random_to_drinkClickedFragment"
             app:destination="@id/drinkClickedFragment" />

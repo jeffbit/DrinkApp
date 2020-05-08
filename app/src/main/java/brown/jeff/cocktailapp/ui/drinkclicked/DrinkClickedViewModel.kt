@@ -80,4 +80,31 @@ class DrinkClickedViewModel(
     }
 
 
+    //todo: need to set up to share ingredients through intent
+    fun addIngredientsToArray(): MutableList<String> {
+        val ingredientList = mutableListOf<String>()
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient1)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient2)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient3)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient4)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient5)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient6)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient7)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient8)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient9)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient10)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient11)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient12)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient13)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient14)?.let { ingredientList.add(it) }
+        addIngredientIfNotNull(clickedDrink.value?.strIngredient15)?.let { ingredientList.add(it) }
+
+
+        return ingredientList
+    }
+
+
+    private fun addIngredientIfNotNull(ingredients: String?): String? {
+        return ingredients
+    }
 }

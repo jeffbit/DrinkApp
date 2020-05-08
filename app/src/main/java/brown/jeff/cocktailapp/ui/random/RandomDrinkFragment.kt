@@ -16,36 +16,6 @@ import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient10_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient11_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient12_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient13_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient14_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient15_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient1_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient2_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient3_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient4_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient5_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient6_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient7_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient8_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.ingredient9_tv
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider1
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider10
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider11
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider12
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider13
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider14
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider15
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider2
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider3
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider4
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider5
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider6
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider7
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider8
-import kotlinx.android.synthetic.main.drink_random_fragment.view_divider9
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RandomDrinkFragment : Fragment() {
@@ -53,6 +23,7 @@ class RandomDrinkFragment : Fragment() {
 
     private val randomDrinkViewModel: RandomDrinkViewModel by viewModel()
     private lateinit var toolbar: Toolbar
+    private var isDrink: Boolean = true
     private var drink: Drink? = null
 
 
@@ -66,7 +37,12 @@ class RandomDrinkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.drink_clicked_fragment, container, false)
-        if (drink == null) {
+        if (savedInstanceState != null) {
+            val drinkBoolean = savedInstanceState.getBoolean("isDrink")
+            if(drinkBoolean) {
+                observeRandomDrink()
+            }
+        } else {
             randomDrinkViewModel.getRandomDrink()
         }
         toolbar = view?.findViewById(R.id.drink_toolbar)!!
@@ -90,7 +66,7 @@ class RandomDrinkFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.drinkclicked_favorite_menuitem -> {
-                drink?.let { addDrinkToFavorites(this.requireView(), it) }
+                addDrinkToFavorites(this.requireView(), drink!!)
                 true
             }
             R.id.drinkclicked_settings_menuitem -> {
@@ -102,6 +78,11 @@ class RandomDrinkFragment : Fragment() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("isDrink", isDrink)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         appbarFadeIn()
@@ -109,7 +90,7 @@ class RandomDrinkFragment : Fragment() {
         coordinatorLayout.visibility = View.GONE
         observeRandomDrink()
         randomDrinkViewModel.drink.observe(viewLifecycleOwner, Observer {
-            favoriteFloatingActionButton(requireView(), it)
+            favoriteFloatingActionButton(this.requireView(), it)
         })
 
 
@@ -137,6 +118,7 @@ class RandomDrinkFragment : Fragment() {
             instructions_tv.text = it.strInstructions
             coordinatorLayout.visibility = View.VISIBLE
             drink = it
+            isDrink = false
 
         })
     }
@@ -153,7 +135,7 @@ class RandomDrinkFragment : Fragment() {
         randomDrinkViewModel.addDrinkToFavorites(drink)
         showSnackBar(
             view,
-            "Drink favorited ",
+            "Drink added to favorites ",
             Snackbar.LENGTH_LONG,
             "Undo",
             { randomDrinkViewModel.removeDrinkFromFavorites(drink.idDrink) })

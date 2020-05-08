@@ -1,5 +1,6 @@
 package brown.jeff.cocktailapp.ui.drinkclicked
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -15,6 +16,7 @@ import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
+import brown.jeff.cocktailapp.util.shareIngredients
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
@@ -59,7 +61,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
                 changeToSettingsScreen()
                 true
             }
-            else ->  super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -106,6 +108,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
         }
 
+        shareIngredientButtonClicked(requireActivity())
+
 
 
 
@@ -122,6 +126,12 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     }
 
+
+    private fun shareIngredientButtonClicked(activity: Activity){
+        shareingredients_button.setOnClickListener {
+            shareIngredients(activity, drinkClickedViewModel.addIngredientsToArray() )
+        }
+    }
 
     //observes drink from viewmodel
     private fun loadDrinkIntoView() {

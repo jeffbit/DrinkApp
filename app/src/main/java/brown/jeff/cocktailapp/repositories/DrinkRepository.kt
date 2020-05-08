@@ -115,6 +115,7 @@ class DrinkRepository(
 
     suspend fun deleteAllDrinks() {
         withContext(Dispatchers.IO) {
+            Timber.e("Repository: Delete Drinks")
             drinkDao.deleteAllDrinks()
         }
     }

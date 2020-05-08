@@ -2,12 +2,11 @@ package brown.jeff.cocktailapp.util
 
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
+import android.content.Intent
 import android.content.res.Configuration
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -60,22 +59,6 @@ fun showSnackBar(
 
 }
 
-//show alert
-fun showAlertDialog(context: Context, message: String, action: () -> Unit) {
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage(message)
-        .setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, _ ->
-            action
-            dialog.dismiss()
-        })
-        .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
-            dialog.cancel()
-        })
-
-    builder.create()
-
-
-}
 
 //back press
 fun backPressedToolbar(toolbar: androidx.appcompat.widget.Toolbar?, activity: Activity?) {
@@ -107,5 +90,18 @@ fun changeRecyclerViewLayout(
 
     }
 }
+
+
+fun shareIngredients(activity: Activity, ingredientList: MutableList<String>) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_INTENT, ingredientList.toString())
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    activity.startActivity(shareIntent)
+}
+
+
 
 
