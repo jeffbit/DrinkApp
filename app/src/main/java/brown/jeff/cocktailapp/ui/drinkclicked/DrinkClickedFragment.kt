@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private val drinkClickedViewModel: DrinkClickedViewModel by sharedViewModel()
     private lateinit var drinkClickedAdapter: DrinkAdapter
     private val safeArgs: DrinkClickedFragmentArgs by navArgs()
+    private lateinit var toolbar: Toolbar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("drinkId", safeArgs.passDrink.idDrink)
+        outState.putString("drinkName", safeArgs.passDrink.drink)
     }
 
 
@@ -54,10 +56,10 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
                 true
             }
             R.id.drinkclicked_settings_menuitem -> {
-                //todo: Load settings fragment into view
+                changeToSettingsScreen()
                 true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else ->  super.onOptionsItemSelected(item)
         }
     }
 
@@ -68,9 +70,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         savedInstanceState: Bundle?
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        val toolbar = view?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.drink_toolbar)
+        toolbar = view?.findViewById(R.id.drink_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        toolbar?.title = safeArgs.passDrink.drink
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
 
@@ -79,6 +80,11 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        toolbar.title = safeArgs.passDrink.drink
+
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -90,11 +96,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         ) { drink: Drink ->
             handleScreenChange(drink)
         }
-        drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
-            favoriteFloatingActionButton(requireView(), it)
-        })
-
-
 
 
         drinkclicked_recyclerview.apply {
@@ -110,6 +111,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
         drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
             drinkClickedViewModel.getDrinksByIngredient(it.strIngredient1)
+            favoriteFloatingActionButton(requireView(), it)
+
         })
         drinkClickedViewModel.relatedDrinks.observe(viewLifecycleOwner, Observer {
             Timber.e("List updated")
@@ -164,6 +167,11 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
             DrinkClickedFragmentDirections.actionDrinkClickedFragmentSelf(drink)
         findNavController().navigate(action)
 
+    }
+
+    private fun changeToSettingsScreen() {
+        val action = DrinkClickedFragmentDirections.actionDrinkClickedFragmentToSettingsFragment()
+        findNavController().navigate(action)
     }
 
 

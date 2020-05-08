@@ -45,4 +45,16 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
         }
     }
 
+    fun addDrinkToFavorites(drink: Drink) {
+        viewModelScope.launch {
+            drinkRepository.insertDrinksLocalDB(drink)
+        }
+    }
+
+    fun removeDrinkFromFavorites(drinkId: String) {
+        viewModelScope.launch {
+            drinkRepository.removeDrinkById(drinkId)
+        }
+    }
+
 }

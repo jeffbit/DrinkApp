@@ -3,10 +3,18 @@ package brown.jeff.cocktailapp.ui.random
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
+import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
+import brown.jeff.cocktailapp.util.showSnackBar
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import kotlinx.android.synthetic.main.drink_random_fragment.ingredient10_tv
 import kotlinx.android.synthetic.main.drink_random_fragment.ingredient11_tv
@@ -44,6 +52,9 @@ class RandomDrinkFragment : Fragment() {
 
 
     private val randomDrinkViewModel: RandomDrinkViewModel by viewModel()
+    private lateinit var toolbar: Toolbar
+    private var drink: Drink? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,19 +66,35 @@ class RandomDrinkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.drink_clicked_fragment, container, false)
-        randomDrinkViewModel.getRandomDrink()
+        if (drink == null) {
+            randomDrinkViewModel.getRandomDrink()
+        }
+        toolbar = view?.findViewById(R.id.drink_toolbar)!!
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        backPressedToolbar(toolbar, activity)
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        randomDrinkViewModel.drink.observe(viewLifecycleOwner, Observer {
+            toolbar.title = it.drink
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.random_drink_menu, menu)
+        inflater.inflate(R.menu.drink_clicked_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.random_menuitem -> {
-                randomDrinkViewModel.getRandomDrink()
+            R.id.drinkclicked_favorite_menuitem -> {
+                drink?.let { addDrinkToFavorites(this.requireView(), it) }
+                true
+            }
+            R.id.drinkclicked_settings_menuitem -> {
+                changeToSettingsScreen()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -77,8 +104,13 @@ class RandomDrinkFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // observeProgressBar()
+        appbarFadeIn()
+        relateddrinkstitle_tv.visibility = View.GONE
+        coordinatorLayout.visibility = View.GONE
         observeRandomDrink()
+        randomDrinkViewModel.drink.observe(viewLifecycleOwner, Observer {
+            favoriteFloatingActionButton(requireView(), it)
+        })
 
 
     }
@@ -103,10 +135,29 @@ class RandomDrinkFragment : Fragment() {
             setIngredients(it.strMeasure15, it.strIngredient15, ingredient15_tv, view_divider15)
             loadImage(drink_imageview, it)
             instructions_tv.text = it.strInstructions
+            coordinatorLayout.visibility = View.VISIBLE
+            drink = it
 
         })
     }
 
+
+    private fun favoriteFloatingActionButton(view: View, drink: Drink) {
+        favoritedrink_fab.setOnClickListener {
+            addDrinkToFavorites(view, drink)
+        }
+
+    }
+
+    private fun addDrinkToFavorites(view: View, drink: Drink) {
+        randomDrinkViewModel.addDrinkToFavorites(drink)
+        showSnackBar(
+            view,
+            "Drink favorited ",
+            Snackbar.LENGTH_LONG,
+            "Undo",
+            { randomDrinkViewModel.removeDrinkFromFavorites(drink.idDrink) })
+    }
 
     private fun setIngredients(
         measure: String?,
@@ -123,6 +174,23 @@ class RandomDrinkFragment : Fragment() {
             textView.visibility = View.GONE
             view.visibility = View.GONE
         }
+    }
+
+    //fades imageview,title,and floating actionbar into toolbar
+    private fun appbarFadeIn() {
+        var scrollRage = -1
+        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (scrollRage == -1) {
+                scrollRage = appBarLayout?.totalScrollRange!!
+            }
+            drink_toolbar.menu.findItem(R.id.drinkclicked_favorite_menuitem).isVisible =
+                scrollRage + verticalOffset == 0
+        })
+    }
+
+    private fun changeToSettingsScreen() {
+        val action = RandomDrinkFragmentDirections.actionNavigationRandomToSettingsFragment()
+        findNavController().navigate(action)
     }
 
 
