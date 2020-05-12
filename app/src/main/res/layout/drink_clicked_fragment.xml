@@ -63,7 +63,8 @@
                 android:paddingBottom="8dp"
                 android:text="@string/ingredients"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/ingredient1_tv"
@@ -287,14 +288,14 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/shareingredients_button"
+                android:id="@+id/sharedrink_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="12dp"
-                android:text="@string/share_ingredients" />
+                android:text="@string/share_drink" />
 
             <TextView
                 android:id="@+id/instructiontitle_tv"
@@ -304,7 +305,8 @@
                 android:paddingBottom="8dp"
                 android:text="@string/instructions"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/instructions_tv"
@@ -333,7 +335,8 @@
                 android:paddingBottom="8dp"
                 android:text="Related Drinks"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/drinkclicked_recyclerview"

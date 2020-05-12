@@ -17,9 +17,11 @@
     <string name="change_drink">Change Drink</string>
     <string name="drink_image">Drink Image</string>
     <string name="drink_name">Drink Name</string>
+    <string name="drink_url">"https://www.thecocktaildb.com/drink.php?c=%1$s-%2$s"</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clear_all_favorites">Clear all favorites</string>
     <string name="no_drinks_favorited">No drinks favorited</string>
+    <string name="share_drink">Share Drink</string>
 </resources>

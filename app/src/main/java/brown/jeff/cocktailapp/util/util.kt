@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -92,15 +93,28 @@ fun changeRecyclerViewLayout(
 }
 
 
-fun shareIngredients(activity: Activity, ingredientList: MutableList<String>) {
+fun shareDrink(
+    activity: Activity,
+    drinkName: String
+) {
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_INTENT, ingredientList.toString())
+        putExtra(Intent.EXTRA_TEXT, drinkName)
         type = "text/plain"
     }
-    val shareIntent = Intent.createChooser(sendIntent, null)
+    val shareIntent = Intent.createChooser(sendIntent, "Share $drinkName")
     activity.startActivity(shareIntent)
 }
+
+//todo: notification setup in progress
+fun setUpNotification(activity: Activity, CHANNEL_ID: String, drink: Drink) {
+    val builder = NotificationCompat.Builder(activity, CHANNEL_ID)
+        .setSmallIcon(R.drawable.ic_broken_image_black_24dp)
+        .setContentTitle("Its 5'oclock somewhere!")
+        .setContentTitle("Click me for a random drink")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+}
+
 
 
 

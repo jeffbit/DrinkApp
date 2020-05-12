@@ -16,7 +16,7 @@ import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
-import brown.jeff.cocktailapp.util.shareIngredients
+import brown.jeff.cocktailapp.util.shareDrink
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -113,7 +113,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
         }
 
-        shareIngredientButtonClicked(requireActivity())
+        shareDrinkUrl(requireActivity())
 
 
 
@@ -132,9 +132,12 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
-    private fun shareIngredientButtonClicked(activity: Activity) {
-        shareingredients_button.setOnClickListener {
-            shareIngredients(activity, drinkClickedViewModel.addIngredientsToArray())
+    //shares drink url on button press
+    private fun shareDrinkUrl(activity: Activity) {
+        sharedrink_button.setOnClickListener {
+            drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
+                shareDrink(activity, getString(R.string.drink_url, it.idDrink, it.drink))
+            })
         }
     }
 

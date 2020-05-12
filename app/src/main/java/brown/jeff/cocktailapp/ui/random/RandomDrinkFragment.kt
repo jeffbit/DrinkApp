@@ -14,6 +14,7 @@ import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +24,7 @@ class RandomDrinkFragment : Fragment() {
 
     private val randomDrinkViewModel: RandomDrinkViewModel by viewModel()
     private lateinit var toolbar: Toolbar
+    private lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
     private var isDrink: Boolean = true
     private var drink: Drink? = null
 
@@ -39,7 +41,7 @@ class RandomDrinkFragment : Fragment() {
         val view = inflater.inflate(R.layout.drink_clicked_fragment, container, false)
         if (savedInstanceState != null) {
             val drinkBoolean = savedInstanceState.getBoolean("isDrink")
-            if(drinkBoolean) {
+            if (drinkBoolean) {
                 observeRandomDrink()
             }
         } else {
@@ -47,6 +49,9 @@ class RandomDrinkFragment : Fragment() {
         }
         toolbar = view?.findViewById(R.id.drink_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor));
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor));
         backPressedToolbar(toolbar, activity)
         return view
     }
