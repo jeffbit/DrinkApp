@@ -3,4 +3,5 @@
     <color name="primaryColor">#bcbbbd</color>
     <color name="primaryLightColor">#eeedef</color>
     <color name="primaryDarkColor">#f2eff2</color>
+    <color name="textColor">#ffffff</color>
     </resources>

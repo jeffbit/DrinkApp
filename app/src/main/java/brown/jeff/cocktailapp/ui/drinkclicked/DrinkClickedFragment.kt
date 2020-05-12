@@ -19,6 +19,7 @@ import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.shareIngredients
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -31,6 +32,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private lateinit var drinkClickedAdapter: DrinkAdapter
     private val safeArgs: DrinkClickedFragmentArgs by navArgs()
     private lateinit var toolbar: Toolbar
+    private lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +75,9 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         toolbar = view?.findViewById(R.id.drink_toolbar)!!
+        collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor));
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor));
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
@@ -84,7 +89,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     override fun onResume() {
         super.onResume()
-        toolbar.title = safeArgs.passDrink.drink
+        collapsingToolbarLayout.title = safeArgs.passDrink.drink
 
     }
 
@@ -127,9 +132,9 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
-    private fun shareIngredientButtonClicked(activity: Activity){
+    private fun shareIngredientButtonClicked(activity: Activity) {
         shareingredients_button.setOnClickListener {
-            shareIngredients(activity, drinkClickedViewModel.addIngredientsToArray() )
+            shareIngredients(activity, drinkClickedViewModel.addIngredientsToArray())
         }
     }
 

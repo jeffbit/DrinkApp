@@ -22,7 +22,6 @@ class SearchRecentDrinksFragment : Fragment() {
     private val searchRecentDrinksViewModel: SearchRecentDrinksViewModel by viewModel()
     private lateinit var drinkAdapter: DrinkAdapter
     private lateinit var searchView: SearchView
-    private var savedQuery: String? = null
 
 
     override fun onCreateView(
@@ -43,9 +42,7 @@ class SearchRecentDrinksFragment : Fragment() {
 
     }
 
-    //   add filter to searchview. This will change search to search ingredients, will return list of drinks with the query ingredients,
-//            return search of no alcoholic drinks or alcoholic drinks
-//        this will change the search view fun depending on what item is checked
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.searchsettings_menuitem -> {
@@ -73,14 +70,7 @@ class SearchRecentDrinksFragment : Fragment() {
         }
 
 
-//        // set up so that if query was searched before fragment was destroyed it populates with that data
-//        savedQuery = savedInstanceState?.getString("QUERY")
-//        Toast.makeText(context, savedQuery, Toast.LENGTH_SHORT).show();
-//        if (savedQuery != null) {
-//            searchRecentDrinksViewModel.searchDrinkByName(savedQuery!!)
-//        } else {
         searchRecentDrinksViewModel.getRecentDrinks()
-//        }
         searchRecentDrinksViewModel.popularDrinks.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 drinkAdapter.updateDrinkList(it)
@@ -90,6 +80,10 @@ class SearchRecentDrinksFragment : Fragment() {
             if (!it.isNullOrEmpty()) {
                 errrortextview_search.text = it
                 recyclerview_search.visibility = View.GONE
+            } else {
+                errrortextview_search.visibility = View.GONE
+                recyclerview_search.visibility = View.VISIBLE
+
             }
 
         })
@@ -97,23 +91,18 @@ class SearchRecentDrinksFragment : Fragment() {
 
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        outState.putString("QUERY", savedQuery)
-//    }
-
 
     //initiates searchview
     private fun searchDrinks(view: View) {
         searchView = view.findViewById(R.id.searchview_search)
-//        searchView.isIconified = false
-//        searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { searchRecentDrinksViewModel.searchDrinkByName(it) }
-                hideKeyboard()
-                // savedQuery = query
+                query?.let {
+                    searchRecentDrinksViewModel.searchDrinkByName(it)
+                    hideKeyboard()
+                }
                 return true
+
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -129,4 +118,5 @@ class SearchRecentDrinksFragment : Fragment() {
         findNavController().navigate(action)
 
     }
+
 }

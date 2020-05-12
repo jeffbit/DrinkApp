@@ -99,7 +99,6 @@ class DrinkClickedViewModel(
         addIngredientIfNotNull(clickedDrink.value?.strIngredient14)?.let { ingredientList.add(it) }
         addIngredientIfNotNull(clickedDrink.value?.strIngredient15)?.let { ingredientList.add(it) }
 
-
         return ingredientList
     }
 

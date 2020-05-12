@@ -15,6 +15,7 @@
             android:id="@+id/collapsingToolBarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:collapsedTitleTextAppearance="@color/textColor"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
@@ -36,7 +37,9 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:menu="@menu/drink_clicked_menu"
-                app:navigationIcon="?attr/homeAsUpIndicator"></androidx.appcompat.widget.Toolbar>
+                app:navigationIcon="?attr/homeAsUpIndicator">
+
+            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

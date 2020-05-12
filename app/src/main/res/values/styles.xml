@@ -6,7 +6,11 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryLightColor</item>
+    </style>
 
+    <!-- Expanded Toolbar DrinkClicked -->
+    <style name="ExpandedAppBar" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <!--Creates divider. -->
@@ -15,14 +19,13 @@
         <item name="android:layout_height">2dp</item>
         <item name="android:background">?android:attr/listDivider</item>
         <item name="android:layout_margin">4dp</item>
-
     </style>
 
     <!-- Style is for the splash screen. -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
+
 
 </resources>

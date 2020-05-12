@@ -79,22 +79,18 @@ class FavoriteDrinksFragment : Fragment() {
                 deleteAllDrinks()
             }
         }
-        favoriteDrinksViewModel.getDrinks
-        showErrorMessage()
 
 
-        //todo: Fragment will not inflate with empty list, figure out how to and display error message if nothing has been added to favorites.
         favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
             it?.let {
+                if (it.isNullOrEmpty()) {
+                    errormessage_tv_favorites.visibility = View.VISIBLE
+                } else {
+                    errormessage_tv_favorites.visibility = View.GONE
+                }
                 favoriteDrinkAdapter.updateDrinkList(it)
+
             }
-            errormessage_tv_favorites.visibility = View.GONE
-        })
-
-        favoriteDrinksViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
-            errormessage_tv_favorites.text = it
-            errormessage_tv_favorites.visibility = View.VISIBLE
-
         })
 
     }
@@ -113,6 +109,9 @@ class FavoriteDrinksFragment : Fragment() {
 
     }
 
+    private fun showErrorMessage(drinkList : List<Drink>){
+
+    }
     private fun deleteAllDrinks() {
         showAlertDialogFavorites()
     }
@@ -138,17 +137,6 @@ class FavoriteDrinksFragment : Fragment() {
         alert.show()
 
 
-    }
-
-    private fun showErrorMessage() {
-        favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
-            if (it.isEmpty()) {
-                errormessage_tv_favorites.visibility = View.VISIBLE
-                errormessage_tv_favorites.text = "No drinks added to favorites"
-            } else {
-                errormessage_tv_favorites.visibility = View.GONE
-            }
-        })
     }
 
 
