@@ -16,6 +16,10 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
     val drink: LiveData<Drink>
         get() = _drink
 
+    private val _previousDaysDrink = MutableLiveData<Drink>()
+    val previousDaysDrink: LiveData<Drink>
+        get() = _previousDaysDrink
+
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
         get() = _loading
@@ -31,7 +35,6 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
             when (val result = drinkRepository.getRandomDrink()) {
                 is Result.Success -> {
                     _loading.value = false
-                    _drink.value = result.data.drinks[0]
                     Timber.i(result.data.toString())
                 }
                 is Result.Failure -> {
@@ -56,5 +59,6 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
             drinkRepository.removeDrinkById(drinkId)
         }
     }
+
 
 }

@@ -106,14 +106,7 @@ fun shareDrink(
     activity.startActivity(shareIntent)
 }
 
-//todo: notification setup in progress
-fun setUpNotification(activity: Activity, CHANNEL_ID: String, drink: Drink) {
-    val builder = NotificationCompat.Builder(activity, CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_broken_image_black_24dp)
-        .setContentTitle("Its 5'oclock somewhere!")
-        .setContentTitle("Click me for a random drink")
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-}
+
 
 
 
