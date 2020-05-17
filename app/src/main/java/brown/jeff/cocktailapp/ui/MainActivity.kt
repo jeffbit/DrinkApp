@@ -39,24 +39,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        createNotificationChannel(notificationManager)
-        notificationManager.sendNotification(this)
     }
 
-    fun createNotificationChannel(notificationManager: NotificationManager) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (notificationManager.getNotificationChannel(getString(R.string.drink_notification_channel_id)) == null) {
-                notificationManager.createNotificationChannel(
-                    NotificationChannel(
-                        getString(R.string.drink_notification_channel_id),
-                        "Default",
-                        NotificationManager.IMPORTANCE_DEFAULT
-                    )
-                )
 
-            }
-        }
-    }
 }
