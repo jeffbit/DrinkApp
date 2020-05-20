@@ -1,27 +1,51 @@
 package brown.jeff.cocktailapp.ui
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.util.sendNotification
+import brown.jeff.cocktailapp.notifications.AlarmReceiver
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navView: BottomNavigationView
-    private lateinit var notificationManager: NotificationManager
+    private lateinit var alarmReceiver: AlarmManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        alarmReceiver = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, 11)
+        calendar.set(Calendar.MINUTE, 55)
+        calendar.set(Calendar.SECOND, 0)
+
+        alarmReceiver.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+
+
+
+
+
         Timber.plant(Timber.DebugTree())
         navView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -36,9 +60,6 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.show()
             }
         }
-
-
-
 
     }
 
