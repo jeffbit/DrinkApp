@@ -16,10 +16,6 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
     val drink: LiveData<Drink>
         get() = _drink
 
-    private val _previousDaysDrink = MutableLiveData<Drink>()
-    val previousDaysDrink: LiveData<Drink>
-        get() = _previousDaysDrink
-
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
         get() = _loading

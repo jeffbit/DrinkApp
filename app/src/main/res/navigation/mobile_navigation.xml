@@ -89,6 +89,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="brown.jeff.cocktailapp.ui.settings.SettingsFragment"
-        android:label="settings_fragment"
-        tools:layout="@layout/settings_fragment" />
+        android:label="settings_fragment" />
 </navigation>

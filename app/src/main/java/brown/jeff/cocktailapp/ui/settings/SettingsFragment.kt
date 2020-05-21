@@ -33,4 +33,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preference, rootKey)
     }
 
+
+    //todo: setup checkbox to enable or disable dark mode
+
+//todo: set up about me porition to link to website and api
+
 }

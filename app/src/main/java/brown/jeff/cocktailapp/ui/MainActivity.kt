@@ -23,28 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        alarmReceiver = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent =
-            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, 11)
-        calendar.set(Calendar.MINUTE, 55)
-        calendar.set(Calendar.SECOND, 0)
-
-        alarmReceiver.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
-
-
-
-
+        //sets alarm to be enabled
+        enableAlarm()
 
         Timber.plant(Timber.DebugTree())
         navView = findViewById(R.id.nav_view)
@@ -52,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         //hides bottom navigation view for DrinkClickedFragment
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.drinkClickedFragment || destination.id == R.id.navigation_random) {
+            if (destination.id == R.id.drinkClickedFragment) {
+//                || destination.id == R.id.navigation_random) {
                 navView.visibility = View.GONE
                 supportActionBar?.hide()
             } else {
@@ -60,6 +41,30 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.show()
             }
         }
+
+    }
+
+    private fun enableAlarm() {
+        alarmReceiver = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, 17)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        alarmReceiver.setExact(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pendingIntent
+        )
+    }
+
+    private fun cancelAlarm() {
 
     }
 

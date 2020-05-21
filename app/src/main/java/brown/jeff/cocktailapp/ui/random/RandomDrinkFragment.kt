@@ -3,6 +3,7 @@ package brown.jeff.cocktailapp.ui.random
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -46,8 +47,9 @@ class RandomDrinkFragment : Fragment() {
             }
         } else {
             randomDrinkViewModel.getRandomDrink()
+
         }
-        toolbar = view?.findViewById(R.id.drink_toolbar)!!
+        toolbar = view.findViewById(R.id.drink_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
         collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor));
