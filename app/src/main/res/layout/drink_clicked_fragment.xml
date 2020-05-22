@@ -333,7 +333,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Related Drinks"
+                android:text="@string/related_drinks"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@android:color/black" />
@@ -348,10 +348,10 @@
                 android:id="@+id/drinkresponsibly_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Drink Responsibly"
+                android:text="@string/drink_responsibly"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -76,8 +76,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         toolbar = view?.findViewById(R.id.drink_toolbar)!!
         collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor));
-        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor))
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor))
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
@@ -197,11 +197,10 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         drinkClickedViewModel.addDrinkToFavorites(drink)
         showSnackBar(
             view,
-            "Drink favorited ",
+            getString(R.string.drink_favorited),
             Snackbar.LENGTH_LONG,
-            "Undo",
-            { drinkClickedViewModel.removeDrinkFromFavorites(drink.idDrink) }
-        )
+            getString(R.string.undo)
+        ) { drinkClickedViewModel.removeDrinkFromFavorites(drink.idDrink) }
 
     }
 

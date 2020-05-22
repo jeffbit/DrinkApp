@@ -1,6 +1,5 @@
 package brown.jeff.cocktailapp.ui.favorite
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -13,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +23,7 @@ class FavoriteDrinksFragment : Fragment() {
     private val favoriteDrinksViewModel: FavoriteDrinksViewModel by viewModel()
     private lateinit var favoriteDrinkAdapter: DrinkAdapter
     private var isAlertDisplayed: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -37,7 +38,7 @@ class FavoriteDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.favoritesettings_menuitem -> {
-                Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.settings), Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.favoriteclear_menuitem -> {
@@ -74,7 +75,7 @@ class FavoriteDrinksFragment : Fragment() {
         }
 
         if (savedInstanceState != null) {
-            val isDisplayed = savedInstanceState.getBoolean("isAlertDisplayed")
+            val isDisplayed = savedInstanceState.getBoolean(Constants.IS_ALERT_KEY)
             if (isDisplayed) {
                 deleteAllDrinks()
             }
@@ -98,7 +99,7 @@ class FavoriteDrinksFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("isAlertDisplayed", isAlertDisplayed)
+        outState.putBoolean(Constants.IS_ALERT_KEY, isAlertDisplayed)
     }
 
 
@@ -109,9 +110,7 @@ class FavoriteDrinksFragment : Fragment() {
 
     }
 
-    private fun showErrorMessage(drinkList : List<Drink>){
 
-    }
     private fun deleteAllDrinks() {
         showAlertDialogFavorites()
     }
@@ -120,20 +119,24 @@ class FavoriteDrinksFragment : Fragment() {
     //show alert for favorites fragment
     private fun showAlertDialogFavorites() {
         isAlertDisplayed = true
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setMessage("Delete all Drinks")
-            ?.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, _ ->
+        val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialog)
+        builder.setMessage(getString(R.string.delete_drinks_confirmation))
+            ?.setPositiveButton(
+                getString(R.string.confirm)
+            ) { dialog, _ ->
                 favoriteDrinksViewModel.deleteAllDrinks()
                 isAlertDisplayed = false
                 dialog.dismiss()
-            })
-            ?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
+            }
+            ?.setNegativeButton(
+                getString(R.string.cancel)
+            ) { dialog, _ ->
                 isAlertDisplayed = false
                 dialog.cancel()
-            })
+            }
 
         val alert = builder.create()
-        alert.setTitle("Are you sure")
+        alert.setTitle(getString(R.string.delete_drinks))
         alert.show()
 
 

@@ -20,11 +20,7 @@ class DrinkDiffCallBack(private var oldDrinks: List<Drink>, private var newDrink
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldDrinks[oldItemPosition].equals(newDrinks[newItemPosition])
+        return oldDrinks[oldItemPosition] == newDrinks[newItemPosition]
     }
 
-
-    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        return super.getChangePayload(oldItemPosition, newItemPosition)
-    }
 }

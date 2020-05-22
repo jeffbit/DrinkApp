@@ -8,7 +8,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,9 +52,9 @@ fun showSnackBar(
     actionFunction: () -> Unit
 ) {
     val snackBar = Snackbar.make(view, displayedMessage, duration)
-    snackBar.setAction(action, View.OnClickListener {
+    snackBar.setAction(action) {
         actionFunction()
-    })
+    }
     snackBar.show()
 
 }
@@ -83,7 +82,7 @@ fun changeRecyclerViewLayout(
     activity: Activity,
     recyclerView: RecyclerView
 ) {
-    if (activity?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
+    if (activity.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
         recyclerView.layoutManager = GridLayoutManager(context, 2)
     } else {
         recyclerView.layoutManager = GridLayoutManager(context, 4)

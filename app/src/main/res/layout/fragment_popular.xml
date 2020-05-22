@@ -36,4 +36,5 @@
         app:menu="@menu/settings_menu"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="Popular Drinks" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

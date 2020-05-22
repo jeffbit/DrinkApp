@@ -18,9 +18,17 @@
     <string name="drink_image">Drink Image</string>
     <string name="drink_name">Drink Name</string>
     <string name="drink_url">"https://www.thecocktaildb.com/drink.php?c=%1$s-%2$s"</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clear_all_favorites">Clear all favorites</string>
     <string name="no_drinks_favorited">No drinks favorited</string>
     <string name="share_drink">Share Drink</string>
     <string name="drink_notification_channel_id">Drink Notification ChannelId</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_drinks_confirmation">Are you sure you want to delete all your favorite drinks?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_drinks">Delete drinks</string>
+    <string name="drink_favorited">Drink favorited</string>
+    <string name="drink_added_to_favorites">Drink added to favorites</string>
+    <string name="undo">Undo</string>
+    <string name="related_drinks">Related Drinks</string>
+    <string name="drink_responsibly">Drink Responsibly</string>
 </resources>

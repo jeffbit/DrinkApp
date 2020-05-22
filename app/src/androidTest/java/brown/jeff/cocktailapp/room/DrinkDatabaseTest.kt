@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.DRINK
+import kotlinx.coroutines.runBlocking
 import org.junit.*
 import java.io.IOException
 
@@ -29,7 +30,7 @@ class DrinkDatabaseTest {
     }
 
     @Test
-    fun insertDrink() {
+    fun insertDrink() = runBlocking {
         //given
         val writeDrink = DRINK
         val writtenDrinkId = writeDrink.idDrink
@@ -43,10 +44,10 @@ class DrinkDatabaseTest {
     }
 
     @Test
-    fun getAllDrinks() {
+    fun getAllDrinks() = runBlocking {
         //given
         val drink = DRINK
-        val drinkList = listOf<Drink>(drink)
+        val drinkList = drink
         //when
         drinkDao.insertDrink(drink)
         //then
@@ -55,7 +56,7 @@ class DrinkDatabaseTest {
     }
 
     @Test
-    fun deleteDrink() {
+    fun deleteDrink() = runBlocking {
         //given
         val writeDrink = DRINK
         drinkDao.insertDrink(writeDrink)

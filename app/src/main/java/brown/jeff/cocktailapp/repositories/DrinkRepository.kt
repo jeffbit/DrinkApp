@@ -34,25 +34,12 @@ class DrinkRepository(
         }
     }
 
-    //gets list of drinks that start with letter
-    //this will be useful if we have a dictionary view of all drinks in alphabetical order
-    suspend fun getDrinksByFirstLetterInName(firstLetter: Char): Result<Drinks> {
-        return withContext(Dispatchers.IO) {
-            makeCall(drinkApi.searchDrinksByLetter(firstLetter))
-        }
-    }
+
 
     //gets single drink by drinkId
     suspend fun getDrinkById(drinkId: String): Result<Drinks> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinkById(drinkId))
-        }
-    }
-
-    //gets recently added drinks
-    suspend fun getRecentDrinks(): Result<Drinks> {
-        return withContext(Dispatchers.IO) {
-            makeCall(drinkApi.getRecentDrinks())
         }
     }
 
@@ -103,8 +90,6 @@ class DrinkRepository(
     }
 
     //DRINKDAO CALLS
-
-    //TODO: Add empty or null check to return error if local database is empty.
 
 
     fun getDrinksLocalDB(): LiveData<List<Drink>> {

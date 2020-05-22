@@ -6,8 +6,6 @@ package brown.jeff.cocktailapp.network
 sealed class Errors {
 
     data class NetworkError(val error: String = "No Network Connection") : Errors()
-    data class UnknownError(val exception: Throwable) : Errors()
-    data class ServerError(val exception: Throwable) : Errors()
     data class ExceptionError(val exception: Throwable) : Errors()
     data class ResponseError(val error: String) : Errors()
 

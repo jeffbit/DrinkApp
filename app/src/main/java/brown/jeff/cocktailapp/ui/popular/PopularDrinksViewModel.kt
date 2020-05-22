@@ -15,6 +15,7 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
     val popularDrinks: LiveData<List<Drink>>
         get() = _popularDrinks
 
+    //todo: add loading drink spinner to popular fragment
     private val _loadingDrinks = MutableLiveData<Boolean>()
     val loadingDrinks: LiveData<Boolean>
         get() = _loadingDrinks

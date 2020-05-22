@@ -17,6 +17,7 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
     val popularDrinks: LiveData<List<Drink>>
         get() = recentDrinks
 
+    //todo: progressbar for drink loading in search view
     private val _loadingDrinks = MutableLiveData<Boolean>()
     val loadingDrinks: LiveData<Boolean>
         get() = _loadingDrinks
@@ -60,20 +61,21 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
                 is Result.Failure -> {
                     _displayError.value = result.errors.toString()
                     _loadingDrinks.value = false
-                    Timber.e("Failure : ${result.errors.toString()}")
+                    Timber.e("Failure : ${result.errors}")
                 }
             }
         }
     }
 
 
+    //todo: validate search results. "ERROR HANDLING NEEDS TO TAKE PLACE HERE"
     private fun validateResults(drinks: Result<Drinks>): Boolean {
-        if (_currentDrinks.value == drinks) {
+        return if (_currentDrinks.value == drinks) {
             _displayError.value = "No drink"
-            return false
+            false
         } else {
 
-            return true
+            true
         }
 
     }

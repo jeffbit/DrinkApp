@@ -1,6 +1,5 @@
 package brown.jeff.cocktailapp.network
 
-import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.model.Drinks
 import retrofit2.Call
 import retrofit2.http.GET

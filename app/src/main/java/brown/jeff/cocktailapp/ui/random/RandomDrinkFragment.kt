@@ -3,7 +3,6 @@ package brown.jeff.cocktailapp.ui.random
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.showSnackBar
@@ -36,12 +36,13 @@ class RandomDrinkFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.drink_clicked_fragment, container, false)
         if (savedInstanceState != null) {
-            val drinkBoolean = savedInstanceState.getBoolean("isDrink")
+            val drinkBoolean = savedInstanceState.getBoolean(Constants.IS_DRINK)
             if (drinkBoolean) {
                 observeRandomDrink()
             }
@@ -52,11 +53,13 @@ class RandomDrinkFragment : Fragment() {
         toolbar = view.findViewById(R.id.drink_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor));
-        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor))
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor))
         backPressedToolbar(toolbar, activity)
         return view
+
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -87,7 +90,7 @@ class RandomDrinkFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("isDrink", isDrink)
+        outState.putBoolean(Constants.IS_DRINK, isDrink)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -139,13 +142,15 @@ class RandomDrinkFragment : Fragment() {
     }
 
     private fun addDrinkToFavorites(view: View, drink: Drink) {
+
         randomDrinkViewModel.addDrinkToFavorites(drink)
         showSnackBar(
             view,
-            "Drink added to favorites ",
+            getString(R.string.drink_added_to_favorites),
             Snackbar.LENGTH_LONG,
-            "Undo",
-            { randomDrinkViewModel.removeDrinkFromFavorites(drink.idDrink) })
+            getString(R.string.undo)
+        ) { randomDrinkViewModel.removeDrinkFromFavorites(drink.idDrink) }
+
     }
 
     private fun setIngredients(

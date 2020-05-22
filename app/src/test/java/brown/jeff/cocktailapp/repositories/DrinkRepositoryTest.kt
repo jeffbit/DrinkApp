@@ -1,15 +1,13 @@
 package brown.jeff.cocktailapp.repositories
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
+
 import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.model.Drinks
 import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.Errors
 import brown.jeff.cocktailapp.network.NetworkConnection
 import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.room.DrinkDao
-import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.util.DRINK
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
@@ -27,12 +25,11 @@ class DrinkRepositoryTest {
     private lateinit var mockNetworkConnection: NetworkConnection
     private lateinit var mockDrinkCall: Call<Drink>
     private lateinit var mockDrinkResponse: Response<Drink>
-    private lateinit var mockDrinksCall: Call<Drink>
+    private lateinit var mockDrinksCall: Call<Drinks>
     private lateinit var mockDrinksResponse: Response<Drink>
     private lateinit var drinkRepository: DrinkRepository
 
 
-    private val drink = DRINK
     private val drinkID = DRINK.idDrink
 
 
@@ -63,7 +60,7 @@ class DrinkRepositoryTest {
         given { mockDrinkResponse.isSuccessful }.willReturn(true)
         given { mockDrinkResponse.body() }.willReturn(drink)
         given { mockDrinkCall.execute() }.willReturn(mockDrinkResponse)
-        given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinkCall)
+        given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinksCall)
         //when
         val response = drinkRepository.getDrinkById(drinkID)
         //then
@@ -105,7 +102,7 @@ class DrinkRepositoryTest {
         given { mockNetworkConnection.isInternetAvailable() }.willReturn(true)
         given { mockDrinkResponse.isSuccessful }.willReturn(false)
         given { mockDrinkCall.execute() }.willReturn(mockDrinkResponse)
-        given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinkCall)
+        given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinksCall)
         //then
         val response = drinkRepository.getDrinkById(drinkID)
         //when

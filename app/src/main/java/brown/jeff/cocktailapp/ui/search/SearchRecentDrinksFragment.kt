@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import brown.jeff.cocktailapp.util.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -46,7 +47,7 @@ class SearchRecentDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.searchsettings_menuitem -> {
-                Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Settings Clicked", Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -58,15 +59,18 @@ class SearchRecentDrinksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)
         activity?.setActionBar(toolbar)
-        drinkAdapter = DrinkAdapter(emptyList(), { drink: Drink ->
+        drinkAdapter = DrinkAdapter(emptyList()) { drink: Drink ->
             handleScreenChange(drink)
-        })
+        }
         recyclerview_search.apply {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = drinkAdapter
             activity?.let { changeRecyclerViewLayout(context, it, this) }
 
+        }
+        if (savedInstanceState != null) {
+            val searchString = savedInstanceState.getString(Constants.SEARCH_STRING)
         }
 
 

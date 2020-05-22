@@ -13,8 +13,6 @@ import timber.log.Timber
 class DrinkClickedViewModel(
     private val drinkRepository: DrinkRepository
 ) : ViewModel() {
-    // TODO: Implement the ViewModel
-
     private val _relatedDrinks = MutableLiveData<List<Drink>>()
     val relatedDrinks: LiveData<List<Drink>>
         get() = _relatedDrinks
@@ -23,14 +21,6 @@ class DrinkClickedViewModel(
     val clickedDrink: LiveData<Drink>
         get() = _clickedDrink
 
-    private val _drinkId = MutableLiveData<String>()
-    val drinkId: LiveData<String>
-        get() = _drinkId
-
-
-    fun setDrinkId(drinkId: String) {
-        _drinkId.postValue(drinkId)
-    }
 
     fun addDrinkToFavorites(drink: Drink) {
         viewModelScope.launch {

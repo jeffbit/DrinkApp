@@ -35,7 +35,8 @@ class PopularDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.setting_menuitem -> {
-//                allow user to disable notifications, delete all favorites, view info about api, access original api website, change from light mode to dark mode
+//todo: allow user to disable notifications, delete all favorites,
+// view info about api, access original api website, change from light mode to dark mode
                 changeToSettingsScreen()
                 true
             }
@@ -51,13 +52,7 @@ class PopularDrinksFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_popular, container, false)
-        //swipe to refresh pulls new data
-        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh_popular)
-        swipeRefreshLayout.setOnRefreshListener {
-            popularDrinksViewModel.getAllPopularDrinks()
-            //val snackBar = Snackbar.make(view, "Data updated", 1000)
-            swipeRefreshLayout.isRefreshing = false
-        }
+        swipeToRefresh(view)
         //sets the toolbar in the fragment
         val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -77,7 +72,6 @@ class PopularDrinksFragment : Fragment() {
 
         }
 
-
         popularDrinksViewModel.getAllPopularDrinks()
         popularDrinksViewModel.popularDrinks.observe(viewLifecycleOwner, Observer {
             popularDrinkAdapter.updateDrinkList(it)
@@ -86,6 +80,18 @@ class PopularDrinksFragment : Fragment() {
 
 
     }
+
+    //swipe to refresh pulls new data
+
+    private fun swipeToRefresh(view: View) {
+        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh_popular)
+        swipeRefreshLayout.setOnRefreshListener {
+            popularDrinksViewModel.getAllPopularDrinks()
+            swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+
 
 
     private fun handleScreenChange(drink: Drink) {

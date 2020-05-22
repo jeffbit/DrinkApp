@@ -2,9 +2,7 @@ package brown.jeff.cocktailapp.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -13,7 +11,7 @@ import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.ui.MainActivity
 
 
-private val CHANNEL_ID: String = "ChannelID"
+private const val CHANNEL_ID: String = "ChannelID"
 
 object NotificationHelper {
 
@@ -49,14 +47,6 @@ object NotificationHelper {
         autoCancel: Boolean
     ) {
 
-//        val snoozeIntent: Intent = Intent(context, MainActivity::class.java).apply {
-//            action = "SNOOZE"
-//            putExtra("1", 0)
-//        }
-//
-//        val snoozePendingIntent: PendingIntent =
-//            PendingIntent.getBroadcast(context, 0, snoozeIntent, 0)
-
         val pendingIntent = NavDeepLinkBuilder(context)
             .setComponentName(MainActivity::class.java)
             .setGraph(R.navigation.mobile_navigation)
@@ -75,7 +65,6 @@ object NotificationHelper {
             //closes notification after click
             .setAutoCancel(autoCancel)
             .setContentIntent(pendingIntent)
-//            .addAction(R.drawable.ic_favorite_black_24dp, "SNOOZE", snoozePendingIntent)
 
 
         val notificationManager = NotificationManagerCompat.from(context)
