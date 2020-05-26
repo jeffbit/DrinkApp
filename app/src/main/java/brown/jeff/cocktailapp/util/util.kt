@@ -3,11 +3,14 @@ package brown.jeff.cocktailapp.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -92,6 +95,7 @@ fun changeRecyclerViewLayout(
 }
 
 
+//intent to share drink
 fun shareDrink(
     activity: Activity,
     drinkName: String
@@ -103,6 +107,48 @@ fun shareDrink(
     }
     val shareIntent = Intent.createChooser(sendIntent, "Share $drinkName")
     activity.startActivity(shareIntent)
+}
+
+//intent to open url
+fun openToWebsite(activity: Activity, url: String, title: String) {
+
+    val intent: Intent = Intent().apply {
+        action = Intent.ACTION_VIEW
+        data = Uri.parse(url)
+    }
+    val shareIntent = Intent.createChooser(intent, title)
+    activity.startActivity(shareIntent)
+}
+
+//intent to email feedback to dev
+fun emailFeedback(activity: Activity) {
+    val intent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        type = "text/plain"
+        putExtra(Intent.EXTRA_EMAIL, "jbicondev@gmail.com")
+        putExtra(Intent.EXTRA_SUBJECT, "DrinkApp: Feedback")
+    }
+
+    val sendIntent = Intent.createChooser(intent, "Email feedback")
+    activity.startActivity(sendIntent)
+
+
+}
+
+//get saved theme
+fun getSavedTheme(activity: Activity) {
+    val settings: SharedPreferences =
+        activity.getSharedPreferences(Constants.SETTINGS_SHARED_PREF, 0)
+    val value = settings.getInt("mode", 0)
+    if (value == 0) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+    } else {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+
+    }
+
 }
 
 

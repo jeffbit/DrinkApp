@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
-import brown.jeff.cocktailapp.model.Drinks
 import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Success
 import brown.jeff.cocktailapp.repositories.DrinkRepository
@@ -51,9 +50,14 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
         viewModelScope.launch {
             when (val result = drinkRepository.getDrinksByName(drinkName)) {
                 is Success -> {
-                    if (validateParameter(drinkName)) {
-                        recentDrinks.value = result.data.drinks
+                    if (result.data.drinks.isNullOrEmpty()) {
                         _loadingDrinks.value = false
+                        _displayError.value = "No drink found"
+                    } else {
+                        if (validateParameter(drinkName)) {
+                            recentDrinks.value = result.data.drinks
+                            _loadingDrinks.value = false
+                        }
                     }
                     _loadingDrinks.value = false
                     Timber.e("Success")
@@ -67,18 +71,7 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
         }
     }
 
-
-    //todo: validate search results. "ERROR HANDLING NEEDS TO TAKE PLACE HERE"
-    private fun validateResults(drinks: Result<Drinks>): Boolean {
-        return if (_currentDrinks.value == drinks) {
-            _displayError.value = "No drink"
-            false
-        } else {
-
-            true
-        }
-
-    }
+    
 
     //error appears for numbers. need to setup error to appear if nothing is returned
     private fun validateParameter(drinkName: String): Boolean {

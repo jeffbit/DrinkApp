@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/textColor">
 
     <PreferenceCategory
+        android:background="@color/textColor"
         android:title="General"
         android:visibility="visible">
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="disable_database"
-            android:title="Disable Favorites" />
+        <ListPreference
+            android:entries="@array/ui_string"
+            android:entryValues="@array/ui_string"
+            android:key="ui_mode"
+            android:title="Themes" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Color Settings">
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:key="feedback"
+            android:summary="Report technical issues or suggest new features"
+            android:title="Send feedback" />
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="ui_mode_switch"
-            android:switchTextOff="Disable DarkMode"
-            android:switchTextOn="Enable Darkmode"
-            android:title="Enable DarkMode" />
+        <Preference
+            android:key="website"
+            android:summary="View cocktaildb.com"
+            app:title="Website API" />
     </PreferenceCategory>
 </PreferenceScreen>

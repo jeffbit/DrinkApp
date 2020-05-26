@@ -83,6 +83,7 @@ class SearchRecentDrinksFragment : Fragment() {
         searchRecentDrinksViewModel.displayError.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 errrortextview_search.text = it
+                errrortextview_search.visibility = View.VISIBLE
                 recyclerview_search.visibility = View.GONE
             } else {
                 errrortextview_search.visibility = View.GONE
@@ -99,6 +100,9 @@ class SearchRecentDrinksFragment : Fragment() {
     //initiates searchview
     private fun searchDrinks(view: View) {
         searchView = view.findViewById(R.id.searchview_search)
+        searchView.setOnClickListener {
+            searchView.onActionViewExpanded()
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {

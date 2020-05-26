@@ -31,4 +31,11 @@
     <string name="undo">Undo</string>
     <string name="related_drinks">Related Drinks</string>
     <string name="drink_responsibly">Drink Responsibly</string>
+
+    <string-array name="ui_string">
+        <item name="lightmode">Light Mode</item>
+        <item name="darkmode">Dark Mode</item>
+    </string-array>
+
+
 </resources>
