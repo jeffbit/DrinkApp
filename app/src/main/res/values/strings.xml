@@ -31,6 +31,11 @@
     <string name="undo">Undo</string>
     <string name="related_drinks">Related Drinks</string>
     <string name="drink_responsibly">Drink Responsibly</string>
+    <string name="cocktaildb_site">https://www.thecocktaildb.com/</string>
+    <string name="open_cocktaildb">Open thecocktaildb.com</string>
+    <string name="drink_disclaimer">Cocktail App is intended only for
+        responsible adults of legal drinking age in the United States of America (21 years old or older).
+        It is purely intended for entertainment purposes. Please drink responsibly and with moderation.</string>
 
     <string-array name="ui_string">
         <item name="lightmode">Light Mode</item>

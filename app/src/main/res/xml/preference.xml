@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/textColor">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
-        android:background="@color/textColor"
-        android:title="General"
-        android:visibility="visible">
-
+        android:title="General">
         <ListPreference
             android:entries="@array/ui_string"
             android:entryValues="@array/ui_string"
             android:key="ui_mode"
             android:title="Themes" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="About">
         <Preference
             android:key="feedback"
             android:summary="Report technical issues or suggest new features"
@@ -24,5 +17,9 @@
             android:key="website"
             android:summary="View cocktaildb.com"
             app:title="Website API" />
+        <Preference
+            android:key="drinkresponsibly"
+            android:summary="@string/drink_disclaimer"
+            app:title="Disclaimer" />
     </PreferenceCategory>
 </PreferenceScreen>

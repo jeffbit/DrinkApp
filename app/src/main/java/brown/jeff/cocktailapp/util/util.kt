@@ -135,6 +135,8 @@ fun emailFeedback(activity: Activity) {
 
 }
 
+
+//todo: them changes colors once app is re-opened
 //get saved theme
 fun getSavedTheme(activity: Activity) {
     val settings: SharedPreferences =

@@ -32,7 +32,7 @@ class SearchRecentDrinksFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         searchDrinks(view)
-
+        hideKeyboard()
         setHasOptionsMenu(true)
         return view
     }

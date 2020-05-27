@@ -14,7 +14,6 @@ import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksViewModel
 import brown.jeff.cocktailapp.ui.popular.PopularDrinksViewModel
 import brown.jeff.cocktailapp.ui.random.RandomDrinkViewModel
 import brown.jeff.cocktailapp.ui.search.SearchRecentDrinksViewModel
-import brown.jeff.cocktailapp.ui.settings.SettingsViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -63,7 +62,6 @@ val viewModelModule = module {
     viewModel { PopularDrinksViewModel(get()) }
     viewModel { SearchRecentDrinksViewModel(get()) }
     viewModel { DrinkClickedViewModel(get()) }
-    viewModel { SettingsViewModel() }
 
 
 }

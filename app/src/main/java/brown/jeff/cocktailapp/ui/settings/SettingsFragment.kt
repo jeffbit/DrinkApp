@@ -22,7 +22,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         darkModeConfig = DarkModeConfig
-        activity?.setTheme(R.style.SettingsFragmentStyle)
     }
 
     override fun onCreateView(
@@ -55,8 +54,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             "website" -> {
                 openToWebsite(
                     requireActivity(),
-                    "https://www.thecocktaildb.com/",
-                    "Open thecocktaildb.com"
+                    getString(R.string.cocktaildb_site),
+                    getString(R.string.open_cocktaildb)
                 )
                 true
 

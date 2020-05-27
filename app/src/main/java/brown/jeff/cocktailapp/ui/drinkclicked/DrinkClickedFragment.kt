@@ -76,8 +76,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         toolbar = view?.findViewById(R.id.drink_toolbar)!!
         collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor))
-        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor))
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.actionBarTextColor))
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.actionBarTextColor))
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()

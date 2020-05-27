@@ -16,7 +16,6 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
     val popularDrinks: LiveData<List<Drink>>
         get() = recentDrinks
 
-    //todo: progressbar for drink loading in search view
     private val _loadingDrinks = MutableLiveData<Boolean>()
     val loadingDrinks: LiveData<Boolean>
         get() = _loadingDrinks
@@ -71,7 +70,6 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
         }
     }
 
-    
 
     //error appears for numbers. need to setup error to appear if nothing is returned
     private fun validateParameter(drinkName: String): Boolean {
