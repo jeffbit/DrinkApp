@@ -16,8 +16,6 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
     val drink: LiveData<Drink>
         get() = _drink
 
-    //todo: add progress loading bar to random drink fragment
-
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
         get() = _loading

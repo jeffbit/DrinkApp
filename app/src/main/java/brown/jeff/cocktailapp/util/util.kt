@@ -3,21 +3,18 @@ package brown.jeff.cocktailapp.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
-import brown.jeff.cocktailapp.ui.popular.PopularDrinksFragmentDirections
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
@@ -58,6 +55,7 @@ fun showSnackBar(
     snackBar.setAction(action) {
         actionFunction()
     }
+    snackBar.setTextColor(Color.WHITE)
     snackBar.show()
 
 }
@@ -69,15 +67,6 @@ fun backPressedToolbar(toolbar: androidx.appcompat.widget.Toolbar?, activity: Ac
         activity?.onBackPressed()
     }
 }
-
-
-//navigate to settings fragment
-fun navigateToSettings(view: View) {
-    val action =
-        PopularDrinksFragmentDirections.actionNavigationPopularToSettingsFragment()
-    view.findNavController().navigate(action)
-}
-
 
 //change recyclerview on orientation change
 fun changeRecyclerViewLayout(
@@ -100,12 +89,14 @@ fun shareDrink(
     activity: Activity,
     drinkName: String
 ) {
+    val drink = drinkName + " Cocktail"
+    val formattedDrinkName = drink.replace(' ', '-')
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, drinkName)
         type = "text/plain"
     }
-    val shareIntent = Intent.createChooser(sendIntent, "Share $drinkName")
+    val shareIntent = Intent.createChooser(sendIntent, "Share $formattedDrinkName")
     activity.startActivity(shareIntent)
 }
 
@@ -131,29 +122,8 @@ fun emailFeedback(activity: Activity) {
 
     val sendIntent = Intent.createChooser(intent, "Email feedback")
     activity.startActivity(sendIntent)
-
-
 }
 
-
-//todo: them changes colors once app is re-opened
-//get saved theme
-fun getSavedTheme(activity: Activity) {
-    val settings: SharedPreferences =
-        activity.getSharedPreferences(Constants.SETTINGS_SHARED_PREF, 0)
-    when (settings.getInt("mode", 0)) {
-        0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    }
-
-}
-
-fun shouldEnableDarkMode(theme: String) {
-    when (theme) {
-        Constants.DARK_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        Constants.LIGHT_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-}
 
 
 

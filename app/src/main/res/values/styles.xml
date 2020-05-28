@@ -11,18 +11,6 @@
         <item name="android:actionMenuTextColor">@color/actionBarTextColor</item>
     </style>
 
-    <!--     Style for preference page-->
-    <style name="SettingsFragmentStyle">
-        <item name="android:textColorPrimary">#000000</item>
-        <item name="android:textColorSecondary">#000000</item>
-    </style>
-
-
-    <!-- Expanded Toolbar DrinkClicked -->
-    <style name="ExpandedAppBar" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">@color/textColor</item>
-    </style>
-
     <!--Creates divider. -->
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
@@ -32,10 +20,6 @@
     </style>
 
     <!-- Style is for the splash screen. -->
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <!-- Alert Dialog. -->
     <style name="AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
@@ -43,7 +27,6 @@
     </style>
 
     <!-- Button Style -->
-    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button" />
 
 
 </resources>

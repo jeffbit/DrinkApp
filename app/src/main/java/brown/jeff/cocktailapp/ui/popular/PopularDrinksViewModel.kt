@@ -15,7 +15,6 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
     val popularDrinks: LiveData<List<Drink>>
         get() = _popularDrinks
 
-    //todo: add loading drink spinner to popular fragment
     private val _loadingDrinks = MutableLiveData<Boolean>()
     val loadingDrinks: LiveData<Boolean>
         get() = _loadingDrinks
@@ -27,10 +26,10 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
 
     fun getAllPopularDrinks() {
         _loadingDrinks.value = true
+        _displayError.value = null
         viewModelScope.launch {
             when (val result = drinkRepository.getPopularDrinks()) {
                 is Result.Success -> {
-                    // Timber.i(result.data.drinks.toString())
                     _popularDrinks.postValue(result.data.drinks)
                     _loadingDrinks.postValue(false)
                 }

@@ -35,8 +35,6 @@ class PopularDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.setting_menuitem -> {
-//todo: allow user to disable notifications, delete all favorites,
-// view info about api, access original api website, change from light mode to dark mode
                 changeToSettingsScreen()
                 true
             }
@@ -78,6 +76,8 @@ class PopularDrinksFragment : Fragment() {
 
         })
 
+        displayErrorMessage()
+
 
     }
 
@@ -92,17 +92,29 @@ class PopularDrinksFragment : Fragment() {
     }
 
 
+    private fun displayErrorMessage() {
+        popularDrinksViewModel.displayError.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                recyclerview_popular.visibility = View.GONE
+                popular_errortextview.visibility = View.VISIBLE
+                popular_errortextview.text = it
+            } else {
+                recyclerview_popular.visibility = View.VISIBLE
+                popular_errortextview.visibility = View.GONE
 
+            }
+        })
+    }
 
     private fun handleScreenChange(drink: Drink) {
         val action =
-            PopularDrinksFragmentDirections.actionNavigationPopularToDrinkClickedFragment(drink)
+            PopularDrinksFragmentDirections.popularToDrinkclicked(drink)
         findNavController().navigate(action)
 
     }
 
     private fun changeToSettingsScreen() {
-        val action = PopularDrinksFragmentDirections.actionNavigationPopularToSettingsFragment()
+        val action = PopularDrinksFragmentDirections.popularToSettings()
         findNavController().navigate(action)
     }
 

@@ -1,19 +1,15 @@
 package brown.jeff.cocktailapp.ui.settings
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.emailFeedback
 import brown.jeff.cocktailapp.util.openToWebsite
-import brown.jeff.cocktailapp.util.shouldEnableDarkMode
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -28,8 +24,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        return view
+        return super.onCreateView(inflater, container, savedInstanceState)
+
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -38,12 +34,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     }
 
+
+    //future updates for settings page. Add alert dialog so user can rate and review app. Add option to switch to dark,light, or battery saver mode
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         return when (preference?.key) {
-            "ui_mode" -> {
-                switchThemes()
-                true
-            }
             "feedback" -> {
                 emailFeedback(requireActivity())
                 true
@@ -60,40 +54,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             else -> super.onPreferenceTreeClick(preference)
         }
-    }
-
-
-    private fun switchThemes() {
-        val settingsPref: SharedPreferences =
-            requireActivity().getSharedPreferences(Constants.SETTINGS_SHARED_PREF, 0)
-        val editor: SharedPreferences.Editor = settingsPref.edit()
-
-        val listPreference: ListPreference? =
-            preferenceManager.findPreference<ListPreference>("ui_mode")
-        listPreference?.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { preference, newValue ->
-                when (newValue) {
-                    "Light Mode" -> {
-                        shouldEnableDarkMode("light")
-                        requireActivity().recreate()
-                        editor.putInt("mode", 0)
-                        editor.apply()
-                    }
-                    "Dark Mode" -> {
-                        shouldEnableDarkMode("dark")
-                        requireActivity().recreate()
-                        editor.putInt("mode", 1)
-                        editor.apply()
-                    }
-                }
-                true
-            }
-
-    }
-
-
-    private fun openGooglePlay() {
-        //todo: open up google play app page to write review or submit issues
     }
 
 }

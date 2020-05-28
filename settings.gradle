@@ -1,2 +1,3 @@
 rootProject.name='CocktailApp'
 include ':app'
+include ':feature1'

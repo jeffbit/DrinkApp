@@ -10,9 +10,6 @@ class Constants {
         const val SEARCH_STRING = "searchString"
         const val BASE_URL: String =
             "https://www.thecocktaildb.com/api/json/v2/${brown.jeff.cocktailapp.BuildConfig.apiKey}/"
-        const val SETTINGS_SHARED_PREF: String = "settingsPref"
-        const val DARK_MODE: String = "dark"
-        const val LIGHT_MODE: String = "light"
 
 
     }

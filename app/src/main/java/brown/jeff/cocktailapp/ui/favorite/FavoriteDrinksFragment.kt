@@ -2,7 +2,6 @@ package brown.jeff.cocktailapp.ui.favorite
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +37,7 @@ class FavoriteDrinksFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.favoritesettings_menuitem -> {
-                Toast.makeText(context, getString(R.string.settings), Toast.LENGTH_SHORT).show()
+                changeToSettingScreen()
                 true
             }
             R.id.favoriteclear_menuitem -> {
@@ -105,7 +104,7 @@ class FavoriteDrinksFragment : Fragment() {
 
     private fun handleScreenChange(drink: Drink) {
         val action =
-            FavoriteDrinksFragmentDirections.actionNavigationFavoritesToDrinkClickedFragment(drink)
+            FavoriteDrinksFragmentDirections.favoritesToDrinkclicked(drink)
         findNavController().navigate(action)
 
     }
@@ -140,6 +139,11 @@ class FavoriteDrinksFragment : Fragment() {
         alert.show()
 
 
+    }
+
+    private fun changeToSettingScreen() {
+        val action = FavoriteDrinksFragmentDirections.favoritesToSettings()
+        findNavController().navigate(action)
     }
 
 

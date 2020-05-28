@@ -69,9 +69,7 @@ class SearchRecentDrinksFragment : Fragment() {
             activity?.let { changeRecyclerViewLayout(context, it, this) }
 
         }
-        if (savedInstanceState != null) {
-            val searchString = savedInstanceState.getString(Constants.SEARCH_STRING)
-        }
+
 
 
         searchRecentDrinksViewModel.getRecentDrinks()
@@ -122,7 +120,7 @@ class SearchRecentDrinksFragment : Fragment() {
     //moves drink data to new fragment
     private fun handleScreenChange(drink: Drink) {
         val action =
-            SearchRecentDrinksFragmentDirections.actionNavigationRecentToDrinkClickedFragment(drink)
+            SearchRecentDrinksFragmentDirections.recentToDrinkclicked(drink)
         findNavController().navigate(action)
 
     }

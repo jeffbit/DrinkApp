@@ -10,14 +10,8 @@ interface DrinkApi {
     @GET("popular.php")
     fun getPopularDrinks(): Call<Drinks>
 
-    @GET("recent.php")
-    fun getRecentDrinks(): Call<Drinks>
-
     @GET("search.php")
     fun searchDrinksByName(@Query("s") name: String): Call<Drinks>
-
-    @GET("search.php")
-    fun searchDrinksByLetter(@Query("f") firstLetter: Char): Call<Drinks>
 
     @GET("filter.php")
     fun getDrinksByIngredient(@Query("i") ingredient: String?): Call<Drinks>

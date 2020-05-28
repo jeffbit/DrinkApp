@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.notifications.AlarmReceiver
-import brown.jeff.cocktailapp.util.getSavedTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
 import java.util.*
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //sets alarm to be enabled
-        getSavedTheme(this)
         enableAlarm()
         Timber.plant(Timber.DebugTree())
         navView = findViewById(R.id.nav_view)

@@ -3,7 +3,6 @@ package brown.jeff.cocktailapp.room
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.util.DRINK
 import kotlinx.coroutines.runBlocking
 import org.junit.*
@@ -30,13 +29,15 @@ class DrinkDatabaseTest {
     }
 
     @Test
-    fun insertDrink() = runBlocking {
+    fun insertDrink() {
         //given
         val writeDrink = DRINK
         val writtenDrinkId = writeDrink.idDrink
 
         //when
-        drinkDao.insertDrink(writeDrink)
+        runBlocking {
+            drinkDao.insertDrink(writeDrink)
+        }
         val readDrink = drinkDao.getDrinkById(writtenDrinkId).getValueBlocking()
 
         //then
@@ -44,24 +45,26 @@ class DrinkDatabaseTest {
     }
 
     @Test
-    fun getAllDrinks() = runBlocking {
+    fun getAllDrinks() {
         //given
         val drink = DRINK
-        val drinkList = drink
         //when
-        drinkDao.insertDrink(drink)
+        runBlocking {
+            drinkDao.insertDrink(drink)
+        }
         //then
         val getDrinks = drinkDao.getAllDrinks().getValueBlocking()
-        Assert.assertEquals(drinkList, getDrinks)
+        Assert.assertEquals(drink, getDrinks)
     }
 
     @Test
-    fun deleteDrink() = runBlocking {
+    fun deleteDrink() {
         //given
         val writeDrink = DRINK
-        drinkDao.insertDrink(writeDrink)
         //when
-        drinkDao.deleteDrink(writeDrink)
+        runBlocking {
+            drinkDao.deleteDrink(writeDrink)
+        }
         val result = drinkDao.getDrinkById(writeDrink.idDrink).getValueBlocking()
         //then
         Assert.assertNull(result)

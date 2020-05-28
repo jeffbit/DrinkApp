@@ -45,7 +45,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedscrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -57,7 +56,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ingredienttitle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
@@ -299,7 +297,6 @@
                 android:text="@string/share_drink" />
 
             <TextView
-                android:id="@+id/instructiontitle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
@@ -346,7 +343,6 @@
                 tools:listitem="@layout/drink_adapter_view" />
 
             <TextView
-                android:id="@+id/drinkresponsibly_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/drink_responsibly"

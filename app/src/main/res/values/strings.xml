@@ -6,22 +6,15 @@
     <string name="todo" />
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
-    <string name="image_of_drink">Image of Drink</string>
     <string name="favorite">Favorite</string>
     <string name="settings">Settings</string>
-    <string name="ingredients_fragment">Ingredients Fragment</string>
     <string name="set_ingredients_and_measurements">%1$s%2$s</string>
-    <string name="share_ingredients">Share Ingredients</string>
-    <string name="filter">Filter</string>
     <string name="random">Random</string>
-    <string name="change_drink">Change Drink</string>
     <string name="drink_image">Drink Image</string>
-    <string name="drink_name">Drink Name</string>
-    <string name="drink_url">"https://www.thecocktaildb.com/drink.php?c=%1$s-%2$s"</string>
+    <string name="drink_url">"https://www.thecocktaildb.com/drink/%1$s-%2$s"</string>
     <string name="clear_all_favorites">Clear all favorites</string>
     <string name="no_drinks_favorited">No drinks favorited</string>
     <string name="share_drink">Share Drink</string>
-    <string name="drink_notification_channel_id">Drink Notification ChannelId</string>
     <string name="confirm">Confirm</string>
     <string name="delete_drinks_confirmation">Are you sure you want to delete all your favorite drinks?</string>
     <string name="cancel">Cancel</string>
@@ -36,11 +29,7 @@
     <string name="drink_disclaimer">Cocktail App is intended only for
         responsible adults of legal drinking age in the United States of America (21 years old or older).
         It is purely intended for entertainment purposes. Please drink responsibly and with moderation.</string>
-
-    <string-array name="ui_string">
-        <item name="lightmode">Light Mode</item>
-        <item name="darkmode">Dark Mode</item>
-    </string-array>
+    <string name="title_feature1">CocktailAppFeature1</string>
 
 
 </resources>

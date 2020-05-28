@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:title="General">
-        <ListPreference
-            android:entries="@array/ui_string"
-            android:entryValues="@array/ui_string"
-            android:key="ui_mode"
-            android:title="Themes" />
         <Preference
             android:key="feedback"
             android:summary="Report technical issues or suggest new features"

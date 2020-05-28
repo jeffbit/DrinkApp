@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_popular">
 
     <fragment
@@ -11,13 +10,12 @@
         android:label="@string/popular"
         tools:layout="@layout/fragment_popular">
         <action
-            android:id="@+id/action_navigation_popular_to_drinkClickedFragment"
-            app:destination="@id/drinkClickedFragment" />
+            android:id="@+id/popular_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
         <action
-            android:id="@+id/action_navigation_popular_to_settingsFragment"
+            android:id="@+id/popular_to_settings"
             app:destination="@id/settingsFragment" />
 
     </fragment>
@@ -27,16 +25,14 @@
         android:name="brown.jeff.cocktailapp.ui.search.SearchRecentDrinksFragment"
         android:label="@string/recent"
         tools:layout="@layout/fragment_search">
-        <action
-            android:id="@+id/action_navigation_recent_to_drinkClickedFragment"
+        <action android:id="@+id/recent_to_drinkclicked"
             app:destination="@id/drinkClickedFragment">
 
         </action>
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
-        <action
-            android:id="@+id/action_navigation_recent_to_settingsFragment"
+        <action android:id="@+id/recent_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
 
@@ -45,14 +41,11 @@
         android:name="brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites">
-        <action
-            android:id="@+id/action_navigation_favorites_to_drinkClickedFragment"
-            app:destination="@id/drinkClickedFragment" />
+        <action android:id="@+id/favorites_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
-        <action
-            android:id="@+id/action_navigation_favorites_to_settingsFragment"
+        <action android:id="@+id/favorites_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
@@ -62,13 +55,11 @@
         tools:layout="@layout/drink_clicked_fragment">
 
         <action
-            android:id="@+id/action_drinkClickedFragment_self"
-            app:destination="@id/drinkClickedFragment" />
+            android:id="@+id/drinkclicked_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
             android:name="passDrink"
             app:argType="brown.jeff.cocktailapp.model.Drink" />
-        <action
-            android:id="@+id/action_drinkClickedFragment_to_settingsFragment"
+        <action android:id="@+id/drinkclicked_to_settings"
             app:destination="@id/settingsFragment" />
 
 
@@ -79,12 +70,8 @@
         android:name="brown.jeff.cocktailapp.ui.random.RandomDrinkFragment"
         android:label="random_drink_fragment"
         tools:layout="@layout/drink_clicked_fragment">
-        <action
-            android:id="@+id/action_navigation_random_to_drinkClickedFragment"
-            app:destination="@id/drinkClickedFragment" />
-        <action
-            android:id="@+id/action_navigation_random_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+        <action android:id="@+id/randomdrink_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
+        <action android:id="@+id/randomdrink_to_settings" app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

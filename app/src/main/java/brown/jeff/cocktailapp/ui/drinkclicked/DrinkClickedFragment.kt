@@ -182,13 +182,13 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     private fun handleScreenChange(drink: Drink) {
         val action =
-            DrinkClickedFragmentDirections.actionDrinkClickedFragmentSelf(drink)
+            DrinkClickedFragmentDirections.drinkclickedToDrinkclicked(drink)
         findNavController().navigate(action)
 
     }
 
     private fun changeToSettingsScreen() {
-        val action = DrinkClickedFragmentDirections.actionDrinkClickedFragmentToSettingsFragment()
+        val action = DrinkClickedFragmentDirections.drinkclickedToSettings()
         findNavController().navigate(action)
     }
 

@@ -1,5 +1,6 @@
 package brown.jeff.cocktailapp.ui.random
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -53,8 +54,8 @@ class RandomDrinkFragment : Fragment() {
         toolbar = view.findViewById(R.id.drink_toolbar)!!
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.textColor))
-        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.textColor))
+        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.actionBarTextColor))
+        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.actionBarTextColor))
         backPressedToolbar(toolbar, activity)
         return view
 
@@ -183,7 +184,7 @@ class RandomDrinkFragment : Fragment() {
     }
 
     private fun changeToSettingsScreen() {
-        val action = RandomDrinkFragmentDirections.actionNavigationRandomToSettingsFragment()
+        val action = RandomDrinkFragmentDirections.randomdrinkToSettings()
         findNavController().navigate(action)
     }
 
