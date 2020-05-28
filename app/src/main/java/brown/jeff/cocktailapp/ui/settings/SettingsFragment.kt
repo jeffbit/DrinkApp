@@ -11,17 +11,15 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.util.Constants
-import brown.jeff.cocktailapp.util.DarkModeConfig
 import brown.jeff.cocktailapp.util.emailFeedback
 import brown.jeff.cocktailapp.util.openToWebsite
+import brown.jeff.cocktailapp.util.shouldEnableDarkMode
 
 class SettingsFragment : PreferenceFragmentCompat() {
-    private lateinit var darkModeConfig: DarkModeConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        darkModeConfig = DarkModeConfig
     }
 
     override fun onCreateView(
@@ -69,21 +67,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val settingsPref: SharedPreferences =
             requireActivity().getSharedPreferences(Constants.SETTINGS_SHARED_PREF, 0)
         val editor: SharedPreferences.Editor = settingsPref.edit()
+
         val listPreference: ListPreference? =
             preferenceManager.findPreference<ListPreference>("ui_mode")
         listPreference?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { preference, newValue ->
                 when (newValue) {
                     "Light Mode" -> {
-                        darkModeConfig.shouldEnableDarkMode("light")
+                        shouldEnableDarkMode("light")
                         requireActivity().recreate()
                         editor.putInt("mode", 0)
                         editor.apply()
                     }
                     "Dark Mode" -> {
-                        darkModeConfig.shouldEnableDarkMode("dark")
+                        shouldEnableDarkMode("dark")
                         requireActivity().recreate()
-
                         editor.putInt("mode", 1)
                         editor.apply()
                     }

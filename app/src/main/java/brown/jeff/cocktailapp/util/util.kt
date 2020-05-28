@@ -141,16 +141,18 @@ fun emailFeedback(activity: Activity) {
 fun getSavedTheme(activity: Activity) {
     val settings: SharedPreferences =
         activity.getSharedPreferences(Constants.SETTINGS_SHARED_PREF, 0)
-    val value = settings.getInt("mode", 0)
-    if (value == 0) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-    } else {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-
+    when (settings.getInt("mode", 0)) {
+        0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
+}
+
+fun shouldEnableDarkMode(theme: String) {
+    when (theme) {
+        Constants.DARK_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        Constants.LIGHT_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
 }
 
 
