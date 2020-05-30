@@ -42,8 +42,10 @@
 ## Future Updates
 <ul>
  <li>Offline Database cache</li>
-  <li>Dark mode/light mode</li>
+ <li>Dark mode/light mode</li>
  <li>Create cocktails in application</li>
+ <li>Tablet UI support</li>
+
 
 </ul>
 
