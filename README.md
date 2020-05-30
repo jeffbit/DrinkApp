@@ -36,11 +36,16 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-
-<!--FUTURE UPDATES -->
 <p>Cocktail Recipes allows you to search and create amazing cocktails from your mobile device. The application allows you to search drinks, view recently popular drinks, and save favorite drinks for offline access.   </p>
 
+<!--FUTURE UPDATES -->
+## Future Updates
+<ul>
+ <li>Offline Database cache</li>
+  <li>Dark mode/light mode</li>
+ <li>Create cocktails in application</li>
+
+</ul>
 
 
 
