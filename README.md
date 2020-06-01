@@ -73,6 +73,8 @@
 * [Junit](https://developer.android.com/training/testing/unit-testing/local-unit-tests) - used to test repository class
 
 
+<!-- Architecture-->
+## Architecture
 
 
 
