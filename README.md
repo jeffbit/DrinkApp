@@ -29,6 +29,7 @@
 * [About the Project](#about-the-project)
 * [Future Updates](#future-updates)
 * [Built With](#built-with)
+* [Architecture](#mvvm-architecture)
 * [Screenshots](#screenshot)
 * [Contact](#contact)
 
@@ -74,7 +75,10 @@
 
 
 <!-- Architecture-->
-## Architecture
+## MVVM Architecture
+<p align= "center">
+<!-- IMAGES GO HERE -->
+ <img alt="MVVM Architecture" src="https://user-images.githubusercontent.com/26611879/83455070-1eb89000-a412-11ea-8536-9354fb3827f2.png">
 
 
 
