@@ -36,7 +36,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<p>Cocktail Recipes allows you to search and create amazing cocktails from your mobile device. The application allows you to search drinks, view recently popular drinks, and save favorite drinks for offline access.   </p>
+<p>Cocktail Recipes is a small application based on modern Android application libraries(Android Jetpack) and MVVM architecture.
+ This application was created to focus on Android Jetpack, study of depenedency injections, and data fetching with retrofit.The application allows you to search drinks, view recently popular drinks, and save favorite drinks for offline access.  
+
+</p>
 
 <!--FUTURE UPDATES -->
 ## Future Updates
@@ -59,13 +62,15 @@
 * [MVVM](https://developer.android.com/jetpack/docs/guide)
 * [Navigation](https://developer.android.com/guide/navigation)
 * [Room](https://developer.android.com/topic/libraries/architecture/room)
-* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Fragment](https://developer.android.com/guide/components/fragments)
 * [Android KTX](https://developer.android.com/kotlin/ktx.html)
-* [Retrofit2](https://github.com/square/retrofit)
-* [Glide](https://github.com/bumptech/glide)
-* [Koin](https://insert-koin.io/)
+* [Retrofit2](https://github.com/square/retrofit) - Used to communicate with API
+* [Glide](https://github.com/bumptech/glide) - Loads Images
+* [Koin](https://insert-koin.io/) - Handles dependency injection 
+* [Mockitto](https://github.com/nhaarman/mockito-kotlin) - used to test repository class
+* [Junit](https://developer.android.com/training/testing/unit-testing/local-unit-tests) - used to test repository class
 
 
 
