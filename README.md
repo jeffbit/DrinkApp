@@ -49,6 +49,7 @@
  <li>Dark mode/light mode</li>
  <li>Create cocktails in application</li>
  <li>Tablet UI support</li>
+ <li>Better testing coverage</li>
 
 
 </ul>
