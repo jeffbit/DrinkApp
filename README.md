@@ -20,7 +20,7 @@
   </p>
 </p>
 
-<!-- ![google feature graphic](https://user-images.githubusercontent.com/26611879/75197223-98a1f480-5712-11ea-9b01-e55e41b9730e.jpg)-->
+![google feature graphic](https://user-images.githubusercontent.com/26611879/83340991-53eaa400-a293-11ea-9391-89442281b2f1.jpg)
 
 
 <!-- TABLE OF CONTENTS -->
@@ -29,6 +29,7 @@
 * [About the Project](#about-the-project)
 * [Future Updates](#future-updates)
 * [Built With](#built-with)
+* [Architecture](#mvvm-architecture)
 * [Screenshots](#screenshot)
 * [Contact](#contact)
 
@@ -36,11 +37,22 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<p>Cocktail Recipes is a small application based on modern Android application libraries(Android Jetpack) and MVVM architecture.
+ This application was created to focus on Android Jetpack, study of depenedency injections, and data fetching with retrofit.The application allows you to search drinks, view recently popular drinks, and save favorite drinks for offline access.  
 
+</p>
 
 <!--FUTURE UPDATES -->
-<p> Application in Progress..... </p>
+## Future Updates
+<ul>
+ <li>Offline Database cache</li>
+ <li>Dark mode/light mode</li>
+ <li>Create cocktails in application</li>
+ <li>Tablet UI support</li>
+ <li>Better testing coverage</li>
 
+
+</ul>
 
 
 
@@ -52,15 +64,22 @@
 * [MVVM](https://developer.android.com/jetpack/docs/guide)
 * [Navigation](https://developer.android.com/guide/navigation)
 * [Room](https://developer.android.com/topic/libraries/architecture/room)
-* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Fragment](https://developer.android.com/guide/components/fragments)
 * [Android KTX](https://developer.android.com/kotlin/ktx.html)
-* [Retrofit2](https://github.com/square/retrofit)
-* [Glide](https://github.com/bumptech/glide)
-* [Koin](https://insert-koin.io/)
+* [Retrofit2](https://github.com/square/retrofit) - Used to communicate with API
+* [Glide](https://github.com/bumptech/glide) - Loads Images
+* [Koin](https://insert-koin.io/) - Handles dependency injection 
+* [Mockitto](https://github.com/nhaarman/mockito-kotlin) - used to test repository class
+* [Junit](https://developer.android.com/training/testing/unit-testing/local-unit-tests) - used to test repository class
 
 
+<!-- Architecture-->
+## MVVM Architecture
+<p align= "center">
+<!-- IMAGES GO HERE -->
+ <img alt="MVVM Architecture" src="https://user-images.githubusercontent.com/26611879/83455070-1eb89000-a412-11ea-8536-9354fb3827f2.png">
 
 
 
@@ -68,6 +87,10 @@
 ## Screenshot
 <p align= "center">
 <!-- IMAGES GO HERE -->
+ <img width="156" alt="Google Play Screenshot 1" src="https://user-images.githubusercontent.com/26611879/83341121-9c569180-a294-11ea-860d-5fe8fc938b53.jpg">
+ <img width="156" alt="Google Play Screenshot 2" src="https://user-images.githubusercontent.com/26611879/83341122-9d87be80-a294-11ea-93c1-42174fc40e64.jpg">
+ <img width="156" alt="Google Play Screenshot 3" src="https://user-images.githubusercontent.com/26611879/83341124-9eb8eb80-a294-11ea-85b1-3964a7fa5a48.jpg">
+  <img width="156" height = "312" alt="Collapsing Actionbar GIF" src="https://user-images.githubusercontent.com/26611879/83341181-38809880-a295-11ea-95d8-fbba17c8e2de.gif">
  </p>
 
 
