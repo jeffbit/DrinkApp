@@ -19,6 +19,7 @@ class PopularDrinksFragment : Fragment() {
 
     private val popularDrinksViewModel: PopularDrinksViewModel by viewModel()
     private lateinit var popularDrinkAdapter: DrinkAdapter
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -50,6 +51,8 @@ class PopularDrinksFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_popular, container, false)
+        toolbar = view.findViewById(R.id.popular_toolbar)
+
         swipeToRefresh(view)
         //sets the toolbar in the fragment
         val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)

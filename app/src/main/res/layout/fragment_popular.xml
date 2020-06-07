@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryLightColor"
-    tools:context=".ui.popular.PopularDrinksFragment">
+    tools:context=".ui.popular.PopularDrinksFragment"
+    >
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -34,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/swiperefresh_popular"
         app:menu="@menu/settings_menu"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="Popular Drinks" />
 
     <TextView

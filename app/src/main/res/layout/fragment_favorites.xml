@@ -30,8 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/favorite_menu"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:menu="@menu/favorite_menu" />
 
     <TextView
         android:id="@+id/errormessage_tv_favorites"
