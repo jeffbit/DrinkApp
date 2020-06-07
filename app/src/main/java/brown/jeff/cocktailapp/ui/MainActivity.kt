@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //sets alarm to be enabled
         enableAlarm()
+
         Timber.plant(Timber.DebugTree())
         navView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 
 }
