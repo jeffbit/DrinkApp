@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CocktailApp</string>
+    <string name="app_name">Cocktail Recipes</string>
     <string name="favorites">Favorites</string>
     <string name="recent">Recent</string>
     <string name="popular">Popular</string>
