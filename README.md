@@ -1,14 +1,14 @@
- <h3 align="center">Drink App</h3>
+ <h3 align="center">Cocktail Recipes</h3>
  <p align = "center">
-<!-- <a href="https://play.google.com/store/apps/details?id=com.brown.jeff.iplocator"> 
-<img src="https://user-images.githubusercontent.com/26611879/75366175-2c8ad200-5873-11ea-954e-0719977cc28b.png" alt="Google Play Store"> -->
+ <a href="https://play.google.com/store/apps/details?id=brown.jeff.cocktailapp"> 
+<img src="https://user-images.githubusercontent.com/26611879/75366175-2c8ad200-5873-11ea-954e-0719977cc28b.png" alt="Google Play Store"> 
  </a>
  </p>
 
 
 
   <p align="center">
-    Cocktail App
+    Cocktail Recipes
     <br />
     <a href="https://github.com/jeffbit/DrinkApp"><strong>Explore the docs »</strong></a>
     <br />
