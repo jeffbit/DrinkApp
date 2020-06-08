@@ -58,7 +58,7 @@ object NotificationHelper {
 
         )
             //change small icon to cup
-            .setSmallIcon(R.drawable.ic_broken_image_black_24dp)
+            .setSmallIcon(R.drawable.ic_whatshot_black_24dp)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
