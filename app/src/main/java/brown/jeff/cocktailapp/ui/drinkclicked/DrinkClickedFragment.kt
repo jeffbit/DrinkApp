@@ -34,7 +34,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private lateinit var toolbar: Toolbar
     private lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

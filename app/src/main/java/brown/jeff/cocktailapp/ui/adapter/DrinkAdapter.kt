@@ -49,10 +49,11 @@ class DrinkAdapter(
 
     }
 
-    class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DrinkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var drinkImageView: ImageView = itemView.findViewById(R.id.drink_imageview)
         private var drinkNameTextView: TextView = itemView.findViewById(R.id.drink_name)
         private var drinkContainer: CardView = itemView.findViewById(R.id.drink_cardview)
+
 
         fun bind(
             drink: Drink,
@@ -61,13 +62,26 @@ class DrinkAdapter(
             drinkNameTextView.text = drink.drink
             //Glide loads image into view
             loadImage(drinkImageView, drink)
-
-            drinkContainer.setOnClickListener { clickListener(drink) }
+            drinkContainer.setOnClickListener {
+                clickListener(drink)
+                drinkSelectedListener?.onDrinkSelected(drink, drinkImageView)
+            }
 
         }
 
+    }
+
+    interface DrinkSelectedListener {
+        fun onDrinkSelected(drink: Drink, imageView: ImageView)
 
     }
 
+     var drinkSelectedListener: DrinkSelectedListener? = null
+
 
 }
+
+
+
+
+

@@ -2,11 +2,13 @@ package brown.jeff.cocktailapp.ui.favorite
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
@@ -80,6 +82,13 @@ class FavoriteDrinksFragment : Fragment() {
             }
         }
 
+        favoriteDrinkAdapter.drinkSelectedListener = object : DrinkAdapter.DrinkSelectedListener{
+            override fun onDrinkSelected(drink: Drink, imageView: ImageView) {
+                val extras = FragmentNavigatorExtras(imageView to drink.drinkImg)
+            }
+        }
+
+
 
         favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -104,7 +113,8 @@ class FavoriteDrinksFragment : Fragment() {
 
     private fun handleScreenChange(drink: Drink) {
         val action =
-            FavoriteDrinksFragmentDirections.favoritesToDrinkclicked(drink)
+            FavoriteDrinksFragmentDirections.favoritesToDrinkclicked(
+                drink)
         findNavController().navigate(action)
 
     }

@@ -25,6 +25,7 @@
             <ImageView
                 android:id="@+id/drink_imageview"
                 android:layout_width="match_parent"
+                android:transitionName="@string/drink_clicked"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/drink_image"
                 android:scaleType="centerCrop"

@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 
 //used to load image into imageview
 fun loadImage(imageView: ImageView, drink: Drink) {
+
     Glide.with(imageView.context)
         .load(drink.drinkImg)
         .error(R.drawable.ic_broken_image_black_24dp)
