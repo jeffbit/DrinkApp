@@ -89,7 +89,7 @@
 <!-- IMAGES GO HERE -->
  <img width="156" alt="Google Play Screenshot 1" src="https://user-images.githubusercontent.com/26611879/83341121-9c569180-a294-11ea-860d-5fe8fc938b53.jpg">
  <img width="156" alt="Google Play Screenshot 2" src="https://user-images.githubusercontent.com/26611879/83341122-9d87be80-a294-11ea-93c1-42174fc40e64.jpg">
- <img width="156" alt="Google Play Screenshot 3" src="https://user-images.githubusercontent.com/26611879/83341124-9eb8eb80-a294-11ea-85b1-3964a7fa5a48.jpg">
+ <img width="156" alt="Google Play Screenshot 3" src="https://user-images.githubusercontent.com/26611879/86433068-86caf200-bcae-11ea-9b58-e85087aaa3b3.jpg">
   <img width="156" height = "312" alt="Collapsing Actionbar GIF" src="https://user-images.githubusercontent.com/26611879/83341181-38809880-a295-11ea-95d8-fbba17c8e2de.gif">
  </p>
 
