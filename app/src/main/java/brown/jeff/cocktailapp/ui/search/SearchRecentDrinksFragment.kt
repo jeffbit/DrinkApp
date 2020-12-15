@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import brown.jeff.cocktailapp.util.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -59,8 +58,8 @@ class SearchRecentDrinksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val toolbar = view?.findViewById<Toolbar>(R.id.popular_toolbar)
         activity?.setActionBar(toolbar)
-        drinkAdapter = DrinkAdapter(emptyList()) { drink: Drink ->
-            handleScreenChange(drink)
+        drinkAdapter = DrinkAdapter(emptyList()) { id: String ->
+            handleScreenChange(id)
         }
         recyclerview_search.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -118,9 +117,9 @@ class SearchRecentDrinksFragment : Fragment() {
     }
 
     //moves drink data to new fragment
-    private fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(id: String) {
         val action =
-            SearchRecentDrinksFragmentDirections.recentToDrinkclicked(drink)
+            SearchRecentDrinksFragmentDirections.recentToDrinkclicked(id)
         findNavController().navigate(action)
 
     }

@@ -64,9 +64,10 @@ class FavoriteDrinksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        favoriteDrinksViewModel.getFavoriteDrinks()
         favoriteDrinkAdapter = DrinkAdapter(
             emptyList()
-        ) { drink: Drink -> handleScreenChange(drink) }
+        ) { id: String -> handleScreenChange(id) }
 
         recyclerview_favorites.apply {
             adapter = favoriteDrinkAdapter
@@ -82,7 +83,7 @@ class FavoriteDrinksFragment : Fragment() {
             }
         }
 
-        favoriteDrinkAdapter.drinkSelectedListener = object : DrinkAdapter.DrinkSelectedListener{
+        favoriteDrinkAdapter.drinkSelectedListener = object : DrinkAdapter.DrinkSelectedListener {
             override fun onDrinkSelected(drink: Drink, imageView: ImageView) {
                 val extras = FragmentNavigatorExtras(imageView to drink.drinkImg)
             }
@@ -90,16 +91,13 @@ class FavoriteDrinksFragment : Fragment() {
 
 
 
-        favoriteDrinksViewModel.getDrinks.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                if (it.isNullOrEmpty()) {
-                    errormessage_tv_favorites.visibility = View.VISIBLE
-                } else {
-                    errormessage_tv_favorites.visibility = View.GONE
-                }
-                favoriteDrinkAdapter.updateDrinkList(it)
-
+        favoriteDrinksViewModel.favoriteDrinks.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+                errormessage_tv_favorites.visibility = View.VISIBLE
+            } else {
+                errormessage_tv_favorites.visibility = View.GONE
             }
+            favoriteDrinkAdapter.updateDrinkList(it)
         })
 
     }
@@ -111,10 +109,11 @@ class FavoriteDrinksFragment : Fragment() {
     }
 
 
-    private fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(id: String) {
         val action =
             FavoriteDrinksFragmentDirections.favoritesToDrinkclicked(
-                drink)
+                id
+            )
         findNavController().navigate(action)
 
     }

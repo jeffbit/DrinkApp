@@ -17,7 +17,7 @@ import org.junit.*
 import retrofit2.Call
 import retrofit2.Response
 
-class DrinkRepositoryTest {
+class DrinkRepositoryImplTest {
 
     //Network Calls
     private lateinit var mockDrinkDao: DrinkDao
@@ -27,7 +27,7 @@ class DrinkRepositoryTest {
     private lateinit var mockDrinkResponse: Response<Drink>
     private lateinit var mockDrinksCall: Call<Drinks>
     private lateinit var mockDrinksResponse: Response<Drink>
-    private lateinit var drinkRepository: DrinkRepository
+    private lateinit var drinkRepositoryImpl: DrinkRepositoryImpl
 
 
     private val drinkID = DRINK.idDrink
@@ -44,7 +44,7 @@ class DrinkRepositoryTest {
         //for call to Drinks
         mockDrinksCall = mock()
         mockDrinksResponse = mock()
-        drinkRepository = DrinkRepository(mockDrinkApi, mockDrinkDao, mockNetworkConnection)
+        drinkRepositoryImpl = DrinkRepositoryImpl(mockDrinkApi, mockDrinkDao, mockNetworkConnection)
 
 
 
@@ -62,7 +62,7 @@ class DrinkRepositoryTest {
         given { mockDrinkCall.execute() }.willReturn(mockDrinkResponse)
         given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinksCall)
         //when
-        val response = drinkRepository.getDrinkById(drinkID)
+        val response = drinkRepositoryImpl.getDrinkById(drinkID)
         //then
         verify(mockDrinkApi).getDrinkById(drinkID)
         Assert.assertEquals(response, Result.Success(drink))
@@ -74,7 +74,7 @@ class DrinkRepositoryTest {
         //given
         given { mockNetworkConnection.isInternetAvailable() }.willReturn(false)
         //when
-        val response = drinkRepository.getDrinkById(drinkID)
+        val response = drinkRepositoryImpl.getDrinkById(drinkID)
         //then
         Assert.assertEquals(response, Result.Failure(Errors.NetworkError()))
         println(response)
@@ -86,7 +86,7 @@ class DrinkRepositoryTest {
         //given
         given { mockNetworkConnection.isInternetAvailable() }.willReturn(true)
         //when
-        val response = drinkRepository.getDrinkById("test")
+        val response = drinkRepositoryImpl.getDrinkById("test")
         //then
         val result = Result.Failure(Errors.ExceptionError(NullPointerException()))
         Assert.assertEquals(response, result)
@@ -104,7 +104,7 @@ class DrinkRepositoryTest {
         given { mockDrinkCall.execute() }.willReturn(mockDrinkResponse)
         given { mockDrinkApi.getDrinkById(drinkID) }.willReturn(mockDrinksCall)
         //then
-        val response = drinkRepository.getDrinkById(drinkID)
+        val response = drinkRepositoryImpl.getDrinkById(drinkID)
         //when
         val result = Result.Failure(Errors.ResponseError("null"))
         Assert.assertEquals(response, result)

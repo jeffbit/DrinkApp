@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.network.Result
-import brown.jeff.cocktailapp.repositories.DrinkRepository
+import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
 import kotlinx.coroutines.launch
 
-class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
+class PopularDrinksViewModel(private val drinkRepositoryImpl: DrinkRepositoryImpl) : ViewModel() {
 
     private val _popularDrinks = MutableLiveData<List<Drink>>()
     val popularDrinks: LiveData<List<Drink>>
@@ -28,7 +28,7 @@ class PopularDrinksViewModel(private val drinkRepository: DrinkRepository) : Vie
         _loadingDrinks.value = true
         _displayError.value = null
         viewModelScope.launch {
-            when (val result = drinkRepository.getPopularDrinks()) {
+            when (val result = drinkRepositoryImpl.getPopularDrinks()) {
                 is Result.Success -> {
                     _popularDrinks.postValue(result.data.drinks)
                     _loadingDrinks.postValue(false)

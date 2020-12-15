@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Success
-import brown.jeff.cocktailapp.repositories.DrinkRepository
+import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
+class SearchRecentDrinksViewModel(private val drinkRepositoryImpl: DrinkRepositoryImpl) : ViewModel() {
     private val recentDrinks = MutableLiveData<List<Drink>>()
     val popularDrinks: LiveData<List<Drink>>
         get() = recentDrinks
@@ -29,7 +29,7 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
     fun getRecentDrinks() {
         _loadingDrinks.value = true
         viewModelScope.launch {
-            when (val result = drinkRepository.getPopularDrinks()) {
+            when (val result = drinkRepositoryImpl.getPopularDrinks()) {
                 is Success -> {
                     recentDrinks.postValue(result.data.drinks)
                     _loadingDrinks.postValue(false)
@@ -47,7 +47,7 @@ class SearchRecentDrinksViewModel(private val drinkRepository: DrinkRepository) 
     fun searchDrinkByName(drinkName: String) {
         _loadingDrinks.value = true
         viewModelScope.launch {
-            when (val result = drinkRepository.getDrinksByName(drinkName)) {
+            when (val result = drinkRepositoryImpl.getDrinksByName(drinkName)) {
                 is Success -> {
                     if (result.data.drinks.isNullOrEmpty()) {
                         _loadingDrinks.value = false

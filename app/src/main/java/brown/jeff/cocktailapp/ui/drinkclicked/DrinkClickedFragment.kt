@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
@@ -42,7 +41,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("drinkName", safeArgs.passDrink.drink)
+        outState.putString("drinkId", safeArgs.id)
     }
 
 
@@ -55,7 +54,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.drinkclicked_favorite_menuitem -> {
-                addTofavoriteSnackBar(this.requireView(), safeArgs.passDrink)
+                addTofavoriteSnackBar(this.requireView(), safeArgs.id)
                 true
             }
             R.id.drinkclicked_settings_menuitem -> {
@@ -81,14 +80,17 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         backPressedToolbar(toolbar, activity)
         retrieveSafeArgs()
 
-        drinkClickedViewModel.getDrinkById(safeArgs.passDrink.idDrink)
+        drinkClickedViewModel.getDrinkById(safeArgs.id)
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        collapsingToolbarLayout.title = safeArgs.passDrink.drink
+        drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
+            collapsingToolbarLayout.title = it.drink
+
+        })
 
     }
 
@@ -99,8 +101,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
         drinkClickedAdapter = DrinkAdapter(
             emptyList()
-        ) { drink: Drink ->
-            handleScreenChange(drink)
+        ) { id: String ->
+            handleScreenChange(id)
         }
 
 
@@ -119,7 +121,7 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
 
         drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
             drinkClickedViewModel.getDrinksByIngredient(it.strIngredient1)
-            favoriteFloatingActionButton(requireView(), it)
+            favoriteFloatingActionButton(requireView(), it.idDrink)
 
         })
         drinkClickedViewModel.relatedDrinks.observe(viewLifecycleOwner, Observer {
@@ -164,24 +166,24 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
-    private fun favoriteFloatingActionButton(view: View, drink: Drink) {
+    private fun favoriteFloatingActionButton(view: View, id: String) {
         favoritedrink_fab.setOnClickListener {
-            addTofavoriteSnackBar(view, drink)
+            addTofavoriteSnackBar(view, id)
         }
 
     }
 
     //retrieves data from previous fragment and sets viewmodel data
     private fun retrieveSafeArgs() {
-        val drinkPassed = safeArgs.passDrink
-        drinkClickedViewModel.setClickedDrink(drinkPassed)
+        val drinkId = safeArgs.id
+        drinkClickedViewModel.getDrinkById(drinkId)
 
 
     }
 
-    private fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(id: String) {
         val action =
-            DrinkClickedFragmentDirections.drinkclickedToDrinkclicked(drink)
+            DrinkClickedFragmentDirections.drinkclickedToDrinkclicked(id)
         findNavController().navigate(action)
 
     }
@@ -192,14 +194,14 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     }
 
 
-    private fun addTofavoriteSnackBar(view: View, drink: Drink) {
-        drinkClickedViewModel.addDrinkToFavorites(drink)
+    private fun addTofavoriteSnackBar(view: View, id: String) {
+        drinkClickedViewModel.addDrinkToFavorites()
         showSnackBar(
             view,
             getString(R.string.drink_favorited),
             Snackbar.LENGTH_LONG,
             getString(R.string.undo)
-        ) { drinkClickedViewModel.removeDrinkFromFavorites(drink.idDrink) }
+        ) { drinkClickedViewModel.removeDrinkFromFavorites(id) }
 
     }
 

@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.network.Result
-import brown.jeff.cocktailapp.repositories.DrinkRepository
+import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
+import brown.jeff.cocktailapp.repositories.FavoriteDrinkRepositoryImpl
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class DrinkClickedViewModel(
-    private val drinkRepository: DrinkRepository
+    private val drinkRepositoryImpl: DrinkRepositoryImpl,
+    private val favoriteDrinkRepositoryImpl: FavoriteDrinkRepositoryImpl
 ) : ViewModel() {
     private val _relatedDrinks = MutableLiveData<List<Drink>>()
     val relatedDrinks: LiveData<List<Drink>>
@@ -22,15 +24,19 @@ class DrinkClickedViewModel(
         get() = _clickedDrink
 
 
-    fun addDrinkToFavorites(drink: Drink) {
+    fun addDrinkToFavorites() {
         viewModelScope.launch {
-            drinkRepository.insertDrinksLocalDB(drink)
+            if (_clickedDrink.value != null) {
+                _clickedDrink.value.let {
+                    favoriteDrinkRepositoryImpl.insertDrinksLocalDB(it!!)
+                }
+            }
         }
     }
 
     fun removeDrinkFromFavorites(drinkId: String) {
         viewModelScope.launch {
-            drinkRepository.removeDrinkById(drinkId)
+            favoriteDrinkRepositoryImpl.removeDrinkById(drinkId)
         }
     }
 
@@ -41,7 +47,7 @@ class DrinkClickedViewModel(
 
     fun getDrinkById(drinkId: String) {
         viewModelScope.launch {
-            when (val result = drinkRepository.getDrinkById(drinkId)) {
+            when (val result = drinkRepositoryImpl.getDrinkById(drinkId)) {
                 is Result.Success -> {
                     _clickedDrink.value = result.data.drinks[0]
                 }
@@ -54,7 +60,7 @@ class DrinkClickedViewModel(
 
     fun getDrinksByIngredient(ingredients: String? = "Vodka") {
         viewModelScope.launch {
-            when (val result = drinkRepository.getDrinksByIngredients(ingredients)) {
+            when (val result = drinkRepositoryImpl.getDrinksByIngredients(ingredients)) {
                 is Result.Success -> {
                     Timber.e("Realted Drinks added")
                     _relatedDrinks.postValue(result.data.drinks)

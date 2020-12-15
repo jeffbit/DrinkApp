@@ -1,6 +1,5 @@
 package brown.jeff.cocktailapp.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import brown.jeff.cocktailapp.model.Drink
 
@@ -14,13 +13,13 @@ interface DrinkDao {
     suspend fun deleteDrink(drink: Drink)
 
     @Query("SELECT * FROM drinkTable")
-    fun getAllDrinks(): LiveData<List<Drink>>
+    fun getAllDrinks(): List<Drink>
 
     @Query("SELECT * FROM drinkTable WHERE drink LIKE :drinkName")
-    fun getDrinkByName(drinkName: String): LiveData<List<Drink>>
+    fun getDrinkByName(drinkName: String): List<Drink>
 
     @Query("SELECT * FROM drinkTable WHERE idDrink LIKE :drinkId")
-    fun getDrinkById(drinkId: String): LiveData<Drink>
+    fun getDrinkById(drinkId: String): Drink
 
     @Query("Delete FROM drinkTable WHERE idDrink Like :drinkId")
     suspend fun deleteDrinkById(drinkId: String)

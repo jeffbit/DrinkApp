@@ -14,7 +14,7 @@ import brown.jeff.cocktailapp.util.loadImage
 
 class DrinkAdapter(
     private var drinks: List<Drink>,
-    private val clickListener: (Drink) -> Unit
+    private val clickListener: (String) -> Unit
 ) :
     RecyclerView.Adapter<DrinkAdapter.DrinkViewHolder>() {
 
@@ -57,13 +57,13 @@ class DrinkAdapter(
 
         fun bind(
             drink: Drink,
-            clickListener: (Drink) -> Unit
+            clickListener: (String) -> Unit
         ) {
             drinkNameTextView.text = drink.drink
             //Glide loads image into view
             loadImage(drinkImageView, drink)
             drinkContainer.setOnClickListener {
-                clickListener(drink)
+                clickListener(drink.idDrink)
                 drinkSelectedListener?.onDrinkSelected(drink, drinkImageView)
             }
 
@@ -76,7 +76,7 @@ class DrinkAdapter(
 
     }
 
-     var drinkSelectedListener: DrinkSelectedListener? = null
+    var drinkSelectedListener: DrinkSelectedListener? = null
 
 
 }

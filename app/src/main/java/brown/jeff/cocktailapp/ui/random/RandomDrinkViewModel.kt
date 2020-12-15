@@ -6,11 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.network.Result
-import brown.jeff.cocktailapp.repositories.DrinkRepository
+import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
+import brown.jeff.cocktailapp.repositories.FavoriteDrinkRepositoryImpl
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewModel() {
+class RandomDrinkViewModel(
+    private val drinkRepositoryImpl: DrinkRepositoryImpl,
+    private val favoriteDrinkRepositoryImpl: FavoriteDrinkRepositoryImpl
+) : ViewModel() {
 
     private val _drink = MutableLiveData<Drink>()
     val drink: LiveData<Drink>
@@ -28,7 +32,7 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
     fun getRandomDrink() {
         _loading.value = true
         viewModelScope.launch {
-            when (val result = drinkRepository.getRandomDrink()) {
+            when (val result = drinkRepositoryImpl.getRandomDrink()) {
                 is Result.Success -> {
                     _loading.value = false
                     _drink.value = result.data.drinks[0]
@@ -47,13 +51,13 @@ class RandomDrinkViewModel(private val drinkRepository: DrinkRepository) : ViewM
 
     fun addDrinkToFavorites(drink: Drink) {
         viewModelScope.launch {
-            drinkRepository.insertDrinksLocalDB(drink)
+            favoriteDrinkRepositoryImpl.insertDrinksLocalDB(drink)
         }
     }
 
     fun removeDrinkFromFavorites(drinkId: String) {
         viewModelScope.launch {
-            drinkRepository.removeDrinkById(drinkId)
+            favoriteDrinkRepositoryImpl.removeDrinkById(drinkId)
         }
     }
 

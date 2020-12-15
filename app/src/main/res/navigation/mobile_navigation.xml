@@ -12,8 +12,8 @@
         <action
             android:id="@+id/popular_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
-            android:name="passDrink"
-            app:argType="brown.jeff.cocktailapp.model.Drink" />
+            android:name="id"
+            app:argType="string" />
         <action
             android:id="@+id/popular_to_settings"
             app:destination="@id/settingsFragment" />
@@ -30,8 +30,8 @@
 
         </action>
         <argument
-            android:name="passDrink"
-            app:argType="brown.jeff.cocktailapp.model.Drink" />
+            android:name="id"
+            app:argType="string" />
         <action android:id="@+id/recent_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
@@ -43,8 +43,8 @@
         tools:layout="@layout/fragment_favorites">
         <action android:id="@+id/favorites_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
-            android:name="passDrink"
-            app:argType="brown.jeff.cocktailapp.model.Drink" />
+            android:name="id"
+            app:argType="string" />
         <action android:id="@+id/favorites_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
@@ -57,8 +57,8 @@
         <action
             android:id="@+id/drinkclicked_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
         <argument
-            android:name="passDrink"
-            app:argType="brown.jeff.cocktailapp.model.Drink" />
+            android:name="id"
+            app:argType="string" />
         <action android:id="@+id/drinkclicked_to_settings"
             app:destination="@id/settingsFragment" />
 

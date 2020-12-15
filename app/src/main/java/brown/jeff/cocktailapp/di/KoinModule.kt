@@ -5,7 +5,8 @@ import androidx.room.Room
 import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.NetworkConnection
 import brown.jeff.cocktailapp.network.RetrofitClient
-import brown.jeff.cocktailapp.repositories.DrinkRepository
+import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
+import brown.jeff.cocktailapp.repositories.FavoriteDrinkRepositoryImpl
 import brown.jeff.cocktailapp.room.DrinkDao
 import brown.jeff.cocktailapp.room.DrinkDatabase
 import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
@@ -25,43 +26,72 @@ val networkModule = module(override = true) {
     }
     single { provideRetrofit() }
 
-    factory { NetworkConnection(get()) }
-    factory { DrinkAdapter(get(), get()) }
+    factory { NetworkConnection(context = get()) }
+    factory { DrinkAdapter(drinks = get(), clickListener = get()) }
 
 
 }
-val repositoryModule = module {
-
-    fun provideRepository(
-        drinkApi: DrinkApi, drinkDao: DrinkDao, networkConnection: NetworkConnection
-    ): DrinkRepository {
-        return DrinkRepository(drinkApi, drinkDao, networkConnection)
+val drinkRepositoryModule = module {
+    single {
+        DrinkRepositoryImpl(
+            drinkApi = get(),
+            networkConnection = get()
+        )
     }
-    single { provideRepository(get(), get(), get()) }
 
 }
+
+val favoriteDrinkRepositoryModule = module {
+    single {
+        FavoriteDrinkRepositoryImpl(drinkDao = get())
+    }
+}
+
 val databaseModule = module {
 
 
     fun provideDatabase(application: Application): DrinkDatabase {
         return Room.databaseBuilder(application, DrinkDatabase::class.java, "drink.database")
-            .fallbackToDestructiveMigration().build()
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     fun provideDao(database: DrinkDatabase): DrinkDao {
         return database.drinkDao()
     }
 
-    single { provideDatabase(androidApplication()) }
-    single { provideDao(get()) }
+    single { provideDatabase(application = androidApplication()) }
+    single { provideDao(database = get()) }
 
 }
 val viewModelModule = module {
-    viewModel { FavoriteDrinksViewModel(get()) }
-    viewModel { RandomDrinkViewModel(get()) }
-    viewModel { PopularDrinksViewModel(get()) }
-    viewModel { SearchRecentDrinksViewModel(get()) }
-    viewModel { DrinkClickedViewModel(get()) }
+    viewModel {
+        FavoriteDrinksViewModel(
+            favoriteDrinkRepositoryImpl = get()
+        )
+    }
+    viewModel {
+        RandomDrinkViewModel(
+            drinkRepositoryImpl = get(),
+            favoriteDrinkRepositoryImpl = get()
+        )
+    }
+    viewModel {
+        PopularDrinksViewModel(
+            drinkRepositoryImpl = get()
+        )
+    }
+    viewModel {
+        SearchRecentDrinksViewModel(
+            drinkRepositoryImpl = get()
+        )
+    }
+    viewModel {
+        DrinkClickedViewModel(
+            drinkRepositoryImpl = get(),
+            favoriteDrinkRepositoryImpl = get()
+        )
+    }
 
 
 }

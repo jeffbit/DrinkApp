@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
@@ -65,7 +64,7 @@ class PopularDrinksFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         popularDrinkAdapter = DrinkAdapter(
             emptyList()
-        ) { drink: Drink -> handleScreenChange(drink) }
+        ) { id : String -> handleScreenChange(id) }
 
         recyclerview_popular.apply {
             adapter = popularDrinkAdapter
@@ -110,9 +109,9 @@ class PopularDrinksFragment : Fragment() {
         })
     }
 
-    private fun handleScreenChange(drink: Drink) {
+    private fun handleScreenChange(id: String) {
         val action =
-            PopularDrinksFragmentDirections.popularToDrinkclicked(drink)
+            PopularDrinksFragmentDirections.popularToDrinkclicked(id)
         findNavController().navigate(action)
 
     }
