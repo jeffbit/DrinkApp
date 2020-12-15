@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.search
+package brown.jeff.cocktailapp.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

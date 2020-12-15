@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.network
+package brown.jeff.cocktailapp.data.api
 
 import android.content.Context
 import android.net.ConnectivityManager

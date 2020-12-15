@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.network
+package brown.jeff.cocktailapp.data.api
 
 import brown.jeff.cocktailapp.util.Constants
 import okhttp3.OkHttpClient

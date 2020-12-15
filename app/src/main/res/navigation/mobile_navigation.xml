@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navigation_popular"
-        android:name="brown.jeff.cocktailapp.ui.popular.PopularDrinksFragment"
+        android:name="brown.jeff.cocktailapp.presentation.popular.PopularDrinksFragment"
         android:label="@string/popular"
         tools:layout="@layout/fragment_popular">
         <action
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/navigation_recent"
-        android:name="brown.jeff.cocktailapp.ui.search.SearchRecentDrinksFragment"
+        android:name="brown.jeff.cocktailapp.presentation.search.SearchRecentDrinksFragment"
         android:label="@string/recent"
         tools:layout="@layout/fragment_search">
         <action android:id="@+id/recent_to_drinkclicked"
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksFragment"
+        android:name="brown.jeff.cocktailapp.presentation.favorite.FavoriteDrinksFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites">
         <action android:id="@+id/favorites_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/drinkClickedFragment"
-        android:name="brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedFragment"
+        android:name="brown.jeff.cocktailapp.presentation.drinkclicked.DrinkClickedFragment"
         android:label="drink_clicked_fragment"
         tools:layout="@layout/drink_clicked_fragment">
 
@@ -67,7 +67,7 @@
 
     <fragment
         android:id="@+id/navigation_random"
-        android:name="brown.jeff.cocktailapp.ui.random.RandomDrinkFragment"
+        android:name="brown.jeff.cocktailapp.presentation.random.RandomDrinkFragment"
         android:label="random_drink_fragment"
         tools:layout="@layout/drink_clicked_fragment">
         <action android:id="@+id/randomdrink_to_drinkclicked" app:destination="@id/drinkClickedFragment" />
@@ -75,6 +75,6 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="brown.jeff.cocktailapp.ui.settings.SettingsFragment"
+        android:name="brown.jeff.cocktailapp.presentation.settings.SettingsFragment"
         android:label="settings_fragment" />
 </navigation>

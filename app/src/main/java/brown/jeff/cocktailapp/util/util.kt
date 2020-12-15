@@ -14,17 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.data.entities.DrinkEntity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 
 
 //used to load image into imageview
-fun loadImage(imageView: ImageView, drink: Drink) {
+fun loadImage(imageView: ImageView, drinkEntity: DrinkEntity) {
 
     Glide.with(imageView.context)
-        .load(drink.drinkImg)
+        .load(drinkEntity.drinkImg)
         .error(R.drawable.ic_broken_image_black_24dp)
         .apply(RequestOptions.centerCropTransform())
         .into(imageView)

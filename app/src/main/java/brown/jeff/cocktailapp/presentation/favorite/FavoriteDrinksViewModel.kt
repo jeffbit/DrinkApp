@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.favorite
+package brown.jeff.cocktailapp.presentation.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

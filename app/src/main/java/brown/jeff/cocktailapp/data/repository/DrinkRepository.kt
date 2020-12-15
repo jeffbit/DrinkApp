@@ -1,19 +1,19 @@
 package brown.jeff.cocktailapp.data.repository
 
-import brown.jeff.cocktailapp.model.Drinks
-import brown.jeff.cocktailapp.network.Result
+import brown.jeff.cocktailapp.data.entities.DrinksEntity
+import brown.jeff.cocktailapp.domain.usecase.Result
 
 interface DrinkRepository {
 
 
-    suspend fun getDrinksByName(drinkName: String): Result<Drinks>
+    suspend fun getDrinksByName(drinkName: String): Result<DrinksEntity>
 
-    suspend fun getDrinkById(drinkId: String): Result<Drinks>
+    suspend fun getDrinkById(drinkId: String): Result<DrinksEntity>
 
-    suspend fun getDrinksByIngredients(ingredients: String?): Result<Drinks>
+    suspend fun getDrinksByIngredients(ingredients: String?): Result<DrinksEntity>
 
-    suspend fun getPopularDrinks(): Result<Drinks>
+    suspend fun getPopularDrinks(): Result<DrinksEntity>
 
-    suspend fun getRandomDrink(): Result<Drinks>
+    suspend fun getRandomDrink(): Result<DrinksEntity>
 
 }

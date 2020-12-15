@@ -1,6 +1,6 @@
-package brown.jeff.cocktailapp.model
+package brown.jeff.cocktailapp.data.entities
 
 
-data class DrinksEntitity(
+data class DrinksEntity(
     val drinkEntities: List<DrinkEntity>
 )

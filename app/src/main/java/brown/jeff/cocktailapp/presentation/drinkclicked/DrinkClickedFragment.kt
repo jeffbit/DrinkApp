@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.drinkclicked
+package brown.jeff.cocktailapp.presentation.drinkclicked
 
 import android.app.Activity
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.presentation.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.backPressedToolbar
 import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.shareDrink

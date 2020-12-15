@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.data.api
+package brown.jeff.cocktailapp.domain.usecase
 
 sealed class Result<out T> {
     data class Success<out T>(val data: T) : Result<T>()

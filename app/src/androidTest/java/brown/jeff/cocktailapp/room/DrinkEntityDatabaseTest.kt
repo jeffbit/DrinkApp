@@ -3,13 +3,14 @@ package brown.jeff.cocktailapp.room
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
+import brown.jeff.cocktailapp.data.db.DrinkDatabase
 import brown.jeff.cocktailapp.data.db.dao.DrinkDao
-import brown.jeff.cocktailapp.util.DRINK
+import brown.jeff.cocktailapp.util.DRINK_ENTITY
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import java.io.IOException
 
-class DrinkDatabaseTest {
+class DrinkEntityDatabaseTest {
     private lateinit var drinkDao: DrinkDao
     private lateinit var database: DrinkDatabase
 
@@ -32,14 +33,14 @@ class DrinkDatabaseTest {
     @Test
     fun insertDrink() {
         //given
-        val writeDrink = DRINK
+        val writeDrink = DRINK_ENTITY
         val writtenDrinkId = writeDrink.idDrink
 
         //when
         runBlocking {
             drinkDao.insertDrink(writeDrink)
         }
-        val readDrink = drinkDao.getDrinkById(writtenDrinkId).getValueBlocking()
+        val readDrink = drinkDao.getDrinkById(writtenDrinkId)
 
         //then
         Assert.assertEquals(readDrink?.drink, writeDrink.drink)
@@ -48,25 +49,25 @@ class DrinkDatabaseTest {
     @Test
     fun getAllDrinks() {
         //given
-        val drink = DRINK
+        val drink = DRINK_ENTITY
         //when
         runBlocking {
             drinkDao.insertDrink(drink)
         }
         //then
-        val getDrinks = drinkDao.getAllDrinks().getValueBlocking()
+        val getDrinks = drinkDao.getAllDrinks()
         Assert.assertEquals(drink, getDrinks)
     }
 
     @Test
     fun deleteDrink() {
         //given
-        val writeDrink = DRINK
+        val writeDrink = DRINK_ENTITY
         //when
         runBlocking {
             drinkDao.deleteDrink(writeDrink)
         }
-        val result = drinkDao.getDrinkById(writeDrink.idDrink).getValueBlocking()
+        val result = drinkDao.getDrinkById(writeDrink.idDrink)
         //then
         Assert.assertNull(result)
 

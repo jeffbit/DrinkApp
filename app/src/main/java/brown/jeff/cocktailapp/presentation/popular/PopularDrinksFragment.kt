@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.popular
+package brown.jeff.cocktailapp.presentation.popular
 
 import android.os.Bundle
 import android.view.*
@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.presentation.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import kotlinx.android.synthetic.main.fragment_popular.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +23,8 @@ class PopularDrinksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+        popularDrinksViewModel.getAllPopularDrinks()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,7 +74,6 @@ class PopularDrinksFragment : Fragment() {
 
         }
 
-        popularDrinksViewModel.getAllPopularDrinks()
         popularDrinksViewModel.popularDrinks.observe(viewLifecycleOwner, Observer {
             popularDrinkAdapter.updateDrinkList(it)
 

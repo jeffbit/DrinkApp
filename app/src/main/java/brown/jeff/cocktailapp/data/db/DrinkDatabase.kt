@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.room
+package brown.jeff.cocktailapp.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

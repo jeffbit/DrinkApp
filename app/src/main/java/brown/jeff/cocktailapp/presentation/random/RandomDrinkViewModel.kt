@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.random
+package brown.jeff.cocktailapp.presentation.random
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

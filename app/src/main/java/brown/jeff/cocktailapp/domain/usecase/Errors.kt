@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.data.api
+package brown.jeff.cocktailapp.domain.usecase
 
 
 //used with Result class to catch specific failures

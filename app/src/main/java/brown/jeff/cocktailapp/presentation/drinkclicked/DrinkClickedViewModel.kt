@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.drinkclicked
+package brown.jeff.cocktailapp.presentation.drinkclicked
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -2,19 +2,19 @@ package brown.jeff.cocktailapp.di
 
 import android.app.Application
 import androidx.room.Room
-import brown.jeff.cocktailapp.network.DrinkApi
-import brown.jeff.cocktailapp.network.NetworkConnection
-import brown.jeff.cocktailapp.network.RetrofitClient
-import brown.jeff.cocktailapp.repositories.DrinkRepositoryImpl
-import brown.jeff.cocktailapp.repositories.FavoriteDrinkRepositoryImpl
-import brown.jeff.cocktailapp.room.DrinkDao
-import brown.jeff.cocktailapp.room.DrinkDatabase
-import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
-import brown.jeff.cocktailapp.ui.drinkclicked.DrinkClickedViewModel
-import brown.jeff.cocktailapp.ui.favorite.FavoriteDrinksViewModel
-import brown.jeff.cocktailapp.ui.popular.PopularDrinksViewModel
-import brown.jeff.cocktailapp.ui.random.RandomDrinkViewModel
-import brown.jeff.cocktailapp.ui.search.SearchRecentDrinksViewModel
+import brown.jeff.cocktailapp.data.api.DrinkApi
+import brown.jeff.cocktailapp.data.api.NetworkConnection
+import brown.jeff.cocktailapp.data.api.RetrofitClient
+import brown.jeff.cocktailapp.data.repository.DrinkRepositoryImpl
+import brown.jeff.cocktailapp.data.repository.FavoriteDrinkRepositoryImpl
+import brown.jeff.cocktailapp.data.db.dao.DrinkDao
+import brown.jeff.cocktailapp.data.db.DrinkDatabase
+import brown.jeff.cocktailapp.presentation.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.presentation.drinkclicked.DrinkClickedViewModel
+import brown.jeff.cocktailapp.presentation.favorite.FavoriteDrinksViewModel
+import brown.jeff.cocktailapp.presentation.popular.PopularDrinksViewModel
+import brown.jeff.cocktailapp.presentation.random.RandomDrinkViewModel
+import brown.jeff.cocktailapp.presentation.search.SearchRecentDrinksViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,7 +27,7 @@ val networkModule = module(override = true) {
     single { provideRetrofit() }
 
     factory { NetworkConnection(context = get()) }
-    factory { DrinkAdapter(drinks = get(), clickListener = get()) }
+    factory { DrinkAdapter(drinkEntities = get(), clickListener = get()) }
 
 
 }

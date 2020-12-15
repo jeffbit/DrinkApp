@@ -1,9 +1,9 @@
 package brown.jeff.cocktailapp.util
 
-import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.data.entities.DrinkEntity
 
 //values for testing
-val DRINK: Drink = Drink(
+val DRINK_ENTITY: DrinkEntity = DrinkEntity(
     "11007", "Margarita",
     "Ordinary Drink",
     "No",

@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.settings
+package brown.jeff.cocktailapp.presentation.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater

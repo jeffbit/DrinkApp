@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.search
+package brown.jeff.cocktailapp.presentation.search
 
 import android.os.Bundle
 import android.view.*
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.presentation.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import brown.jeff.cocktailapp.util.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_search.*

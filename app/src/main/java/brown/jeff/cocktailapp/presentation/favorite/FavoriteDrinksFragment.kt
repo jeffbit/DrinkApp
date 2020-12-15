@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.favorite
+package brown.jeff.cocktailapp.presentation.favorite
 
 import android.os.Bundle
 import android.view.*
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import brown.jeff.cocktailapp.R
 import brown.jeff.cocktailapp.data.entities.DrinkEntity
-import brown.jeff.cocktailapp.ui.adapter.DrinkAdapter
+import brown.jeff.cocktailapp.presentation.adapter.DrinkAdapter
 import brown.jeff.cocktailapp.util.Constants
 import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import kotlinx.android.synthetic.main.fragment_favorites.*

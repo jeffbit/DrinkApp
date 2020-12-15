@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui
+package brown.jeff.cocktailapp.presentation
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.notifications.AlarmReceiver
+import brown.jeff.cocktailapp.util.notification.AlarmReceiver
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
 import java.util.*

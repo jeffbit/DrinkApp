@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.adapter
+package brown.jeff.cocktailapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View

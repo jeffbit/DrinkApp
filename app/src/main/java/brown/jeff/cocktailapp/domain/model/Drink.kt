@@ -1,38 +1,21 @@
-package brown.jeff.cocktailapp.data.entities
+package brown.jeff.cocktailapp.domain.model
+
+import brown.jeff.cocktailapp.data.entities.DrinkEntity
 
 
-import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
-
-@Entity(tableName = "drinkTable")
-@Parcelize
-data class DrinkEntity(
-    @PrimaryKey(autoGenerate = false)
+data class Drink(
     val idDrink: String,
-    @SerializedName("strAlcoholic")
     val alcoholic: String,
-    @SerializedName("strCategory")
     val category: String,
-    @SerializedName("strCreativeCommonsConfirmed")
-    val creativeCommonsConfirmed: String,
-    @SerializedName("strDrink")
     val drink: String,
     val strDrinkAlternate: String?,
     val strDrinkDE: String?,
     val strDrinkES: String?,
     val strDrinkFR: String?,
-    @SerializedName("strDrinkThumb")
     val drinkImg: String,
-    @SerializedName("strDrinkZH-HANS")
     val strDrinkZHHANS: String?,
-    @SerializedName("strDrinkZH-HANT")
     val strDrinkZHHANT: String?,
-    @SerializedName("strGlass")
     val glassType: String?,
-    @SerializedName("strIBA")
     val strIBA: String?,
     val strIngredient1: String?,
     val strIngredient10: String?,
@@ -53,9 +36,7 @@ data class DrinkEntity(
     val strInstructionsDE: String?,
     val strInstructionsES: String?,
     val strInstructionsFR: String?,
-    @SerializedName("strInstructionsZH-HANS")
     val strInstructionsZHHANS: String?,
-    @SerializedName("strInstructionsZH-HANT")
     val strInstructionsZHHANT: String?,
     val strMeasure1: String?,
     val strMeasure10: String?,
@@ -74,5 +55,8 @@ data class DrinkEntity(
     val strMeasure9: String?,
     val strTags: String?,
     val strVideo: String?,
-    val dateModified: String
-) : Parcelable
+    val dateModified: String)
+
+
+
+

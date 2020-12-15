@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.network
+package brown.jeff.cocktailapp.data.api
 
 import brown.jeff.cocktailapp.BuildConfig
 import okhttp3.Interceptor

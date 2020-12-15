@@ -1,4 +1,4 @@
-package brown.jeff.cocktailapp.ui.adapter
+package brown.jeff.cocktailapp.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import brown.jeff.cocktailapp.data.entities.DrinkEntity

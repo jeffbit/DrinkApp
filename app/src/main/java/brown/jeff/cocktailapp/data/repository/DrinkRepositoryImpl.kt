@@ -1,14 +1,12 @@
 package brown.jeff.cocktailapp.data.repository
 
-import brown.jeff.cocktailapp.model.Drink
-import brown.jeff.cocktailapp.model.Drinks
-import brown.jeff.cocktailapp.network.DrinkApi
-import brown.jeff.cocktailapp.network.Errors
-import brown.jeff.cocktailapp.network.NetworkConnection
-import brown.jeff.cocktailapp.network.Result
-import brown.jeff.cocktailapp.network.Result.Failure
-import brown.jeff.cocktailapp.network.Result.Success
-import brown.jeff.cocktailapp.room.DrinkDao
+import brown.jeff.cocktailapp.data.entities.DrinksEntity
+import brown.jeff.cocktailapp.data.api.DrinkApi
+import brown.jeff.cocktailapp.domain.usecase.Errors
+import brown.jeff.cocktailapp.data.api.NetworkConnection
+import brown.jeff.cocktailapp.domain.usecase.Result
+import brown.jeff.cocktailapp.domain.usecase.Result.Failure
+import brown.jeff.cocktailapp.domain.usecase.Result.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -20,33 +18,33 @@ class DrinkRepositoryImpl(
 ) : DrinkRepository {
 
 
-    override suspend fun getDrinksByName(drinkName: String): Result<Drinks> {
+    override suspend fun getDrinksByName(drinkName: String): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.searchDrinksByName(drinkName))
         }
     }
 
 
-    override suspend fun getDrinkById(drinkId: String): Result<Drinks> {
+    override suspend fun getDrinkById(drinkId: String): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinkById(drinkId))
         }
     }
 
-    override suspend fun getDrinksByIngredients(ingredients: String?): Result<Drinks> {
+    override suspend fun getDrinksByIngredients(ingredients: String?): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinksByIngredient(ingredients))
         }
     }
 
-    override suspend fun getPopularDrinks(): Result<Drinks> {
+    override suspend fun getPopularDrinks(): Result<DrinksEntity> {
         Timber.e("Drinks called")
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getPopularDrinks())
         }
     }
 
-    override suspend fun getRandomDrink(): Result<Drinks> {
+    override suspend fun getRandomDrink(): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getRandomDrink())
         }
