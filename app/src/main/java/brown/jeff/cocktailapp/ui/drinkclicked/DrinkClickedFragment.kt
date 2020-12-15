@@ -30,8 +30,6 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private val drinkClickedViewModel: DrinkClickedViewModel by sharedViewModel()
     private lateinit var drinkClickedAdapter: DrinkAdapter
     private val safeArgs: DrinkClickedFragmentArgs by navArgs()
-    private lateinit var toolbar: Toolbar
-    private lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,37 +63,18 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         }
     }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        toolbar = view?.findViewById(R.id.drink_toolbar)!!
-        collapsingToolbarLayout = view.findViewById(R.id.collapsingToolBarLayout)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.actionBarTextColor))
-        collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.actionBarTextColor))
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        backPressedToolbar(toolbar, activity)
-        retrieveSafeArgs()
-
-        drinkClickedViewModel.getDrinkById(safeArgs.id)
-
-        return view
-    }
-
-    override fun onResume() {
-        super.onResume()
-        drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
-            collapsingToolbarLayout.title = it.drink
-
-        })
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        collapsingToolBarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.actionBarTextColor))
+        collapsingToolBarLayout.setExpandedTitleColor(resources.getColor(R.color.actionBarTextColor))
+        (activity as AppCompatActivity).setSupportActionBar(drink_toolbar)
+        backPressedToolbar(drink_toolbar, activity)
+        retrieveSafeArgs()
+
+        drinkClickedViewModel.getDrinkById(safeArgs.passDrink.idDrink)
+
         appbarFadeIn()
         loadDrinkIntoView()
 

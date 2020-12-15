@@ -18,8 +18,7 @@ import brown.jeff.cocktailapp.util.changeRecyclerViewLayout
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoriteDrinksFragment : Fragment() {
-
+class FavoriteDrinksFragment : Fragment(R.layout.fragment_favorites) {
 
     private val favoriteDrinksViewModel: FavoriteDrinksViewModel by viewModel()
     private lateinit var favoriteDrinkAdapter: DrinkAdapter
@@ -50,21 +49,12 @@ class FavoriteDrinksFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_favorites, container, false)
-        //sets the toolbar in the fragment
-        val toolbar = view?.findViewById<Toolbar>(R.id.favorite_toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        return view
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+      (activity as AppCompatActivity).setSupportActionBar(favorite_toolbar)
+
         favoriteDrinksViewModel.getFavoriteDrinks()
+
         favoriteDrinkAdapter = DrinkAdapter(
             emptyList()
         ) { id: String -> handleScreenChange(id) }
