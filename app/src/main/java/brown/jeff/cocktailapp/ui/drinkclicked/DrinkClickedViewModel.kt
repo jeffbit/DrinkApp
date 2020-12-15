@@ -23,6 +23,10 @@ class DrinkClickedViewModel(
     val clickedDrink: LiveData<Drink>
         get() = _clickedDrink
 
+//    private val _drinkUpdated = MutableLiveData<Boolean>()
+//    val drinkUpdated: LiveData<Boolean>
+//        get() = _drinkUpdated
+
 
     fun addDrinkToFavorites() {
         viewModelScope.launch {
@@ -40,8 +44,8 @@ class DrinkClickedViewModel(
         }
     }
 
-    fun setClickedDrink(drink: Drink) {
-        _clickedDrink.value = drink
+    fun setDrinkNull() {
+        _clickedDrink.value = null
     }
 
 

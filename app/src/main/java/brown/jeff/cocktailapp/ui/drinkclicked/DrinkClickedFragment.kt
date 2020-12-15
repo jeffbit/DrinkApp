@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -18,30 +17,25 @@ import brown.jeff.cocktailapp.util.loadImage
 import brown.jeff.cocktailapp.util.shareDrink
 import brown.jeff.cocktailapp.util.showSnackBar
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.drink_clicked_fragment.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
+class DrinkClickedFragment : Fragment() {
 
 
-    private val drinkClickedViewModel: DrinkClickedViewModel by sharedViewModel()
+    private val drinkClickedViewModel: DrinkClickedViewModel by viewModel()
     private lateinit var drinkClickedAdapter: DrinkAdapter
     private val safeArgs: DrinkClickedFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        retrieveSafeArgs()
+
 
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString("drinkId", safeArgs.id)
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -63,41 +57,35 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
         }
     }
 
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        return inflater.inflate(R.layout.drink_clicked_fragment, container, false);
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadDrinkIntoView()
         collapsingToolBarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.actionBarTextColor))
         collapsingToolBarLayout.setExpandedTitleColor(resources.getColor(R.color.actionBarTextColor))
         (activity as AppCompatActivity).setSupportActionBar(drink_toolbar)
         backPressedToolbar(drink_toolbar, activity)
-        retrieveSafeArgs()
-
-        drinkClickedViewModel.getDrinkById(safeArgs.passDrink.idDrink)
 
         appbarFadeIn()
-        loadDrinkIntoView()
-
-        drinkClickedAdapter = DrinkAdapter(
-            emptyList()
-        ) { id: String ->
-            handleScreenChange(id)
-        }
-
-
-        drinkclicked_recyclerview.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            setHasFixedSize(true)
-            adapter = drinkClickedAdapter
-            isNestedScrollingEnabled = true
-
-        }
-
+        initializeAdapter()
+        setupRecyclerView()
         shareDrinkUrl(requireActivity())
+        observeRelatedDrinks()
 
 
+    }
 
 
+    private fun observeRelatedDrinks() {
         drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
             drinkClickedViewModel.getDrinksByIngredient(it.strIngredient1)
             favoriteFloatingActionButton(requireView(), it.idDrink)
@@ -107,10 +95,25 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
             Timber.e("List updated")
             drinkClickedAdapter.updateDrinkList(it)
         })
-
-
     }
 
+    private fun initializeAdapter() {
+        drinkClickedAdapter = DrinkAdapter(
+            emptyList()
+        ) { id: String ->
+            handleScreenChange(id)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        drinkclicked_recyclerview.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            setHasFixedSize(true)
+            adapter = drinkClickedAdapter
+            isNestedScrollingEnabled = true
+
+        }
+    }
 
     //shares drink url on button press
     private fun shareDrinkUrl(activity: Activity) {
@@ -125,6 +128,8 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
     private fun loadDrinkIntoView() {
         drinkClickedViewModel.clickedDrink.observe(viewLifecycleOwner, Observer {
             loadImage(drink_imageview, it)
+            appbar.visibility = View.VISIBLE
+            nestedScrollView.visibility = View.VISIBLE
             setIngredients(it.strMeasure1, it.strIngredient1, ingredient1_tv, view_divider1)
             setIngredients(it.strMeasure2, it.strIngredient2, ingredient2_tv, view_divider2)
             setIngredients(it.strMeasure3, it.strIngredient3, ingredient3_tv, view_divider3)
@@ -134,13 +139,44 @@ class DrinkClickedFragment : Fragment(R.layout.drink_clicked_fragment) {
             setIngredients(it.strMeasure7, it.strIngredient7, ingredient7_tv, view_divider7)
             setIngredients(it.strMeasure8, it.strIngredient8, ingredient8_tv, view_divider8)
             setIngredients(it.strMeasure9, it.strIngredient9, ingredient9_tv, view_divider9)
-            setIngredients(it.strMeasure10, it.strIngredient10, ingredient10_tv, view_divider10)
-            setIngredients(it.strMeasure11, it.strIngredient11, ingredient11_tv, view_divider11)
-            setIngredients(it.strMeasure12, it.strIngredient12, ingredient12_tv, view_divider12)
-            setIngredients(it.strMeasure13, it.strIngredient13, ingredient13_tv, view_divider13)
-            setIngredients(it.strMeasure14, it.strIngredient14, ingredient14_tv, view_divider14)
-            setIngredients(it.strMeasure15, it.strIngredient15, ingredient15_tv, view_divider15)
+            setIngredients(
+                it.strMeasure10,
+                it.strIngredient10,
+                ingredient10_tv,
+                view_divider10
+            )
+            setIngredients(
+                it.strMeasure11,
+                it.strIngredient11,
+                ingredient11_tv,
+                view_divider11
+            )
+            setIngredients(
+                it.strMeasure12,
+                it.strIngredient12,
+                ingredient12_tv,
+                view_divider12
+            )
+            setIngredients(
+                it.strMeasure13,
+                it.strIngredient13,
+                ingredient13_tv,
+                view_divider13
+            )
+            setIngredients(
+                it.strMeasure14,
+                it.strIngredient14,
+                ingredient14_tv,
+                view_divider14
+            )
+            setIngredients(
+                it.strMeasure15,
+                it.strIngredient15,
+                ingredient15_tv,
+                view_divider15
+            )
             instructions_tv.text = it.strInstructions
+            collapsingToolBarLayout.title = it.drink
         })
     }
 
