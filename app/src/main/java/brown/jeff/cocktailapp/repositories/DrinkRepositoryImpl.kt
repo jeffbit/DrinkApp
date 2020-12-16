@@ -1,6 +1,6 @@
 package brown.jeff.cocktailapp.repositories
 
-import brown.jeff.cocktailapp.model.Drink
+import androidx.lifecycle.LiveData
 import brown.jeff.cocktailapp.model.Drinks
 import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.Errors
@@ -8,7 +8,6 @@ import brown.jeff.cocktailapp.network.NetworkConnection
 import brown.jeff.cocktailapp.network.Result
 import brown.jeff.cocktailapp.network.Result.Failure
 import brown.jeff.cocktailapp.network.Result.Success
-import brown.jeff.cocktailapp.room.DrinkDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call

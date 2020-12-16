@@ -49,9 +49,13 @@ class RandomDrinkViewModel(
         }
     }
 
-    fun addDrinkToFavorites(drink: Drink) {
+    fun addDrinkToFavorites() {
         viewModelScope.launch {
-            favoriteDrinkRepositoryImpl.insertDrinksLocalDB(drink)
+            if (_drink.value != null) {
+                _drink.value.let {
+                    favoriteDrinkRepositoryImpl.insertDrinksLocalDB(it!!)
+                }
+            }
         }
     }
 

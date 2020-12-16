@@ -38,7 +38,7 @@ class DrinkDatabaseTest {
         runBlocking {
             drinkDao.insertDrink(writeDrink)
         }
-        val readDrink = drinkDao.getDrinkById(writtenDrinkId).getValueBlocking()
+        val readDrink = drinkDao.getDrinkById(writtenDrinkId)
 
         //then
         Assert.assertEquals(readDrink?.drink, writeDrink.drink)
@@ -53,7 +53,7 @@ class DrinkDatabaseTest {
             drinkDao.insertDrink(drink)
         }
         //then
-        val getDrinks = drinkDao.getAllDrinks().getValueBlocking()
+        val getDrinks = drinkDao.getAllDrinks()
         Assert.assertEquals(drink, getDrinks)
     }
 
@@ -65,7 +65,7 @@ class DrinkDatabaseTest {
         runBlocking {
             drinkDao.deleteDrink(writeDrink)
         }
-        val result = drinkDao.getDrinkById(writeDrink.idDrink).getValueBlocking()
+        val result = drinkDao.getDrinkById(writeDrink.idDrink)
         //then
         Assert.assertNull(result)
 

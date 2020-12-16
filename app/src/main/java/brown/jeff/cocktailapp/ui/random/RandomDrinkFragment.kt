@@ -1,6 +1,5 @@
 package brown.jeff.cocktailapp.ui.random
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -110,6 +109,8 @@ class RandomDrinkFragment : Fragment() {
 
     private fun observeRandomDrink() {
         randomDrinkViewModel.drink.observe(viewLifecycleOwner, Observer {
+            appbar.visibility = View.VISIBLE
+            nestedScrollView.visibility = View.VISIBLE
             setIngredients(it.strMeasure1, it.strIngredient1, ingredient1_tv, view_divider1)
             setIngredients(it.strMeasure2, it.strIngredient2, ingredient2_tv, view_divider2)
             setIngredients(it.strMeasure3, it.strIngredient3, ingredient3_tv, view_divider3)
@@ -144,7 +145,7 @@ class RandomDrinkFragment : Fragment() {
 
     private fun addDrinkToFavorites(view: View, drink: Drink) {
 
-        randomDrinkViewModel.addDrinkToFavorites(drink)
+        randomDrinkViewModel.addDrinkToFavorites()
         showSnackBar(
             view,
             getString(R.string.drink_added_to_favorites),

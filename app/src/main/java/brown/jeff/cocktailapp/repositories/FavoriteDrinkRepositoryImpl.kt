@@ -7,7 +7,8 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class FavoriteDrinkRepositoryImpl(
-    private val drinkDao: DrinkDao) : FavoriteDrinkRepository {
+    private val drinkDao: DrinkDao
+) : FavoriteDrinkRepository {
 
 
 

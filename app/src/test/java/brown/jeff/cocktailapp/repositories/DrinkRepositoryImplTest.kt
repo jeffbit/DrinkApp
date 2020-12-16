@@ -7,7 +7,6 @@ import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.Errors
 import brown.jeff.cocktailapp.network.NetworkConnection
 import brown.jeff.cocktailapp.network.Result
-import brown.jeff.cocktailapp.room.DrinkDao
 import brown.jeff.cocktailapp.util.DRINK
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
