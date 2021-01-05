@@ -1,20 +1,19 @@
 package brown.jeff.cocktailapp.repositories
 
-import androidx.lifecycle.LiveData
-import brown.jeff.cocktailapp.model.Drinks
+import brown.jeff.cocktailapp.model.DrinksEntity
 import brown.jeff.cocktailapp.network.Result
 
 interface DrinkRepository {
 
 
-    suspend fun getDrinksByName(drinkName: String): Result<Drinks>
+    suspend fun getDrinksByName(drinkName: String): Result<DrinksEntity>
 
-    suspend fun getDrinkById(drinkId: String): Result<Drinks>
+    suspend fun getDrinkById(drinkId: String): Result<DrinksEntity>
 
-    suspend fun getDrinksByIngredients(ingredients: String?): Result<Drinks>
+    suspend fun getDrinksByIngredients(ingredients: String?): Result<DrinksEntity>
 
-    suspend fun getPopularDrinks(): Result<Drinks>
+    suspend fun getPopularDrinks(): Result<DrinksEntity>
 
-    suspend fun getRandomDrink(): Result<Drinks>
+    suspend fun getRandomDrink(): Result<DrinksEntity>
 
 }

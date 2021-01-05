@@ -1,15 +1,15 @@
 package brown.jeff.cocktailapp.repositories
 
-import brown.jeff.cocktailapp.model.Drink
+import brown.jeff.cocktailapp.room.DrinkORM
 
 interface FavoriteDrinkRepository {
 
 
-    suspend fun getDrinksLocalDB(): List<Drink>
+    suspend fun getDrinksLocalDB(): List<DrinkORM>
 
     suspend fun deleteAllDrinks()
 
-    suspend fun insertDrinksLocalDB(drink: Drink): Boolean
+    suspend fun insertDrinksLocalDB(drink: DrinkORM): Boolean
 
     suspend fun removeDrinkById(drinkId: String): Boolean
 }

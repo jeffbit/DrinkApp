@@ -1,7 +1,6 @@
 package brown.jeff.cocktailapp.repositories
 
-import androidx.lifecycle.LiveData
-import brown.jeff.cocktailapp.model.Drinks
+import brown.jeff.cocktailapp.model.DrinksEntity
 import brown.jeff.cocktailapp.network.DrinkApi
 import brown.jeff.cocktailapp.network.Errors
 import brown.jeff.cocktailapp.network.NetworkConnection
@@ -19,33 +18,33 @@ class DrinkRepositoryImpl(
 ) : DrinkRepository {
 
 
-    override suspend fun getDrinksByName(drinkName: String): Result<Drinks> {
+    override suspend fun getDrinksByName(drinkName: String): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.searchDrinksByName(drinkName))
         }
     }
 
 
-    override suspend fun getDrinkById(drinkId: String): Result<Drinks> {
+    override suspend fun getDrinkById(drinkId: String): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinkById(drinkId))
         }
     }
 
-    override suspend fun getDrinksByIngredients(ingredients: String?): Result<Drinks> {
+    override suspend fun getDrinksByIngredients(ingredients: String?): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getDrinksByIngredient(ingredients))
         }
     }
 
-    override suspend fun getPopularDrinks(): Result<Drinks> {
+    override suspend fun getPopularDrinks(): Result<DrinksEntity> {
         Timber.e("Drinks called")
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getPopularDrinks())
         }
     }
 
-    override suspend fun getRandomDrink(): Result<Drinks> {
+    override suspend fun getRandomDrink(): Result<DrinksEntity> {
         return withContext(Dispatchers.IO) {
             makeCall(drinkApi.getRandomDrink())
         }

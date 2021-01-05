@@ -7,19 +7,19 @@ import brown.jeff.cocktailapp.model.Drink
 interface DrinkDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDrink(drink: Drink)
+    suspend fun insertDrink(drink: DrinkORM)
 
     @Delete
-    suspend fun deleteDrink(drink: Drink)
+    suspend fun deleteDrink(drink: DrinkORM)
 
     @Query("SELECT * FROM drinkTable")
-    fun getAllDrinks(): List<Drink>
+    fun getAllDrinks(): List<DrinkORM>
 
     @Query("SELECT * FROM drinkTable WHERE drink LIKE :drinkName")
-    fun getDrinkByName(drinkName: String): List<Drink>
+    fun getDrinkByName(drinkName: String): List<DrinkORM>
 
     @Query("SELECT * FROM drinkTable WHERE idDrink LIKE :drinkId")
-    fun getDrinkById(drinkId: String): Drink
+    fun getDrinkById(drinkId: String): DrinkORM
 
     @Query("Delete FROM drinkTable WHERE idDrink Like :drinkId")
     suspend fun deleteDrinkById(drinkId: String)

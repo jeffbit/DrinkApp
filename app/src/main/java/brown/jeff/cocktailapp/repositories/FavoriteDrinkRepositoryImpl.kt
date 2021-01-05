@@ -1,7 +1,7 @@
 package brown.jeff.cocktailapp.repositories
 
-import brown.jeff.cocktailapp.model.Drink
 import brown.jeff.cocktailapp.room.DrinkDao
+import brown.jeff.cocktailapp.room.DrinkORM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -12,7 +12,7 @@ class FavoriteDrinkRepositoryImpl(
 
 
 
-    override suspend fun getDrinksLocalDB(): List<Drink> {
+    override suspend fun getDrinksLocalDB(): List<DrinkORM> {
         Timber.e("Repository: Drinks Retrieved")
         return withContext(Dispatchers.IO) {
             drinkDao.getAllDrinks()
@@ -27,7 +27,7 @@ class FavoriteDrinkRepositoryImpl(
         }
     }
 
-    override suspend fun insertDrinksLocalDB(drink: Drink): Boolean {
+    override suspend fun insertDrinksLocalDB(drink: DrinkORM): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 drinkDao.insertDrink(drink)
