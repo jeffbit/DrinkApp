@@ -8,7 +8,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavDeepLinkBuilder
 import brown.jeff.cocktailapp.R
-import brown.jeff.cocktailapp.ui.MainActivity
+import brown.jeff.cocktailapp.MainActivity
 
 
 private const val CHANNEL_ID: String = "ChannelID"
