@@ -107,7 +107,7 @@ Project Link: [https://github.com/jeffbit/DrinkApp](https://github.com/jeffbit/D
 
 Linkedin : [https://www.linkedin.com/in/jeffreydylanbrown/](https://www.linkedin.com/in/jeffreydylanbrown/)
 
-Google Play Store : [https://play.google.com/store/apps/details?id=com.brown.jeff.iplocator](https://play.google.com/store/apps/details?id=com.brown.jeff.iplocator)
+Google Play Store : [https://play.google.com/store/apps/details?id=brown.jeff.cocktailapp](https://play.google.com/store/apps/details?id=brown.jeff.cocktailapp)
 
 
 
