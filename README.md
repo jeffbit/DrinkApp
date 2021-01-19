@@ -10,7 +10,7 @@
   <p align="center">
     Cocktail Recipes
     <br />
-    <a href="https://github.com/jeffbit/DrinkApp"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/jeffbit/DrinkApp"><strong>Explore the docs»</strong></a>
     <br />
     <br />
     <a href="https://github.com/jeffbit/DrinkApp/issues">Report Bug</a>
