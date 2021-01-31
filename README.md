@@ -48,8 +48,9 @@
  <li>Offline Database cache</li>
  <li>Dark mode/light mode</li>
  <li>Create cocktails in application</li>
- <li>Tablet UI support</li>
+ <li>Tablet UI, and Dual screen device support</li>
  <li>Better testing coverage</li>
+ <li> Updating Coroutines</li>
 
 
 </ul>
